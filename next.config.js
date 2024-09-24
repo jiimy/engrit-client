@@ -3,7 +3,7 @@ const path = require("path");
 
 const nextConfig = {
   output: "export",
-  distDir: "out",
+  // distDir: "out",
   reactStrictMode: true,
   swcMinify: true,
   sassOptions: {
