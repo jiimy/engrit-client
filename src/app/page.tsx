@@ -7,6 +7,7 @@ export default function Home() {
     <div>
       <div className='content'>
         메인페이지
+        <br />배포 테스트
       </div>
       <BottomMenu />
     </div>
