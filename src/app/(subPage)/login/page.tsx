@@ -7,6 +7,7 @@ import dayjs from "dayjs";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
+import s from './loginPage.module.scss';
 
 const Index = () => {
   const [tab, setTab] = useState(-1);
@@ -28,17 +29,14 @@ const Index = () => {
   };
 
   return (
-    <div className="flex h-screen max-w-400 m-auto flex-col justify-center items-center">
-      <div className="h-320 flex items-center flex-col relative">
-        <nav className="flex gap-10 mt-10">
-          <button
-            onClick={click}
-            className={classNames("bg-[#fae100] text-white", {})}
-          >
-            카카오 로그인
-          </button>
-        </nav>
-      </div>
+    <div className="">
+      <div className={s.logo}></div>
+      <Button
+        onClick={click}
+        className={s.login_btn}
+      >
+        카카오 로그인
+      </Button>
     </div>
   );
 };
