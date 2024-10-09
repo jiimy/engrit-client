@@ -4,18 +4,14 @@ import { Suspense } from "react"
 
 export default function RootLayout({
   children,
-  headerTitle
 }: {
-  children: React.ReactNode
-  headerTitle: string;
+  children: React.ReactNode;
 }) {
+
   return (
     <div>
       <Suspense fallback={<div>Loading...</div>}>
-        <Header title={headerTitle} type="board" />
-        <div className="content">
-          {children}
-        </div>
+        {children}
         <BottomMenu />
       </Suspense>
     </div>

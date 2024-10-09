@@ -8,3 +8,8 @@
   opacity: 0;
   z-index: -1;
 }
+
+* {
+  font-family: 'Roboto', 'pretendard';
+  font-size: 14px;
+}

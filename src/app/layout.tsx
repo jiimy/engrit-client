@@ -1,7 +1,9 @@
 import QueryProviders from '@/provider/queryProvider';
+import './layout.scss';
 import './globals.css'
 import Head from './head'
-import './layout.scss';
+import CookiesRootProvider from '@/util/cookieProvider';
+import LoginCheck from '@/components/loginCheck/LoginCheck';
 
 export default function RootLayout({
   children,
@@ -13,13 +15,16 @@ export default function RootLayout({
       <Head />
       <body>
         <QueryProviders>
-          <main className="main">
-            <div className="mobile-view">
-              {children}
-            </div>
-          </main>
-          <div id="modal" />
+          <CookiesRootProvider>
+            <main className="main">
+              <div className="mobile-view">
+                {children}
+              </div>
+            </main>
+            <LoginCheck />
+          </CookiesRootProvider>
         </QueryProviders>
+        <div id="modal" />
       </body>
     </html>
   )

@@ -3,6 +3,7 @@ import React from 'react';
 import className from 'classnames';
 import s from './header.module.scss';
 import classNames from 'classnames';
+import { LeftArrow20 } from '@/images';
 
 type headerType = {
   type?: 'home' | 'board' // 홈일때, 그 외. 
@@ -23,7 +24,9 @@ const Header = ({ type, title }: headerType) => {
       }
       {type !== 'home' &&
         <>
-          <div className={s.back} onClick={() => history.go(-1)}>뒤로</div>
+          <div className={s.back} onClick={() => history.go(-1)}>
+            <LeftArrow20 />
+          </div>
           {title}
         </>
       }

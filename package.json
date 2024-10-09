@@ -23,12 +23,14 @@
     "react-lottie-player": "^2.1.0",
     "react-toastify": "^10.0.5",
     "sass": "^1.79.3",
+    "tailwind-merge": "^2.5.3",
     "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "autoprefixer": "^10.4.20",
     "eslint": "^8",
     "eslint-config-next": "14.1.0",
     "postcss": "^8.4.47",
