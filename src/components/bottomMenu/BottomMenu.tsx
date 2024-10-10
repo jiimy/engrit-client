@@ -22,7 +22,7 @@ const BottomMenu = ({ type = 'menu', text }: bottommenuType) => {
         <ul>
           <li><Link href="/">홈</Link></li>
           <li><Link href="/bookmark">저장</Link></li>
-          <li><Link href="/add">추가</Link></li>
+          <li><Link href="/upload">추가</Link></li>
           <li><Link href="/mypage">마이</Link></li>
           <li><div>고객센터</div></li>
         </ul>
