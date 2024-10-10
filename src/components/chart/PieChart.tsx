@@ -6,19 +6,24 @@ import s from './chart.module.scss';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
+
+// TODO:차트 커스텀
+// https://www.chartjs.org/docs/latest/samples/legend/html.html
+
 type pieType = {
   data?: any;
 }
 
 const PieChart = ({ data }: pieType) => {
   const pieOptions = {
-    legend: {
-      display: true,
-      position: "right",
-    },
-    elements: {
-      arc: {
-        borderWidth: 0,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Pie Chart Example',
+      },
+      legend: {
+        display: true,
+        position: 'right' as const,
       },
     },
   };
