@@ -4,6 +4,7 @@ import YouTube from 'react-youtube';
 import s from './peed.module.scss';
 import Image from 'next/image';
 import classNames from 'classnames';
+import { isMobile } from 'react-device-detect';
 
 type peedType = {
   data?: any;
@@ -37,7 +38,7 @@ const Peed = forwardRef(({
       setIsPlaying(false); // isView가 false일 때 비디오 초기화
       playerRef.current?.stopVideo(); // 비디오 중지
     }
-  }, [isView]);
+  }, [isView, isMobile]);
 
   const handlePlay = () => {
     setIsPlaying(true);

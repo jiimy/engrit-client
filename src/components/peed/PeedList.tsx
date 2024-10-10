@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Peed from './Peed';
 import s from './peed.module.scss';
-import { isMobile } from '@/util/isMobile';
+// import { isMobile } from 'react-device-detect';
 
 const videoData = [
   {
@@ -82,9 +82,9 @@ const PeedList = () => {
       });
 
       // 첫 번째 보이는 박스가 있는 경우 레이블 설정
-      if (firstBoxIndex !== -1) {
-        newLabels[firstBoxIndex] = "first"; // 첫 번째 보이는 박스에 'first' 레이블 추가
-      }
+      // if (firstBoxIndex !== -1) {
+      //   newLabels[firstBoxIndex] = "first"; // 첫 번째 보이는 박스에 'first' 레이블 추가
+      // }
 
       setBoxLabels(newLabels);
     }
@@ -92,17 +92,17 @@ const PeedList = () => {
 
   useEffect(() => {
     const scrollElement = scrollRef.current;
-    if (scrollElement && isMobile) {
+    if (scrollElement) {
       scrollElement.addEventListener("scroll", handleScroll);
       handleScroll(); // 초기 상태에서 레이블 설정
     }
 
     return () => {
-      if (scrollElement && isMobile) {
+      if (scrollElement) {
         scrollElement.removeEventListener("scroll", handleScroll);
       }
     };
-  }, [isMobile]);
+  }, []);
 
   const totalHeight =
     videoData?.reduce((total, _, index) => {
