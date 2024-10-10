@@ -68,12 +68,15 @@ const PeedList = () => {
           const boxBottom = boxTop + boxHeight; // 각 박스의 하단 위치
 
           // 스크롤이 0일 때
-          if (scrollTop === 0) {
+          if (scrollTop <= 130) {
             firstBoxIndex = 0;
           }
 
           // 박스가 보이는 영역에 있는지 체크
-          if (boxBottom > scrollTop && boxTop < scrollTop + clientHeight) {
+          if (scrollTop > 130 && boxBottom > scrollTop && boxTop < scrollTop + clientHeight) {
+            console.log(
+              'firstBoxIndex', firstBoxIndex,
+              'boxBottom', boxBottom, 'scrollTop', scrollTop, 'boxTop', boxTop, 'clientHeight', clientHeight)
             if (firstBoxIndex === -1) {
               firstBoxIndex = index + 1; // 가장 첫 번째 보이는 박스 인덱스 저장
             }
@@ -82,9 +85,9 @@ const PeedList = () => {
       });
 
       // 첫 번째 보이는 박스가 있는 경우 레이블 설정
-      // if (firstBoxIndex !== -1) {
-      //   newLabels[firstBoxIndex] = "first"; // 첫 번째 보이는 박스에 'first' 레이블 추가
-      // }
+      if (firstBoxIndex !== -1) {
+        newLabels[firstBoxIndex] = "11"; // 첫 번째 보이는 박스에 'first' 레이블 추가
+      }
 
       setBoxLabels(newLabels);
     }

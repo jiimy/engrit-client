@@ -27,18 +27,19 @@ const Peed = forwardRef(({
   // playerRef.current.stopVideo(); // 영상 초기화
 
   // 3초간 화면에 있으면 자동재생
-  useEffect(() => {
-    if (isView) {
-      const timer = setTimeout(() => {
-        setIsPlaying(true);
-      }, 3000);
-
-      return () => clearTimeout(timer); // 컴포넌트 언마운트 시 타이머 정리
-    } else {
-      setIsPlaying(false); // isView가 false일 때 비디오 초기화
-      playerRef.current?.stopVideo(); // 비디오 중지
-    }
-  }, [isView, isMobile]);
+  // useEffect(() => {
+  //   if (isView && isMobile) {
+  //     const timer = setTimeout(() => {
+  //       setIsPlaying(true);
+  //       playerRef.current?.playVideo();
+  //     }, 3000);
+  //     return () =>
+  //       clearTimeout(timer);
+  //   } else {
+  //     setIsPlaying(false);
+  //     playerRef.current?.stopVideo();
+  //   }
+  // }, [isView]);
 
   const handlePlay = () => {
     setIsPlaying(true);
@@ -51,7 +52,7 @@ const Peed = forwardRef(({
       autoplay: 1,
       controls: 1,
       rel: 0,
-      mute: 1, // 소리를 키니까 자동재생이 안됨.
+      mute: 1, // 소리킴 : 0, 소리를 키니까 자동재생이 안됨.
       loop: 1
     }
   };
@@ -68,6 +69,7 @@ const Peed = forwardRef(({
               onReady={(e: any) => {
                 e.target.playVideo();
                 e.target.unMute();
+                // e.target.setVolume(100);
               }}
             />
         }
