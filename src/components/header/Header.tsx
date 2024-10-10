@@ -6,27 +6,32 @@ import classNames from 'classnames';
 import { LeftArrow20 } from '@/images';
 
 type headerType = {
-  type?: 'home' | 'board' // 홈일때, 그 외. 
+  type?: 'home' | 'board' | 'end' // 홈일때, 그 외. 
   title?: string
 }
 
-const Header = ({ type, title }: headerType) => {
+const Header = ({ type = 'board', title }: headerType) => {
 
   return (
     <header className={classNames([s.header], {
-      [s.is_home]: type === 'home'
+      [s.is_home]: type === 'home',
+      [s.is_end]: type === 'end'
     })}>
       {type === 'home' &&
         <>
           홈피드
-          <div>알림, 종</div>
         </>
       }
-      {type !== 'home' &&
+      {type === 'board' &&
         <>
           <div className={s.back} onClick={() => history.go(-1)}>
             <LeftArrow20 />
           </div>
+          {title}
+        </>
+      }
+      {type === 'end' &&
+        <>
           {title}
         </>
       }

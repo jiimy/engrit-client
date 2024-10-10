@@ -6,20 +6,6 @@ const PeedList = () => {
     <>
       <Peed />
       <Peed />
-      <Peed />
-      <Peed />
-      <Peed />
-      <Peed />
-      <Peed />
-      <Peed />
-      <Peed />
-      <Peed />
-      <Peed />
-      <Peed />
-      <Peed />
-      <Peed />
-      <Peed />
-      <Peed />
     </>
   );
 };
