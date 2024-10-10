@@ -8,7 +8,7 @@ import { LeftArrow20 } from '@/images';
 type headerType = {
   type?: 'home' | 'board' | 'end' // 홈일때, 그 외. 
   title?: string
-}
+} & React.HtmlHTMLAttributes<HTMLHtmlElement>
 
 const Header = ({ type = 'board', title }: headerType) => {
 

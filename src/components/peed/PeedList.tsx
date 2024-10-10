@@ -47,7 +47,7 @@ const videoData = [
   }
 ];
 
-const PeedList = () => {
+const PeedList = ({ onScroll }: { onScroll?: any }) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const boxRefs = useRef<HTMLDivElement[]>([]); // 박스들의 ref 배열
   const [boxLabels, setBoxLabels] = useState(Array(videoData?.length).fill("")); // 박스 레이블 배열
@@ -74,9 +74,6 @@ const PeedList = () => {
 
           // 박스가 보이는 영역에 있는지 체크
           if (scrollTop > 130 && boxBottom > scrollTop && boxTop < scrollTop + clientHeight) {
-            console.log(
-              'firstBoxIndex', firstBoxIndex,
-              'boxBottom', boxBottom, 'scrollTop', scrollTop, 'boxTop', boxTop, 'clientHeight', clientHeight)
             if (firstBoxIndex === -1) {
               firstBoxIndex = index + 1; // 가장 첫 번째 보이는 박스 인덱스 저장
             }
@@ -90,6 +87,8 @@ const PeedList = () => {
       }
 
       setBoxLabels(newLabels);
+
+      onScroll(scrollTop <= 130);
     }
   };
 
@@ -98,12 +97,15 @@ const PeedList = () => {
     if (scrollElement) {
       scrollElement.addEventListener("scroll", handleScroll);
       handleScroll(); // 초기 상태에서 레이블 설정
+
+      // window.addEventListener('scroll', headerScroll);
     }
 
     return () => {
       if (scrollElement) {
         scrollElement.removeEventListener("scroll", handleScroll);
       }
+      // window.removeEventListener('scroll', headerScroll);
     };
   }, []);
 
