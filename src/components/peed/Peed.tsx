@@ -53,7 +53,11 @@ const Peed = forwardRef(({
       controls: 1,
       rel: 0,
       mute: 1, // 소리킴 : 0, 소리를 키니까 자동재생이 안됨.
-      loop: 1
+      modestbranding: 1, // 유튜브 로고 제거? 잘안됨. 
+      loop: 1,
+      // start: 5,
+      // end: 10,
+      fs: 0 // 전체화면 버튼 숨기기?
     }
   };
 
