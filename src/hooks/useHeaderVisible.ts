@@ -17,7 +17,7 @@ export const useHeaderVisible = (ref: RefObject<HTMLDivElement>) => {
       }
       setLastScrollY(currentScrollY);
     }
-  }, 0); // NOTE: 수정필요?
+  }, 1000); // NOTE: 수정필요?
 
   useEffect(() => {
     const element = ref.current;

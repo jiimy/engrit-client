@@ -61,7 +61,7 @@ const PeedList = ({ setIsScroll }: peedListType) => {
 
   useEffect(() => {
     if (setIsScroll !== undefined) {
-      setIsScroll(isHeaderVisible); // 원하는 조건에 맞춰 호출
+      setIsScroll(isHeaderVisible);
     }
   }, [isHeaderVisible, setIsScroll]);
 
