@@ -16,6 +16,7 @@
     "chart": "^0.1.2",
     "classnames": "^2.5.1",
     "dayjs": "^1.11.13",
+    "lodash": "^4.17.21",
     "next": "14.1.0",
     "react": "^18",
     "react-chartjs-2": "^5.2.0",
@@ -31,6 +32,7 @@
     "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.10",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

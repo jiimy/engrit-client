@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Peed from './Peed';
 import s from './peed.module.scss';
+import { useHeaderVisible } from '@/hooks/useHeaderVisible';
 // import { isMobile } from 'react-device-detect';
 
 const videoData = [
@@ -47,10 +48,22 @@ const videoData = [
   }
 ];
 
-const PeedList = () => {
+type peedListType = {
+  setIsScroll?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const PeedList = ({ setIsScroll }: peedListType) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const boxRefs = useRef<HTMLDivElement[]>([]); // 박스들의 ref 배열
   const [boxLabels, setBoxLabels] = useState(Array(videoData?.length).fill("")); // 박스 레이블 배열
+
+  const isHeaderVisible = useHeaderVisible(scrollRef);
+
+  useEffect(() => {
+    if (setIsScroll !== undefined) {
+      setIsScroll(isHeaderVisible); // 원하는 조건에 맞춰 호출
+    }
+  }, [isHeaderVisible, setIsScroll]);
 
   const handleScroll = () => {
     if (scrollRef.current) {
