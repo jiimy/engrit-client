@@ -4,6 +4,7 @@ import './globals.css'
 import Head from './head'
 import CookiesRootProvider from '@/util/cookieProvider';
 import LoginCheck from '@/components/loginCheck/LoginCheck';
+import { SnackbarProvider } from '@/provider/snackbarProvider';
 
 export default function RootLayout({
   children,
@@ -16,11 +17,13 @@ export default function RootLayout({
       <body>
         <QueryProviders>
           <CookiesRootProvider>
-            <main className="main">
-              <div className="mobile-view">
-                {children}
-              </div>
-            </main>
+            <SnackbarProvider>
+              <main className="main">
+                <div className="mobile-view">
+                  {children}
+                </div>
+              </main>
+            </SnackbarProvider>
             <LoginCheck />
           </CookiesRootProvider>
         </QueryProviders>

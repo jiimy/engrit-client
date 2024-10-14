@@ -26,7 +26,7 @@ const Index = () => {
 
   const click = () => {
     router.push(
-      `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=8fd7a1f394d9bbd09fdfdd3827146d73&redirect_uri=http://localhost:3000/oauth/kakao`
+      `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=90dfb6439cebafe3e61ec13e051adbe6&redirect_uri=http://localhost:3000/oauth/kakao`
     );
   };
 
