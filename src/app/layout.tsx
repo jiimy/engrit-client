@@ -23,8 +23,8 @@ export default function RootLayout({
                   {children}
                 </div>
               </main>
+              <LoginCheck />
             </SnackbarProvider>
-            <LoginCheck />
           </CookiesRootProvider>
         </QueryProviders>
         <div id="modal" />

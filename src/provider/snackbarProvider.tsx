@@ -1,9 +1,10 @@
 'use client';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import styles from './snackbarProvider.module.scss';
 import Snackbar from '@/components/snackbar/Snackbar';
-import React, { createContext, useContext, useState } from 'react';
 
 type SnackbarContextType = {
-  showSnackbar: (message: string) => void;
+  showSnackbar: (message: string, duration?: number) => void;
 };
 
 const SnackbarContext = createContext<SnackbarContextType | undefined>(undefined);
@@ -16,23 +17,37 @@ export const useSnackbar = () => {
   return context;
 };
 
-export const SnackbarProvider = ({ children }: { children: React.ReactNode }) => {
-  const [snackbars, setSnackbars] = useState<string[]>([]);
+export const SnackbarProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [snackbars, setSnackbars] = useState<{ message: string; duration?: number }[]>([]);
 
-  const showSnackbar = (message: string) => {
-    setSnackbars((prev) => [...prev, message]);
+  const showSnackbar = (message: string, duration?: number) => {
+    setSnackbars((prev) => [...prev, { message, duration }]);
   };
 
   const handleClose = (index: number) => {
+    // setTimeout(() => {
     setSnackbars((prev) => prev.filter((_, i) => i !== index));
+    // }, snackbars[index].duration);
+    console.log('인덱스', index);
   };
+
+  useEffect(() => {
+    console.log('배열', snackbars)
+  }, [snackbars])
+
 
   return (
     <SnackbarContext.Provider value={{ showSnackbar }}>
       {children}
-      <div>
-        {snackbars.map((message, index) => (
-          <Snackbar key={index} message={message} onClose={() => handleClose(index)} />
+      <div className={styles.snackbarContainer}>
+        {snackbars.map((snackbar, index) => (
+          <Snackbar
+            key={index}
+            index={index}
+            message={snackbar.message}
+            duration={snackbar.duration}
+            onClose={() => handleClose(index)}
+          />
         ))}
       </div>
     </SnackbarContext.Provider>

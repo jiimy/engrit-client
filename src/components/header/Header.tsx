@@ -21,7 +21,7 @@ const Header = ({ type = 'board', title, isScroll }: headerType) => {
       [s.is_end]: type === 'end',
     })}
       style={{
-        marginTop: isScroll ? '0px' : `-${headerRef?.current?.offsetHeight}px`
+        marginTop: isScroll ? `-${headerRef?.current?.offsetHeight}px` : '0px'
       }}
       ref={headerRef}
     >

@@ -11,13 +11,13 @@ export const useHeaderVisible = (ref: RefObject<HTMLDivElement>) => {
       const currentScrollY = ref.current.scrollTop; // 요소의 scrollTop 가져오기
 
       if (currentScrollY > lastScrollY && currentScrollY > 40) {
-        setIsHeaderVisible(false); // 스크롤 다운
+        setIsHeaderVisible(true);
       } else {
-        setIsHeaderVisible(true); // 스크롤 업
+        setIsHeaderVisible(false);
       }
       setLastScrollY(currentScrollY);
     }
-  }, 1000); // NOTE: 수정필요?
+  }, 2000); // NOTE: 수정필요?
 
   useEffect(() => {
     const element = ref.current;
