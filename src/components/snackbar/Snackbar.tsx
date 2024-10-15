@@ -21,7 +21,7 @@ const Snackbar: React.FC<SnackbarProps> = ({ message, duration = 3000, index, on
     }, duration);
 
     return () => clearTimeout(timer);
-  }, [duration, index, onClose]);
+  }, [duration, index, onClose]); 
 
   const handleClose = () => {
     setClose(true);
@@ -31,7 +31,9 @@ const Snackbar: React.FC<SnackbarProps> = ({ message, duration = 3000, index, on
   };
 
   return (
-    <div className={classNames(styles.snackbar, { [styles.is_close]: close })}>
+    <div className={classNames(styles.snackbar, {
+      [styles.is_close]: close
+    })}>
       {message}
       <button className={styles.closeButton} onClick={handleClose}>
         &times;

@@ -25,15 +25,12 @@ export const SnackbarProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const handleClose = (index: number) => {
-    // setTimeout(() => {
+    const a = snackbars.filter((_, i) => i !== index)
     setSnackbars((prev) => prev.filter((_, i) => i !== index));
-    // }, snackbars[index].duration);
-    console.log('인덱스', index);
-  };
 
-  useEffect(() => {
-    console.log('배열', snackbars)
-  }, [snackbars])
+    // setTimeout(() => {
+    
+  };
 
 
   return (

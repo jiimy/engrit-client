@@ -6,8 +6,10 @@
   margin: 10px 0;
   position: relative;
   opacity: 1;
+  pointer-events: auto;
   transform: translateY(20px);
   animation: slideIn 0.3s forwards, fadeOut 0.3s 3s forwards;
+
   // animation: slideIn 0.3s forwards;
 
   // &.is_close {
