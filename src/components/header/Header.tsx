@@ -3,7 +3,7 @@ import React, { useRef } from 'react';
 import className from 'classnames';
 import s from './header.module.scss';
 import classNames from 'classnames';
-import { LeftArrow20 } from '@/images';
+import { LeftArrow20 } from '@/components/images';
 
 type headerType = {
   type?: 'home' | 'board' | 'end' // 홈일때, 그 외. 

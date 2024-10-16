@@ -5,7 +5,8 @@ import s from './bottomMenu.module.scss';
 import classNames from 'classnames';
 import { useRouter } from "next/navigation";
 import { usePathname } from 'next/navigation';
-import { HomeFilled, HomeOutlined } from '@ant-design/icons';
+import { HomeFilled, HomeOutlined, PlusCircleFilled, PlusCircleOutlined, UserOutlined, } from '@ant-design/icons';
+import { BookmarkFill, BookmarkLine, User } from '../images';
 
 type bottommenuType = {
   type?: 'submit' | 'menu',
@@ -45,14 +46,41 @@ const BottomMenu = ({ type = 'menu', text }: bottommenuType) => {
             </Link>
           </li>
           <li>
-            <HomeFilled style={{ fontSize: "300%", color: '#262626' }} />
-            {/* <span>
-              <Link href="/bookmark">
-              </Link>
-            </span> */}
+            <Link href="/bookmark">
+              {
+                route == 'bookmark' ?
+                  <span style={iconStyle}>
+                    <BookmarkFill />
+                  </span>
+                  :
+                  <span style={iconStyle}>
+                    <BookmarkLine />
+                  </span>
+              }
+            </Link>
           </li>
-          <li><Link href="/upload">추가</Link></li>
-          <li><Link href="/mypage">마이</Link></li>
+          <li>
+            <Link href="/upload">
+              {
+                route == 'upload' ?
+                  <PlusCircleFilled style={iconStyle} />
+                  :
+                  <PlusCircleOutlined style={iconStyle} />
+              }
+            </Link>
+          </li>
+          <li>
+            <Link href="/mypage">
+              {
+                route == 'mypage' ?
+                  <span style={iconStyle}>
+                    <User fill='#262626' />
+                  </span>
+                  :
+                  <UserOutlined style={iconStyle} />
+              }
+            </Link>
+          </li>
           <li><button>고객센터</button></li>
         </ul>
       }

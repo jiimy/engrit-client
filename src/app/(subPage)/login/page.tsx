@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import s from './loginPage.module.scss';
-import { Logo34 } from "@/images";
+import { Logo34 } from "@/components/images";
 import Image from "next/image";
 
 // export const generateMetadata = () => {
