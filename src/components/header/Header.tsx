@@ -11,7 +11,7 @@ type headerType = {
   isScroll?: boolean;
 } & React.HtmlHTMLAttributes<HTMLHtmlElement>
 
-const Header = ({ type = 'board', title, isScroll }: headerType) => {
+const Header = ({ type = 'board', title, isScroll = false }: headerType) => {
   const headerRef = useRef<HTMLDivElement | null>(null);
   console.log('isScroll', isScroll);
 
@@ -21,7 +21,7 @@ const Header = ({ type = 'board', title, isScroll }: headerType) => {
       [s.is_end]: type === 'end',
     })}
       style={{
-        marginTop: isScroll ? `-${headerRef?.current?.offsetHeight}px` : '0px'
+        marginTop: isScroll && type === 'home' ? `-${headerRef?.current?.offsetHeight}px` : '0px'
       }}
       ref={headerRef}
     >

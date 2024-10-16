@@ -3,6 +3,7 @@ import BottomMenu from "@/components/bottomMenu/BottomMenu";
 import Header from "@/components/header/Header";
 import PeedList from "@/components/peed/PeedList";
 import { useEffect, useState } from "react";
+import { usePathname } from 'next/navigation';
 
 export default function Home() {
   const [isScroll, setIsScroll] = useState<boolean>(false);

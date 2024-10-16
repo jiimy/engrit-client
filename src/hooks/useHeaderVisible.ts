@@ -3,7 +3,7 @@ import { throttle } from "lodash";
 
 
 export const useHeaderVisible = (ref: RefObject<HTMLDivElement>) => {
-  const [isHeaderVisible, setIsHeaderVisible] = useState<boolean>(true);
+  const [isHeaderVisible, setIsHeaderVisible] = useState<boolean>(false);
   const [lastScrollY, setLastScrollY] = useState<number>(0);
 
    const handleScroll = throttle(() => {
