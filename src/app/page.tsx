@@ -10,7 +10,7 @@ export default function Home() {
 
   return (
     <div>
-      <Header type="home" isScroll={isScroll} />
+      <Header isScroll={isScroll}>홈피드</Header>
       <div className='content'>
         <PeedList setIsScroll={setIsScroll} />
       </div>

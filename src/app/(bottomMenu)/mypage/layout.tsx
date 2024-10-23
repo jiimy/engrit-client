@@ -9,11 +9,11 @@ export default function RootLayout({
 }) {
 
   return (
-    <div>
-      <Suspense fallback={<div>Loading...</div>}>
+    <>
+      <Header>마이페이지</Header>
+      <div className="content">
         {children}
-        <BottomMenu />
-      </Suspense>
-    </div>
+      </div>
+    </>
   )
 }

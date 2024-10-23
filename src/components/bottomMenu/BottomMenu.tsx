@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import s from './bottomMenu.module.scss';
 import classNames from 'classnames';
@@ -7,10 +7,10 @@ import { useRouter } from "next/navigation";
 import { usePathname } from 'next/navigation';
 import { HomeFilled, HomeOutlined, PlusCircleFilled, PlusCircleOutlined, UserOutlined, } from '@ant-design/icons';
 import { BookmarkFill, BookmarkLine, User } from '../images';
+import UploadModal from '../portalModal/uploadModal/UploadModal';
 
 type bottommenuType = {
-  type?: 'submit' | 'menu',
-  text?: string,
+  type?: 'menu' | 'edit' | 'upload',
 }
 
 const iconStyle = {
@@ -19,72 +19,94 @@ const iconStyle = {
   color: '#262626'
 }
 
-const BottomMenu = ({ type = 'menu', text }: bottommenuType) => {
+const BottomMenu = ({ type = 'menu' }: bottommenuType) => {
+  const [uploadModal, setUploadModal] = useState(false);
   const currentPath = usePathname();
-
   const route = currentPath.split('/')[1];
 
   return (
-    <div className={classNames([s.bottom_menu], {
-      [s.is_submit]: type === 'submit'
-    })}>
+    <>
+      <div className={classNames([s.bottom_menu], {
+        [s.is_submit]: type !== 'menu'
+      })}>
+        {
+          type === 'edit' &&
+          <div className={s.text_bottom}>
+            <span>삭제</span>
+            <span>완료</span>
+          </div>
+        }
+        {
+          type === 'upload' &&
+          <div className={s.text_bottom}>
+            <span>업로드</span>
+          </div>
+        }
+        {
+          type === 'menu' &&
+          <ul>
+            <li>
+              <Link href="/">
+                {
+                  route == '' ?
+                    <HomeFilled style={iconStyle} />
+                    :
+                    <HomeOutlined style={iconStyle} />
+                }
+              </Link>
+            </li>
+            <li>
+              <Link href="/bookmark">
+                {
+                  route == 'bookmark' ?
+                    <span style={iconStyle}>
+                      <BookmarkFill />
+                    </span>
+                    :
+                    <span style={iconStyle}>
+                      <BookmarkLine />
+                    </span>
+                }
+              </Link>
+            </li>
+            <li>
+              {/* <span onClick={() => setUploadModal(true)}>
+                <PlusCircleOutlined style={iconStyle} />
+              </span> */}
+              <Link href="/upload">
+                {
+                  route == 'upload' ?
+                    <PlusCircleFilled style={iconStyle} />
+                    :
+                    <PlusCircleOutlined style={iconStyle} />
+                }
+              </Link>
+            </li>
+            <li>
+              <Link href="/mypage">
+                {
+                  route == 'mypage' ?
+                    <span style={iconStyle}>
+                      <User fill='#262626' />
+                    </span>
+                    :
+                    <UserOutlined style={iconStyle} />
+                }
+              </Link>
+            </li>
+            <li>
+              <button>
+                <Link href="/support">고객센터</Link>
+              </button>
+            </li>
+          </ul>
+        }
+      </div>
       {
-        type !== 'menu' &&
-        <div>{text}</div>
+        uploadModal &&
+        <UploadModal setOnModal={() => setUploadModal(false)} />
       }
-      {
-        type === 'menu' &&
-        <ul>
-          <li>
-            <Link href="/">
-              {
-                route == '' ?
-                  <HomeFilled style={iconStyle} />
-                  :
-                  <HomeOutlined style={iconStyle} />
-              }
-            </Link>
-          </li>
-          <li>
-            <Link href="/bookmark">
-              {
-                route == 'bookmark' ?
-                  <span style={iconStyle}>
-                    <BookmarkFill />
-                  </span>
-                  :
-                  <span style={iconStyle}>
-                    <BookmarkLine />
-                  </span>
-              }
-            </Link>
-          </li>
-          <li>
-            <Link href="/upload">
-              {
-                route == 'upload' ?
-                  <PlusCircleFilled style={iconStyle} />
-                  :
-                  <PlusCircleOutlined style={iconStyle} />
-              }
-            </Link>
-          </li>
-          <li>
-            <Link href="/mypage">
-              {
-                route == 'mypage' ?
-                  <span style={iconStyle}>
-                    <User fill='#262626' />
-                  </span>
-                  :
-                  <UserOutlined style={iconStyle} />
-              }
-            </Link>
-          </li>
-          <li><button>고객센터</button></li>
-        </ul>
-      }
-    </div >
+    </>
   );
 };
 

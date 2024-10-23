@@ -7,7 +7,7 @@ export default function Layout({
 }) {
   return (
     <>
-      <Header title='저장' type="board" />
+      <Header isBack>고객센터</Header>
       <div className="content">
         {children}
       </div>

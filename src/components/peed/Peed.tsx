@@ -19,8 +19,9 @@ const Peed = forwardRef(({
 }: peedType, ref: Ref<HTMLDivElement>) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null); // 타이머 Ref 생성
-  const peedRef = useRef<HTMLDivElement | null>(null); // 컴포넌트의 ref
+  const [isAdPlaying, setIsAdPlaying] = useState(false);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const peedRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
 
   const thumbnailUrl = `https://img.youtube.com/vi/${data?.videoId}/maxresdefault.jpg`;

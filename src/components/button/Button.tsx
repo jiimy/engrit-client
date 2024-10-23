@@ -8,7 +8,7 @@ type buttonType = {
 
 const buttonSize: buttonType = {
   small: "text-xs",
-  medium: "text-base",
+  medium: "text-base h-46",
   large: "text-lg",
 };
 

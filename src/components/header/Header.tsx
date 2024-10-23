@@ -3,48 +3,43 @@ import React, { useRef } from 'react';
 import className from 'classnames';
 import s from './header.module.scss';
 import classNames from 'classnames';
-import { LeftArrow20 } from '@/components/images';
+import { Close, LeftArrow20 } from '@/components/images';
+import { usePathname } from 'next/navigation';
 
 type headerType = {
-  type?: 'home' | 'board' | 'end' // 홈일때, 그 외. 
-  title?: string;
   isScroll?: boolean;
+  children?: string;
+  isBack?: boolean;
 } & React.HtmlHTMLAttributes<HTMLHtmlElement>
 
-const Header = ({ type = 'board', title, isScroll = false }: headerType) => {
+// 메인(피드)-스크롤, 북마크, 마이페이지
+const Header = ({ children, isScroll = false, isBack }: headerType) => {
+  const currentPath = usePathname();
+  const route = currentPath.split('/')[1];
   const headerRef = useRef<HTMLDivElement | null>(null);
-  console.log('isScroll', isScroll);
 
   return (
-    <header className={classNames([s.header], {
-      [s.is_home]: type === 'home',
-      [s.is_end]: type === 'end',
-    })}
+    <header className={s.header}
       style={{
-        marginTop: isScroll && type === 'home' ? `-${headerRef?.current?.offsetHeight}px` : '0px'
+        // marginTop: isScroll && type === 'home' ? `-${headerRef?.current?.offsetHeight}px` : '0px'
+        marginTop: isScroll ? `-${headerRef?.current?.offsetHeight}px` : '0px',
+        justifyContent: isBack ? `center` : 'start'
       }}
       ref={headerRef}
     >
-      {type === 'home' &&
-        <>
-          홈피드
-        </>
+      {isBack &&
+        // 라우터에 따라 아이콘을 다르게 하자
+        <div className={s.back} onClick={() => history.go(-1)}>
+          {
+            route === 'upload' || route === 'edit' ?
+              <Close /> :
+              <LeftArrow20 />
+          }
+        </div>
       }
-      {type === 'board' &&
-        <>
-          <div className={s.back} onClick={() => history.go(-1)}>
-            <LeftArrow20 />
-          </div>
-          {title}
-        </>
-      }
-      {type === 'end' &&
-        <>
-          {title}
-        </>
-      }
+      {children}
     </header>
   );
 };
 
-export default Header;
+export default Header

@@ -17,34 +17,6 @@ const videoData = [
   {
     videoId: '2vjPBrBU-TM',
     script: '스크립트2'
-  },
-  {
-    videoId: 'M7lc1UVf-VE',
-    script: '스크립트3'
-  },
-  {
-    videoId: '3JZ_D3ELwOQ',
-    script: '스크립트4'
-  },
-  {
-    videoId: 'wZZ7oFKsKzY',
-    script: '스크립트5'
-  },
-  {
-    videoId: '0zM3nApSvMg',
-    script: '스크립트6'
-  },
-  {
-    videoId: 'sxHj2IlnVVE',
-    script: '스크립트7'
-  },
-  {
-    videoId: 'J---aiyznGQ',
-    script: '스크립트8'
-  },
-  {
-    videoId: 'eVTXPUF4Oz4',
-    script: '스크립트9'
   }
 ];
 

@@ -7,7 +7,7 @@ export default function Layout({
 }) {
   return (
     <>
-      <Header title='로그인' type="board" />
+      <Header>저장</Header>
       <div className="content">
         {children}
       </div>
