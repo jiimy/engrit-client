@@ -1,15 +1,25 @@
 import BottomMenu from "@/components/bottomMenu/BottomMenu";
+import Header from "@/components/header/Header";
+import { MenuProvider } from "@/context/MenuContext";
 import { Suspense } from "react";
 
 export default function RootLayout({
   children,
+  menu,
 }: {
   children: React.ReactNode;
+  menu: React.ReactNode;
 }) {
 
   return (
-    <div>
-      {children}
-    </div>
+    <MenuProvider>
+      <div>
+        <Header isBack>업로드</Header>
+        <div className="content">
+          {children}
+        </div>
+        {menu}
+      </div>
+    </MenuProvider>
   )
 }

@@ -1,17 +1,22 @@
+'use client';
 import BottomMenu from '@/components/bottomMenu/BottomMenu';
 import Header from '@/components/header/Header';
-import React, { Suspense } from 'react';
+import { useMenuContext } from '@/context/MenuContext';
+import React, { Suspense, useEffect } from 'react';
 
-const page = () => {
+const UploadPage = () => {
+  const { setMenuState } = useMenuContext();
+
+  useEffect(() => {
+    setMenuState('여기');
+  }, [])
+
+
   return (
     <>
-      <Header isBack>업로드</Header>
-      <div className='content'>
-        업로드
-      </div>
-      <BottomMenu />
+      업로드페이지
     </>
   );
 };
 
-export default page;
+export default UploadPage;
