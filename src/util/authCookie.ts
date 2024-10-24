@@ -13,3 +13,7 @@ export const getCookie = (name:string) => {
 export const removeCookie = (name:string) => {
   return cookies.remove(name);
 };
+
+export const isLogin = () => {
+  return !!cookies.get("eng-atk");
+};

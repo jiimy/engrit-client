@@ -1,7 +1,16 @@
+'use client';
 import PieChart from '@/components/chart/PieChart';
-import React from 'react';
+import { isLogin } from '@/util/authCookie';
+import { redirect } from 'next/navigation';
+import React, { useEffect } from 'react';
 
-const page = () => {
+const MyPage = () => {
+
+  useEffect(() => {
+    if (!isLogin()) {
+      redirect('/login'); // 로그인하지 않은 경우 리디렉션
+    }
+  }, []);
   return (
     <>
       마이페이지
@@ -14,4 +23,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default MyPage;
