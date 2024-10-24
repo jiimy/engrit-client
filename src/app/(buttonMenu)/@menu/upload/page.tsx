@@ -1,4 +1,5 @@
 'use client';
+import BottomMenu from '@/components/bottomMenu/BottomMenu';
 import { useMenuContext } from '@/context/MenuContext';
 import React from 'react';
 
@@ -7,9 +8,16 @@ const Bottom = () => {
 
   const handleClick = () => {
     console.log('cc', menuState)
+    // menuState 라는 데이터 가져와서 업로드 하는 api hook 넣기
   };
 
-  return <button onClick={handleClick}>Click Me</button>;
+  return (
+    <>
+      <BottomMenu>
+        <button onClick={handleClick}>업로드</button>
+      </BottomMenu>
+    </>
+  );
 };
 
 export default Bottom;

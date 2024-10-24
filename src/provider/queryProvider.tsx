@@ -12,7 +12,7 @@ function QueryProviders({ children }: React.PropsWithChildren) {
       queries: {
         refetchOnWindowFocus: false,
         throwOnError: true,
-
+        staleTime: 5000
       },
       mutations: {
         onError: (error: any) => {

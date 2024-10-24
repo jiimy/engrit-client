@@ -1,10 +1,11 @@
 'use client';
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import className from 'classnames';
 import s from './header.module.scss';
 import classNames from 'classnames';
-import { Close, LeftArrow20 } from '@/components/images';
+import { BookmarkLine, Close, LeftArrow20, More } from '@/components/images';
 import { usePathname } from 'next/navigation';
+import { useOutOfClick } from '@/hooks/useOutOfClick';
 
 type headerType = {
   isScroll?: boolean;
@@ -15,8 +16,14 @@ type headerType = {
 // 메인(피드)-스크롤, 북마크, 마이페이지
 const Header = ({ children, isScroll = false, isBack }: headerType) => {
   const currentPath = usePathname();
+  const targetRef = useRef(null);
   const route = currentPath.split('/')[1];
   const headerRef = useRef<HTMLDivElement | null>(null);
+  const [dropDown, setDropDown] = useState(false);
+
+  useOutOfClick(targetRef, () => {
+    setDropDown(false);
+  });
 
   return (
     <header className={s.header}
@@ -38,6 +45,27 @@ const Header = ({ children, isScroll = false, isBack }: headerType) => {
         </div>
       }
       {children}
+      {
+        currentPath.includes('detail') &&
+        <>
+          <span className='absolute right-16 flex gap-12'>
+            <span className='w-28 h-28 cursor-pointer'>
+              <BookmarkLine />
+            </span>
+            <span className='w-28 h-28 cursor-pointer relative' onClick={() => setDropDown(!dropDown)} ref={targetRef}>
+              <More />
+              {
+                dropDown &&
+                <ul className={s.dropdown}>
+                  <li>수정</li>
+                  <li>삭제</li>
+                  <li>공유</li>
+                </ul>
+              }
+            </span>
+          </span>
+        </>
+      }
     </header>
   );
 };
