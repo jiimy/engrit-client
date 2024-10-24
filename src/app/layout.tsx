@@ -5,6 +5,7 @@ import Head from './head'
 import CookiesRootProvider from '@/util/cookieProvider';
 import LoginCheck from '@/components/loginCheck/LoginCheck';
 import { SnackbarProvider } from '@/provider/snackbarProvider';
+import Script from 'next/script';
 
 export default function RootLayout({
   children,
