@@ -18,7 +18,8 @@ const ShareModal = ({
   };
 
   const { Kakao } = window;
-   useEffect(() => {
+  // NOTE: 이부분 있어야 함.
+  useEffect(() => {
     if (typeof window !== "undefined") {
       const { Kakao } = window;
 
@@ -33,9 +34,10 @@ const ShareModal = ({
       objectType: 'feed',
       content: {
         title: '유튜브 제목',
-        description: '유튜브 태그들',
+        description: '#유튜브 #태그 #태그테스트',
         imageUrl:
-          'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+          // 'http://k.kakaocdn.net/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+          'https://img.youtube.com/vi/JyEpMFjNghU/0.jpg',
         link: {
           // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
           mobileWebUrl: 'https://developers.kakao.com',

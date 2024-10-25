@@ -12,11 +12,11 @@ export default function RootLayout({
 }) {
 
   return (
-    <MenuProvider>
-      <div>
+    <>
+      <Header isBack>업로드</Header>
+      <div className="content">
         {children}
-        {menu}
       </div>
-    </MenuProvider>
+    </>
   )
 }

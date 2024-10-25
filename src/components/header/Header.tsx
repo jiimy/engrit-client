@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react';
 import className from 'classnames';
 import s from './header.module.scss';
 import classNames from 'classnames';
-import { BookmarkLine, Close, LeftArrow20, More } from '@/components/images';
+import { BookmarkLine, Close, Delete, LeftArrow20, More } from '@/components/images';
 import { usePathname } from 'next/navigation';
 import { useOutOfClick } from '@/hooks/useOutOfClick';
 import ShareModal from '../portalModal/shareModal/ShareModal';
@@ -65,6 +65,16 @@ const Header = ({ children, isScroll = false, isBack }: headerType) => {
                     <li onClick={() => setShareModal(true)}>공유</li>
                   </ul>
                 }
+              </span>
+            </span>
+          </>
+        }
+        {
+          currentPath.includes('edit') &&
+          <>
+            <span className='absolute right-16'>
+              <span className='w-28 h-28 cursor-pointer'>
+                <Delete />
               </span>
             </span>
           </>

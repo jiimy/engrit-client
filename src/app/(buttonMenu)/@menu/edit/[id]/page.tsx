@@ -14,8 +14,8 @@ const Bottom = () => {
   return (
     <>
       <BottomMenu>
-        <button onClick={handleClick}>수정</button>
         <button onClick={handleClick}>삭제</button>
+        <button onClick={handleClick}>완료</button>
       </BottomMenu>
     </>
   );
