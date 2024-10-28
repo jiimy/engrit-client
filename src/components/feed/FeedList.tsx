@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react';
-import Peed from './Peed';
-import s from './peed.module.scss';
+import Feed from './Feed';
+import s from './feed.module.scss';
 import { useHeaderVisible } from '@/hooks/useHeaderVisible';
 // import { isMobile } from 'react-device-detect';
 
@@ -20,11 +20,11 @@ const videoData = [
   }
 ];
 
-type peedListType = {
+type FeedListType = {
   setIsScroll?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const PeedList = ({ setIsScroll }: peedListType) => {
+const FeedList = ({ setIsScroll }: FeedListType) => {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const boxRefs = useRef<HTMLDivElement[]>([]); // 박스들의 ref 배열
   const [boxLabels, setBoxLabels] = useState(Array(videoData?.length).fill("")); // 박스 레이블 배열
@@ -95,11 +95,11 @@ const PeedList = ({ setIsScroll }: peedListType) => {
     }, 0) || 0;
 
   return (
-    <div ref={scrollRef} className={s.peedList}>
+    <div ref={scrollRef} className={s.feedList}>
       <div style={{ height: `${totalHeight}px` }}>
 
         {videoData.map((item, index) => (
-          <Peed key={index}
+          <Feed key={index}
             ref={(el: any) => {
               if (el) {
                 boxRefs.current[index] = el;
@@ -112,4 +112,4 @@ const PeedList = ({ setIsScroll }: peedListType) => {
   );
 };
 
-export default PeedList;
+export default FeedList;

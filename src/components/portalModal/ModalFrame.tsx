@@ -4,6 +4,7 @@ import React from "react";
 import ModalPortal from "./PortalModal";
 import classNames from 'classnames';
 import s from './modal.module.scss';
+import { Close } from "../images";
 
 type modalFrameType = {
   children: React.ReactNode;
@@ -30,11 +31,11 @@ const ModalFrame = ({
     <ModalPortal>
       <div className={s.modal} onClick={onClick}>
         <div className={s.modal_container}>
-          <div className={s.modal_content}>
+          <div className={`${className} ${s.modal_content} `}>
             {children}
             {onClose && (
               <div className={s.close} onClick={() => setOnModal(false)}>
-                닫기버튼
+                <Close fill="#8C8C8C"/>
               </div>
             )}
           </div>

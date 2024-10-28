@@ -2,7 +2,8 @@ import { ExportModalType } from '@/types/modal';
 import { useEffect, useRef, useState } from 'react';
 import ModalFrame from '../ModalFrame';
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import s from './sharemodal.module.scss';
+import Image from 'next/image';
 
 const ShareModal = ({
   setOnModal,
@@ -10,7 +11,7 @@ const ShareModal = ({
   isDim = false,
   className
 }: ExportModalType) => {
-  const router = useRouter();
+  const tempUserEmail = 'rudwnok123@naver.com';
 
   const handleShare = () => {
     const currentUrl = window.location.href; // 현재 페이지 URL
@@ -71,13 +72,23 @@ const ShareModal = ({
   return (
     <ModalFrame
       setOnModal={setOnModal}
-      isDim={isDim}
+      isDim={true}
       onClose
-      dimClick={dimClick}
-      className={className}
+      dimClick={false}
+      className={s.share}
     >
-      <button onClick={handleShare}>클립보드에 복사</button>
-      <button onClick={shareMessage}>카톡 공유</button>
+      <div className={s.title}>공유하기</div>
+      <div className='flex gap-20 mt-24'>
+        <span onClick={handleShare}>
+          <Image src="/image/ShareLink.svg" width="40" height="40" alt="링크공유" />
+        </span>
+        <span onClick={shareMessage}>
+          <Image src="/image/ShareKakao.svg" width="40" height="40" alt="링크공유" />
+        </span>
+        <a href={`mailto:${tempUserEmail}`}>
+          <Image src="/image/ShareEmail.svg" width="40" height="40" alt="링크공유" />
+        </a>
+      </div>
     </ModalFrame>
   );
 };

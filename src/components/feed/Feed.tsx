@@ -1,22 +1,22 @@
 'use client';
 import React, { useState, useEffect, useRef, forwardRef, Ref } from 'react';
 import YouTube from 'react-youtube';
-import s from './peed.module.scss';
+import s from './feed.module.scss';
 import Image from 'next/image';
 import classNames from 'classnames';
 import { isMobile } from 'react-device-detect';
 
-type peedType = {
+type feedType = {
   data?: any;
   // text?: string;
   isView: any;
 };
 
-const Peed = forwardRef(({
+const Feed = forwardRef(({
   data,
   // text,
   isView
-}: peedType, ref: Ref<HTMLDivElement>) => {
+}: feedType, ref: Ref<HTMLDivElement>) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [isAdPlaying, setIsAdPlaying] = useState(false);
@@ -93,6 +93,6 @@ const Peed = forwardRef(({
   );
 });
 
-Peed.displayName = "Peed";
+Feed.displayName = "Feed";
 
-export default Peed;
+export default Feed;

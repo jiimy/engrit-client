@@ -1,9 +1,8 @@
 'use client';
 import BottomMenu from "@/components/bottomMenu/BottomMenu";
+import FeedList from "@/components/feed/FeedList";
 import Header from "@/components/header/Header";
-import PeedList from "@/components/peed/PeedList";
-import { useEffect, useState } from "react";
-import { usePathname } from 'next/navigation';
+import { useState } from "react";
 
 export default function Home() {
   const [isScroll, setIsScroll] = useState<boolean>(false);
@@ -12,7 +11,7 @@ export default function Home() {
     <div>
       <Header isScroll={isScroll}>홈피드</Header>
       <div className='content'>
-        <PeedList setIsScroll={setIsScroll} />
+        <FeedList setIsScroll={setIsScroll} />
       </div>
       <BottomMenu />
     </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import Lottie from "react-lottie-player";
 import data from "./engrit-skeleton.json";
 
-const PeedSkeleton = () => {
+const FeedSkeleton = () => {
   return (
     <div>
       <Lottie
@@ -15,4 +15,4 @@ const PeedSkeleton = () => {
   );
 };
 
-export default PeedSkeleton;
+export default FeedSkeleton;
