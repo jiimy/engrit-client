@@ -5,12 +5,7 @@ import { redirect } from 'next/navigation';
 import React, { useEffect } from 'react';
 
 const MyPage = () => {
-
-  useEffect(() => {
-    if (!isLogin()) {
-      redirect('/login'); // 로그인하지 않은 경우 리디렉션
-    }
-  }, []);
+  
   return (
     <>
       마이페이지
