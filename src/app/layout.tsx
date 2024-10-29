@@ -8,11 +8,9 @@ import { SnackbarProvider } from '@/provider/snackbarProvider';
 import Script from 'next/script';
 
 export default function RootLayout({
-  children,
-  modal
+  children
 }: {
   children: React.ReactNode,
-  modal: React.ReactNode
 }) {
   return (
     <html lang="ko">
@@ -24,7 +22,6 @@ export default function RootLayout({
               <main className="main">
                 <div className="mobile-view">
                   {children}
-                  {modal}
                 </div>
               </main>
               <LoginCheck />
