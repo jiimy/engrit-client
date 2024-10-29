@@ -4,11 +4,9 @@ import { MenuProvider } from "@/context/MenuContext";
 import { Suspense } from "react";
 
 export default function RootLayout({
-  children,
-  menu,
+  children
 }: {
   children: React.ReactNode;
-  menu: React.ReactNode;
 }) {
 
   return (
