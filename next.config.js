@@ -6,7 +6,7 @@ const nextConfig = {
   distDir: "out",
   reactStrictMode: true,
   swcMinify: true,
-  images: { unoptimized: true },
+  // images: { unoptimized: true },
   sassOptions: {
     includePaths: [path.join(__dirname, "src/assets/styles")],
     prependData: `@import "_mixins.scss"; @import "_variables";`,
