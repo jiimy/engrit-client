@@ -9,3 +9,4 @@ const Edit = () => {
 };
 
 export default Edit;
+export const runtime = 'edge';

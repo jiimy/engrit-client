@@ -24,3 +24,4 @@ const SupportDetail = () => {
 };
 
 export default SupportDetail;
+export const runtime = 'edge';
