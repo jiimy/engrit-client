@@ -6,6 +6,7 @@ import Image from 'next/image';
 import classNames from 'classnames';
 import { isMobile } from 'react-device-detect';
 
+
 type feedType = {
   data?: any;
   // text?: string;
@@ -23,6 +24,7 @@ const Feed = forwardRef(({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const peedRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
+  const [transcript, setTranscript] = useState<any[]>([]);
 
   const thumbnailUrl = `https://img.youtube.com/vi/${data?.videoId}/maxresdefault.jpg`;
   // playerRef.current.stopVideo(); // 영상 초기화
@@ -46,6 +48,21 @@ const Feed = forwardRef(({
     setIsPlaying(true);
   };
 
+  const fetchTranscript = async () => {
+    try {
+      const response = await fetch(`/api/youtube?videoId=NQ5kD1bKWYI`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      console.log('dd', data);
+      setTranscript(data?.transcript);
+    } catch (err) {
+      setTranscript([]);
+    }
+  };
+
+
   const videoOptions = {
     width: '100%',
     height: "100%",
@@ -64,6 +81,20 @@ const Feed = forwardRef(({
 
   return (
     <div ref={ref}>
+      <button onClick={fetchTranscript}>클릭</button>
+      {transcript?.map((item, index) => (
+        <div key={index}>
+          <div>
+            텍스트: {item.text}
+          </div>
+          <div>
+            듀레이션: {item.duration}
+          </div>
+          <div>
+            오프셋: {item.offset}
+          </div>
+        </div>
+      ))}
       <div className={classNames([s.youtube_wrap], {})}>
         {
           !isPlaying ?
