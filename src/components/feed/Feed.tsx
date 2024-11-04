@@ -48,19 +48,22 @@ const Feed = forwardRef(({
     setIsPlaying(true);
   };
 
-  const fetchTranscript = async () => {
+  const fetchTranscript = async (id: string) => {
     try {
-      const response = await fetch(`/api/youtube?videoId=NQ5kD1bKWYI`);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+      const response = await fetch(`/api/youtube?videoId=${id}`);
       const data = await response.json();
-      console.log('dd', data);
+      console.log('클릭', data);
       setTranscript(data?.transcript);
     } catch (err) {
       setTranscript([]);
     }
   };
+
+  useEffect(() => {
+    console.log('1');
+    const a = fetchTranscript(data?.videoId);
+    console.log('2', a);
+  }, [])
 
 
   const videoOptions = {
@@ -81,7 +84,7 @@ const Feed = forwardRef(({
 
   return (
     <div ref={ref}>
-      <button onClick={fetchTranscript}>클릭</button>
+      {/* <button onClick={fetchTranscript}>클릭</button> */}
       {transcript?.map((item, index) => (
         <div key={index}>
           <div>
