@@ -1,3 +1,4 @@
+export const runtime = "edge";
 const apiKey = "AIzaSyDDGQ-GkgcsTSO4zsZ9epfjbWnMhDjER94"; // 여기에 API 키를 입력하세요.
 
 // 유튜브 스크립트 추출
