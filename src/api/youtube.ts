@@ -1,4 +1,3 @@
-export const runtime = "edge";
 const apiKey = "AIzaSyDDGQ-GkgcsTSO4zsZ9epfjbWnMhDjER94"; // 여기에 API 키를 입력하세요.
 
 // 유튜브 스크립트 추출
@@ -17,7 +16,7 @@ export const fetchTranscript = async (id: string) => {
 
 // 유튜브 정보 추출
 export const fetchVideoInfo = async (id: string) => {
-  const url = `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${apiKey}&part=snippet`;
+  const url = `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&part=snippet`;
 
   try {
     const response = await fetch(url);
@@ -39,7 +38,7 @@ export const fetchVideoInfo = async (id: string) => {
 export const fetchChannelInfo = async (id: string) => {
   try {
     const response = await fetch(
-      `https://www.googleapis.com/youtube/v3/channels?id=${id}&key=${apiKey}&part=snippet`
+      `https://www.googleapis.com/youtube/v3/channels?id=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&key=${apiKey}&part=snippet`
     );
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -50,3 +49,4 @@ export const fetchChannelInfo = async (id: string) => {
     console.error(err);
   }
 };
+export const runtime = "edge";
