@@ -5,6 +5,7 @@ import s from './feed.module.scss';
 import Image from 'next/image';
 import classNames from 'classnames';
 import { isMobile } from 'react-device-detect';
+import { fetchChannelInfo, fetchTranscript, fetchVideoInfo, getChannelProfileImage } from '@/api/youtube';
 
 
 type feedType = {
@@ -24,7 +25,12 @@ const Feed = forwardRef(({
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const peedRef = useRef<HTMLDivElement | null>(null);
   const playerRef = useRef<any>(null);
-  const [transcript, setTranscript] = useState<any[]>([]);
+  // 번역
+  const [transcript, setTranscript] = useState<any>();
+  // 유튜브 정보
+  const [videoInfo, setVideoInfo] = useState<any>();
+  // 유튜브 채널 정보
+  const [profileImage, setProfileImage] = useState<string>('');
 
   const thumbnailUrl = `https://img.youtube.com/vi/${data?.videoId}/maxresdefault.jpg`;
   // playerRef.current.stopVideo(); // 영상 초기화
@@ -48,23 +54,17 @@ const Feed = forwardRef(({
     setIsPlaying(true);
   };
 
-  const fetchTranscript = async (id: string) => {
-    try {
-      const response = await fetch(`/api/youtube?videoId=${id}`);
-      const data = await response.json();
-      console.log('클릭', data);
-      setTranscript(data?.transcript);
-    } catch (err) {
-      setTranscript([]);
-    }
-  };
-
   useEffect(() => {
-    console.log('1');
-    const a = fetchTranscript(data?.videoId);
-    console.log('2', a);
-  }, [])
-
+    const fetchData = async () => {
+      const trans = await fetchTranscript(data?.videoId, 0);
+      const info = await fetchVideoInfo(data?.videoId);
+      const profile = await getChannelProfileImage(data?.videoId);
+      setTranscript(trans);
+      setVideoInfo(info?.snippet);
+      setProfileImage(profile);
+    };
+    fetchData();
+  }, [data?.videoId])
 
   const videoOptions = {
     width: '100%',
@@ -84,20 +84,6 @@ const Feed = forwardRef(({
 
   return (
     <div ref={ref}>
-      {/* <button onClick={fetchTranscript}>클릭</button> */}
-      {transcript?.map((item, index) => (
-        <div key={index}>
-          <div>
-            텍스트: {item.text}
-          </div>
-          <div>
-            듀레이션: {item.duration}
-          </div>
-          <div>
-            오프셋: {item.offset}
-          </div>
-        </div>
-      ))}
       <div className={classNames([s.youtube_wrap], {})}>
         {
           !isPlaying ?
@@ -113,15 +99,23 @@ const Feed = forwardRef(({
             />
         }
       </div>
-      <div className={s.area} style={{ height: '48px' }}>
-        eng
-      </div>
-      {/* <div className={s.area} style={{ height: '330px' }}>
-        스크립트 영역
-      </div> */}
-      <div className={s.area} style={{ height: '102px' }}>
-        태그 영역
-        {isView ? '여기 보고있음.' : ''}
+      <div>
+        <div>
+          <div>
+            <img src={profileImage} />
+          </div>
+          <div>
+            <p>{videoInfo?.title}</p>
+            <span>{videoInfo?.channelTitle}</span>
+          </div>
+          <div>
+            북마크, 더보기
+          </div>
+        </div>
+        <div>
+          <div>텍스트: {transcript?.text} </div>
+          <span>{transcript?.offset} - {transcript?.duration}</span>
+        </div>
       </div>
     </div>
   );

@@ -11,12 +11,8 @@ const videoData = [
     script: '스크립트0'
   },
   {
-    videoId: 'dQw4w9WgXcQ',
+    videoId: 'ehAGlT9DJZ4',
     script: '스크립트1'
-  },
-  {
-    videoId: '2vjPBrBU-TM',
-    script: '스크립트2'
   }
 ];
 
