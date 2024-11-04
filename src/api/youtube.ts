@@ -50,4 +50,4 @@ export async function fetchTranscript(id: string) {
 //   }
 // }
 
-export const runtime = "edge";
+// export const runtime = "edge";
