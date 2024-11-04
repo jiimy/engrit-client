@@ -1,5 +1,6 @@
 import axios from "axios";
 
+export const runtime = "edge";
 // 유튜브 스크립트 추출
 export async function fetchTranscript(id: string) {
   try {
@@ -49,4 +50,4 @@ export async function fetchTranscript(id: string) {
 //     console.error(err);
 //   }
 // }
-export const runtime = "edge";
+
