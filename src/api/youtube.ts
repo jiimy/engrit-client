@@ -1,7 +1,7 @@
 const apiKey = "AIzaSyDDGQ-GkgcsTSO4zsZ9epfjbWnMhDjER94"; // 여기에 API 키를 입력하세요.
 
 // 유튜브 스크립트 추출
-export const fetchTranscript = async (id: string) => {
+export async function fetchTranscript(id: string) {
   try {
     const response = await fetch(`/api/youtube?videoId=${id}`);
     console.log("id", id);
@@ -12,10 +12,10 @@ export const fetchTranscript = async (id: string) => {
   } catch (err) {
     console.log("스크립트 추출 실패");
   }
-};
+}
 
 // 유튜브 정보 추출
-export const fetchVideoInfo = async (id: string) => {
+export async function fetchVideoInfo(id: string) {
   const url = `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&part=snippet`;
 
   try {
@@ -32,10 +32,10 @@ export const fetchVideoInfo = async (id: string) => {
   } catch (err) {
     console.log("유튜브 정보 추출 실패", err);
   }
-};
+}
 
 // 유튜브 채널 정보 추출
-export const fetchChannelInfo = async (id: string) => {
+export async function fetchChannelInfo(id: string) {
   try {
     const response = await fetch(
       `https://www.googleapis.com/youtube/v3/channels?id=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&key=${apiKey}&part=snippet`
@@ -48,5 +48,5 @@ export const fetchChannelInfo = async (id: string) => {
   } catch (err) {
     console.error(err);
   }
-};
+}
 export const runtime = "edge";
