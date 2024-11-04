@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const apiKey = "AIzaSyDDGQ-GkgcsTSO4zsZ9epfjbWnMhDjER94"; // 여기에 API 키를 입력하세요.
-
 // 유튜브 스크립트 추출
 export async function fetchTranscript(id: string) {
   try {
