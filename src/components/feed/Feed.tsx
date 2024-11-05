@@ -1,12 +1,12 @@
 'use client';
-import React, { useState, useEffect, useRef, forwardRef, Ref } from 'react';
+import { fetchTranscript, fetchVideoInfo, getChannelProfileImage } from '@/api/youtube';
+import classNames from 'classnames';
+import Image from 'next/image';
+import { forwardRef, Ref, useEffect, useRef, useState } from 'react';
 import YouTube from 'react-youtube';
 import s from './feed.module.scss';
-import Image from 'next/image';
-import classNames from 'classnames';
-import { isMobile } from 'react-device-detect';
-import { fetchChannelInfo, fetchTranscript, fetchVideoInfo, getChannelProfileImage } from '@/api/youtube';
-
+import { translateText } from '@/util/translate';
+import Test3 from '../test/Test3';
 
 type feedType = {
   data?: any;
@@ -31,6 +31,10 @@ const Feed = forwardRef(({
   const [videoInfo, setVideoInfo] = useState<any>();
   // 유튜브 채널 정보
   const [profileImage, setProfileImage] = useState<string>('');
+  // 번역된거
+  const [textTrans, setTextTrans] = useState<any>('');
+
+  const [translatedText, setTranslatedText] = useState('');
 
   const thumbnailUrl = `https://img.youtube.com/vi/${data?.videoId}/maxresdefault.jpg`;
   // playerRef.current.stopVideo(); // 영상 초기화
@@ -65,6 +69,7 @@ const Feed = forwardRef(({
     };
     fetchData();
   }, [data?.videoId])
+
 
   const videoOptions = {
     width: '100%',
@@ -113,7 +118,10 @@ const Feed = forwardRef(({
           </div>
         </div>
         <div>
-          <div>텍스트: {transcript?.text} </div>
+          <div>텍스트: {transcript?.text}
+            <br />
+            번역: {transcript?.text && <Test3 source={transcript?.text} />}
+          </div>
           <span>{transcript?.offset} - {transcript?.duration}</span>
         </div>
       </div>

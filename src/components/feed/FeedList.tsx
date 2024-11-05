@@ -3,16 +3,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import Feed from './Feed';
 import s from './feed.module.scss';
 import { useHeaderVisible } from '@/hooks/useHeaderVisible';
+import Link from 'next/link';
 // import { isMobile } from 'react-device-detect';
 
 const videoData = [
   {
-    videoId: 'zoxmRJ0grt8',
-    script: '스크립트0'
+    videoId: '95NgtNgmnWA',
   },
   {
-    videoId: 'ehAGlT9DJZ4',
-    script: '스크립트1'
+    videoId: 'vtHl-cMqYg4',
+  },
+  {
+    videoId: 'arj7oStGLkU',
   }
 ];
 
@@ -37,6 +39,7 @@ const FeedList = ({ setIsScroll }: FeedListType) => {
     if (scrollRef.current) {
       const scrollTop = scrollRef.current?.scrollTop; // 현재 스크롤 위치
       const clientHeight = scrollRef.current.clientHeight; // 보이는 영역의 높이
+      const scrollHeight = scrollRef.current.scrollHeight;
       const newLabels = Array(videoData?.length).fill(""); // 새로운 레이블 배열 초기화
       let firstBoxIndex = -1;
 
@@ -53,7 +56,8 @@ const FeedList = ({ setIsScroll }: FeedListType) => {
             firstBoxIndex = 0;
           }
 
-          if (scrollTop > 130 && boxBottom > scrollTop && boxTop < scrollTop + clientHeight) {
+          // if (scrollTop > 130 && boxBottom > scrollTop && boxTop < scrollTop + clientHeight) {
+          if (scrollTop > 130 && boxBottom) {
             if (firstBoxIndex === -1) {
               firstBoxIndex = index + 1;
             }
@@ -66,6 +70,9 @@ const FeedList = ({ setIsScroll }: FeedListType) => {
         newLabels[firstBoxIndex] = "-1";
       }
 
+      if (scrollTop + clientHeight >= scrollHeight - 10) { // 끝에서 10px 이내에 도달하면 끝으로 간주
+        firstBoxIndex = 0;
+      }
       setBoxLabels(newLabels);
     }
   };
@@ -95,13 +102,15 @@ const FeedList = ({ setIsScroll }: FeedListType) => {
       <div style={{ height: `${totalHeight}px` }}>
 
         {videoData.map((item, index) => (
-          <Feed key={index}
-            ref={(el: any) => {
-              if (el) {
-                boxRefs.current[index] = el;
-              }
-            }}
-            data={item} isView={boxLabels[index]} />
+          <Link href={`/detail/${index}`} key={index}>
+            <Feed
+              ref={(el: any) => {
+                if (el) {
+                  boxRefs.current[index] = el;
+                }
+              }}
+              data={item} isView={boxLabels[index]} />
+          </Link>
         ))}
       </div>
     </div>

@@ -1,6 +1,7 @@
 import axios from "axios";
 
 // 유튜브 스크립트 추출
+// 시작 (start) 부터 몇개까지 보여줄지 (viewLength)
 export async function fetchTranscript(id: string, viewLength?: number) {
   try {
     const response = await axios.get(`/api/youtube?videoId=${id}`);
@@ -8,6 +9,7 @@ export async function fetchTranscript(id: string, viewLength?: number) {
     if (response?.data?.transcript) {
       const transcript = response?.data?.transcript;
       if (viewLength !== undefined && viewLength < transcript.length) {
+        console.log('스크립트', transcript);
         return transcript[viewLength];
       } else {
         return transcript;
@@ -25,6 +27,7 @@ export async function fetchVideoInfo(id: string) {
   try {
     const response = await axios.get(url);
     if (response.data.items.length > 0) {
+      console.log("유튜브 정보", response.data.items[0]);
       return response.data.items[0];
     } else {
       console.log("No video found");
