@@ -4,19 +4,8 @@ import Feed from './Feed';
 import s from './feed.module.scss';
 import { useHeaderVisible } from '@/hooks/useHeaderVisible';
 import Link from 'next/link';
+import { videoData } from '@/data/sampleVideoData';
 // import { isMobile } from 'react-device-detect';
-
-const videoData = [
-  {
-    videoId: '95NgtNgmnWA',
-  },
-  {
-    videoId: 'vtHl-cMqYg4',
-  },
-  {
-    videoId: 'arj7oStGLkU',
-  }
-];
 
 type FeedListType = {
   setIsScroll?: React.Dispatch<React.SetStateAction<boolean>>;

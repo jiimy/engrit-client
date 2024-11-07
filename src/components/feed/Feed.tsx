@@ -4,9 +4,8 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import { forwardRef, Ref, useEffect, useRef, useState } from 'react';
 import YouTube from 'react-youtube';
+import TranslateWord from '../../util/TranslateWord';
 import s from './feed.module.scss';
-import { translateText } from '@/util/translate';
-import Test3 from '../test/Test3';
 
 type feedType = {
   data?: any;
@@ -60,7 +59,7 @@ const Feed = forwardRef(({
 
   useEffect(() => {
     const fetchData = async () => {
-      const trans = await fetchTranscript(data?.videoId, 0);
+      const trans = await fetchTranscript(data?.videoId);
       const info = await fetchVideoInfo(data?.videoId);
       const profile = await getChannelProfileImage(data?.videoId);
       setTranscript(trans);
@@ -86,6 +85,8 @@ const Feed = forwardRef(({
       fs: 0 // 전체화면 버튼 숨기기?
     }
   };
+
+  console.log('cc', transcript);
 
   return (
     <div ref={ref}>
@@ -118,9 +119,9 @@ const Feed = forwardRef(({
           </div>
         </div>
         <div>
-          <div>텍스트: {transcript?.text}
+          <div>텍스트: {transcript && transcript[0]?.text}
             <br />
-            번역: {transcript?.text && <Test3 source={transcript?.text} />}
+            번역: {transcript && transcript[0]?.text && <TranslateWord source={transcript[0]?.text} />}
           </div>
           <span>{transcript?.offset} - {transcript?.duration}</span>
         </div>

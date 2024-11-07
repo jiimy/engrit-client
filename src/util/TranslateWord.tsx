@@ -19,7 +19,7 @@ async function translate(source: string, sourceLanguage: string) {
   }
 }
 
-const Test3 = ({ source, sourceLanguage = 'en' }: translateType) => {
+const TranslateWord = ({ source, sourceLanguage = 'en' }: translateType) => {
   // const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
 
@@ -43,4 +43,4 @@ const Test3 = ({ source, sourceLanguage = 'en' }: translateType) => {
   );
 }
 
-export default Test3;
+export default TranslateWord;

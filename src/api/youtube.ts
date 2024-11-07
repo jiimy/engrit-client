@@ -1,19 +1,15 @@
 import axios from "axios";
 
 // 유튜브 스크립트 추출
-// 시작 (start) 부터 몇개까지 보여줄지 (viewLength)
-export async function fetchTranscript(id: string, viewLength?: number) {
+// 시작 (start) 부터 몇개까지 보여줄지 (end)
+export async function fetchTranscript(id: string) {
   try {
     const response = await axios.get(`/api/youtube?videoId=${id}`);
 
     if (response?.data?.transcript) {
       const transcript = response?.data?.transcript;
-      if (viewLength !== undefined && viewLength < transcript.length) {
-        console.log('스크립트', transcript);
-        return transcript[viewLength];
-      } else {
-        return transcript;
-      }
+      console.log("모든 script", transcript);
+      return transcript;
     }
   } catch (err) {
     console.log("스크립트 추출 실패", err);
