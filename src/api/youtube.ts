@@ -8,7 +8,7 @@ export async function fetchTranscript(id: string) {
 
     if (response?.data?.transcript) {
       const transcript = response?.data?.transcript;
-      console.log("모든 script", transcript);
+      // console.log("모든 script", transcript);
       return transcript;
     }
   } catch (err) {
