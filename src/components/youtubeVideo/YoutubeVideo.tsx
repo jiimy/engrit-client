@@ -38,9 +38,8 @@ const YoutubeVideo = ({ videoId, onTimeUpdate }: { videoId: string; onTimeUpdate
         const playerState = player.getPlayerState();
         const currentTime = player.getCurrentTime();
 
-        // 영상이 재생 중일 때만 currentTime 업데이트
         if (playerState === 1) {
-          setLastTime(currentTime); // 현재 시간을 저장
+          setLastTime(currentTime);
           if (onTimeUpdate) {
             onTimeUpdate(currentTime);
           }
@@ -48,14 +47,12 @@ const YoutubeVideo = ({ videoId, onTimeUpdate }: { videoId: string; onTimeUpdate
       }, 1000);
     };
 
-    // 인터벌 시작
     startInterval();
 
-    // 플레이어 상태가 변경될 때마다 호출되는 이벤트 리스너
     player.addEventListener('onStateChange', (event: any) => {
       if (event.data === 0 || event.data === 2) { // 영상이 종료되거나 일시 정지되었을 때
         if (intervalRef.current) {
-          clearInterval(intervalRef.current); // 인터벌 종료
+          clearInterval(intervalRef.current);
           intervalRef.current = null;
         }
       }
