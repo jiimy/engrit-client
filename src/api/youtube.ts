@@ -18,7 +18,7 @@ export async function fetchTranscript(id: string) {
 
 // 유튜브 정보 추출
 export async function fetchVideoInfo(id: string) {
-  const url = `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=AIzaSyDDGQ-GkgcsTSO4zsZ9epfjbWnMhDjER94&part=snippet`;
+  const url = `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&part=snippet`;
 
   try {
     const response = await axios.get(url);
@@ -37,7 +37,7 @@ export async function fetchVideoInfo(id: string) {
 export async function fetchChannelInfo(id: string) {
   try {
     const response = await axios.get(
-      `https://www.googleapis.com/youtube/v3/channels?id=${id}&key=AIzaSyDDGQ-GkgcsTSO4zsZ9epfjbWnMhDjER94&part=snippet`
+      `https://www.googleapis.com/youtube/v3/channels?id=${id}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&part=snippet`
     );
     return response.data.items[0];
   } catch (err) {
