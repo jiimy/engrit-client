@@ -6,6 +6,8 @@ import classNames from 'classnames';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import s from './detail.module.scss';
+import YoutubeData from '@/components/youtubeVideo/YoutubeData';
+import YoutubeScript from '@/components/youtubeVideo/YoutubeScript';
 
 const DetailPage = ({ isViewing }: { isViewing: number }) => {
   const params = useParams<{ id: string }>();
@@ -24,32 +26,16 @@ const DetailPage = ({ isViewing }: { isViewing: number }) => {
     fetchData();
   }, [params])
 
-  // console.log('cc1', script);
   const handleTimeUpdate = (time: number) => {
     setVideoTime(time);
-    console.log('Current video time:', time); // 부모에서 videoTime을 사용할 수 있음
   };
 
   return (
-    <>
+    <div className={s.detail_page}>
       <YoutubeVideo videoId={videoData[videoIndex]?.videoId} onTimeUpdate={handleTimeUpdate} />
-      <div>
-        {script?.map((item: any, index: number) => (
-          <div key={index}
-            className={classNames([s.script], {
-              [s.is_viewing]: (item.offset <= videoTime) && (videoTime < item.offset + item.duration)
-            })}>
-            <p>{item.text}</p>
-            <p>번역된거 들어감
-              {typeof item.offset}
-              {typeof videoTime}
-              {typeof item.offset + item.duration}
-            </p>
-            <span>{item.offset} ~ {item.offset + item.duration}</span>
-          </div>
-        ))}
-      </div>
-    </>
+      <YoutubeData videoId={videoData[videoIndex]} />
+      <YoutubeScript videoTime={videoTime} videoId={videoData[videoIndex]?.videoId}/>
+    </div>
   );
 };
 

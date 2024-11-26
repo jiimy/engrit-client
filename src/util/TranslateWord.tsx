@@ -13,9 +13,9 @@ async function translate(source: string, sourceLanguage: string) {
 
   try {
     const response = await axios.get(url);
-    return response.data[0][0][0]; // 번역된 텍스트 반환
+    return response.data[0][0][0]; 
   } catch (error) {
-    throw error; // 오류 발생 시 처리
+    throw error; 
   }
 }
 

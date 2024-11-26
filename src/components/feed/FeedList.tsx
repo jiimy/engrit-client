@@ -91,15 +91,16 @@ const FeedList = ({ setIsScroll }: FeedListType) => {
       <div style={{ height: `${totalHeight}px` }}>
 
         {videoData.map((item, index) => (
-          <Link href={`/detail/${index}`} key={index}>
+          <>
             <Feed
+              index={index}
               ref={(el: any) => {
                 if (el) {
                   boxRefs.current[index] = el;
                 }
               }}
               data={item} isView={boxLabels[index]} />
-          </Link>
+          </>
         ))}
       </div>
     </div>

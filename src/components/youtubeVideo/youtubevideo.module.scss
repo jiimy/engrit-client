@@ -10,3 +10,18 @@
   cursor: pointer;
   padding-bottom: 56.25%;
 }
+
+
+.script_wrap {
+  overflow: auto;
+  height: 100%;
+}
+.script {
+  margin-bottom: 12px;
+  padding: 16px;
+  border-radius: 8px;
+  background: #FAFAFA;
+}
+.is_viewing {
+  background: #F0F0F0;
+}

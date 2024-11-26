@@ -23,6 +23,8 @@ const Header = ({ children, isScroll = false, isBack }: headerType) => {
   const [dropDown, setDropDown] = useState(false);
   const [shareModal, setShareModal] = useState(false);
 
+  const subPage = ['upload', 'edit'];
+
   useOutOfClick(targetRef, () => {
     setDropDown(false);
   });
@@ -41,7 +43,7 @@ const Header = ({ children, isScroll = false, isBack }: headerType) => {
           // 라우터에 따라 아이콘을 다르게 하자
           <div className={s.back} onClick={() => history.go(-1)}>
             {
-              route === 'upload' || route === 'edit' ?
+              subPage.includes(route) ?
                 <Close /> :
                 <LeftArrow20 />
             }
@@ -51,11 +53,11 @@ const Header = ({ children, isScroll = false, isBack }: headerType) => {
         {
           currentPath.includes('detail') &&
           <>
-            <span className='absolute right-16 flex gap-12'>
-              <span className='w-28 h-28 cursor-pointer'>
+            <span className='absolute flex gap-12 right-16'>
+              <span className='cursor-pointer w-28 h-28'>
                 <BookmarkLine />
               </span>
-              <span className='w-28 h-28 cursor-pointer relative' onClick={() => setDropDown(!dropDown)} ref={targetRef}>
+              <span className='relative cursor-pointer w-28 h-28' onClick={() => setDropDown(!dropDown)} ref={targetRef}>
                 <More />
                 {
                   dropDown &&
@@ -73,7 +75,7 @@ const Header = ({ children, isScroll = false, isBack }: headerType) => {
           currentPath.includes('edit') &&
           <>
             <span className='absolute right-16'>
-              <span className='w-28 h-28 cursor-pointer'>
+              <span className='cursor-pointer w-28 h-28'>
                 <Delete />
               </span>
             </span>

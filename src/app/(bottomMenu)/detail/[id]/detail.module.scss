@@ -1,8 +1,5 @@
-.script {
-  padding: 16px;
-  border-radius: 8px;
-  background: #FAFAFA;
-}
-.is_viewing {
-  background: #F0F0F0;
+.detail_page {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
