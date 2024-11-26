@@ -9,7 +9,8 @@ import s from './detail.module.scss';
 import YoutubeData from '@/components/youtubeVideo/YoutubeData';
 import YoutubeScript from '@/components/youtubeVideo/YoutubeScript';
 
-const DetailPage = ({ isViewing }: { isViewing: number }) => {
+// NOTE: isViewing: number 가 필요할수도있음.
+const DetailPage = () => {
   const params = useParams<{ id: string }>();
   const [script, setScript] = useState<any>();
   const [group, setGroup] = useState<number>(0);
