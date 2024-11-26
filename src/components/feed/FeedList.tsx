@@ -93,6 +93,7 @@ const FeedList = ({ setIsScroll }: FeedListType) => {
         {videoData.map((item, index) => (
           <>
             <Feed
+              key={index}
               index={index}
               ref={(el: any) => {
                 if (el) {

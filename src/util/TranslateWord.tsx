@@ -13,28 +13,34 @@ async function translate(source: string, sourceLanguage: string) {
 
   try {
     const response = await axios.get(url);
-    return response.data[0][0][0]; 
+    return response.data[0][0][0];
   } catch (error) {
-    throw error; 
+    throw error;
   }
 }
 
+// 특수문자 정리
+export function cleanText(text: string): string {
+  return text.replace(/&amp;/g, "").replace(/#39;/g, "'").replace(/[^a-zA-Z0-9\s]/g, ""); // 특수 문자 제거
+}
+
 const TranslateWord = ({ source, sourceLanguage = 'en' }: translateType) => {
-  // const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
 
   useEffect(() => {
     if (source) {
+
+
       const fetchTranslation = async () => {
-        const translation = await translate(source, sourceLanguage);
+        const translation = await translate(cleanText(source), sourceLanguage);
         setOutputText(translation);
       };
 
       fetchTranslation();
     } else {
-      setOutputText(""); // Clear output when input is empty
+      setOutputText(""); 
     }
-  }, [source]); // Effect runs whenever inputText changes
+  }, [source]);
 
   return (
     <>
