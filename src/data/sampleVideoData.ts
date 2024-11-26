@@ -1,7 +1,7 @@
 export const videoData = [
-  // {
-  //   videoId: '95NgtNgmnWA',
-  // },
+  {
+    videoId: '95NgtNgmnWA',
+  },
   {
     videoId: 'vtHl-cMqYg4',
   },

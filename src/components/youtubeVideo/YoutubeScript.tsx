@@ -17,8 +17,6 @@ const YoutubeScript = ({ videoId, videoTime, viewLength }: { videoId: string | a
     fetchData();
   }, [videoId])
 
-  console.log('cc', script, videoId);
-
   return (
     <div className={s.script_wrap}>
       {script?.map((item: any, index: number) => (
@@ -28,7 +26,7 @@ const YoutubeScript = ({ videoId, videoTime, viewLength }: { videoId: string | a
           })}>
           <p>{cleanText(item.text)}</p>
           <p>
-            <TranslateWord source={item.text} />
+            <TranslateWord source={item.text} id={videoId} />
           </p>
           <span>{item.offset} ~ {item.offset + item.duration}</span>
         </div>
