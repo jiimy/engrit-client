@@ -19,9 +19,11 @@ async function translate(source: string, sourceLanguage: string) {
   }
 }
 
+// "guys I&amp;#39;m literally pulling up to school"
+
 // 특수문자 정리
 export function cleanText(text: string): string {
-  return text.replace(/&amp;/g, "").replace(/#39;/g, "'").replace(/[^a-zA-Z0-9\s]/g, ""); // 특수 문자 제거
+  return text.replace(/&amp;/g, "").replace(/#39;/g, "'").replace(/\n/g, ""); // 특수 문자 제거
 }
 
 const TranslateWord = ({ source, sourceLanguage = 'en' }: translateType) => {
