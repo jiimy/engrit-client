@@ -31,28 +31,24 @@ export function cleanText(text: string): string {
 
 const TranslateWord = ({ source, sourceLanguage = 'en', id }: translateType) => {
   const [outputText, setOutputText] = useState("");
-  const [idLanguageMap, setIdLanguageMap] = useState<{ [key: string]: string }>({}); // id별 언어 저장
+  // const [idLanguageMap, setIdLanguageMap] = useState<{ [key: string]: string }>({}); // id별 언어 저장
 
   useEffect(() => {
     const fetchTranslation = async () => {
       const cleanedText = cleanText(source);
 
-      // 만약 id에 대해 이미 언어가 저장되어 있으면 그 언어를 사용
-      const detectedLanguage = idLanguageMap[id] || detectLanguage(cleanedText);
+      // const detectedLanguage = idLanguageMap[id] || detectLanguage(cleanedText);
 
       // 언어가 감지된 경우에만 처리
       // if (!idLanguageMap[id] && detectedLanguage !== 'eng' && detectedLanguage !== 'en') {
       // }
-      setIdLanguageMap((prev) => ({ ...prev, [id]: detectedLanguage }));
+      // setIdLanguageMap((prev) => ({ ...prev, [id]: detectedLanguage }));
 
       let intermediateText = cleanedText;
 
-      // 감지된 언어가 영어가 아니면 영어로 번역
       // if (detectedLanguage !== 'eng' && detectedLanguage !== 'en') {
       // } 
       intermediateText = await translate(cleanedText, "es", "ko");
-      // 중간 언어(영어)에서 한국어로 번역
-      // const finalTranslation = await translate(intermediateText, "en", "ko");
       setOutputText(intermediateText);
     };
 
@@ -61,7 +57,8 @@ const TranslateWord = ({ source, sourceLanguage = 'en', id }: translateType) => 
     } else {
       setOutputText("");
     }
-  }, [source, id, idLanguageMap]);
+  // }, [source, id, idLanguageMap]);
+  }, []);
 
   return <>{outputText}</>;
 };
