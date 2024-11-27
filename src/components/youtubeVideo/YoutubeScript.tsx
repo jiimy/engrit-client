@@ -28,7 +28,7 @@ const YoutubeScript = ({ videoId, videoTime, viewLength }: { videoId: string | a
           <p>
             <TranslateWord source={item.text} id={videoId} />
           </p>
-          <span>{item.offset} ~ {item.offset + item.duration}</span>
+          <span>{item.offset.toFixed(2)} ~ {(item.offset + item.duration).toFixed(2)}</span>
         </div>
       ))}
     </div>

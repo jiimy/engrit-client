@@ -34,7 +34,7 @@ const Header = ({ children, isScroll = false, isBack }: headerType) => {
       <header className={s.header}
         style={{
           // marginTop: isScroll && type === 'home' ? `-${headerRef?.current?.offsetHeight}px` : '0px'
-          marginTop: isScroll ? `-${headerRef?.current?.offsetHeight}px` : '0px',
+          // marginTop: isScroll ? `-${headerRef?.current?.offsetHeight}px` : '0px',
           justifyContent: isBack ? `center` : 'start'
         }}
         ref={headerRef}

@@ -1,4 +1,4 @@
-@mixin dotdotdot($font-size:14, $lines-to-show: 1, $line-height:1.5) {
+@mixin dotdotdot($font-size: 14, $lines-to-show: 1, $line-height: 1.5) {
   display: block;
   /* Fallback for non-webkit */
   display: -webkit-box;
@@ -8,10 +8,10 @@
   // display: box;
   // max-width: 400px;
   max-width: 100%;
-  height: $font-size*$line-height*$lines-to-show*1px;
+  height: $font-size * $line-height * $lines-to-show * 1px;
   /* Fallback for non-webkit */
   margin: 0 auto;
-  font-size: $font-size*1px;
+  font-size: $font-size * 1px;
   line-height: $line-height;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -19,7 +19,7 @@
 
 @mixin parent-selector($new-class) {
   $current-selector: &;
-  $new-selector: '';
+  $new-selector: "";
 
   @each $item in $current-selector {
     $first-item: nth($item, 1);
@@ -32,5 +32,12 @@
 
   @at-root #{$new-selector} {
     @content;
+  }
+}
+
+@mixin scroll-hide {
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
 }

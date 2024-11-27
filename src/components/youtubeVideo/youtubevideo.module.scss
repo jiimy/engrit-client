@@ -15,6 +15,7 @@
 .script_wrap {
   overflow: auto;
   height: 100%;
+  @include scroll-hide;
 }
 .script {
   margin-bottom: 12px;
