@@ -22,7 +22,11 @@
   padding: 16px;
   border-radius: 8px;
   background: #FAFAFA;
+
+  // display: none;
 }
-.is_viewing {
+.is_viewing, .is_viewing2 {
   background: #F0F0F0;
+
+  // display: block;
 }

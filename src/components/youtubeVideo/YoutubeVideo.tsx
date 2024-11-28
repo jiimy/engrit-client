@@ -7,7 +7,6 @@ import s from './youtubevideo.module.scss';
 
 const YoutubeVideo = ({ videoId, onTimeUpdate }: { videoId: string; onTimeUpdate?: (time: number) => void }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const playerRef = useRef<any>(null);
 
@@ -33,7 +32,6 @@ const YoutubeVideo = ({ videoId, onTimeUpdate }: { videoId: string; onTimeUpdate
       if (playerRef.current) {
         const player = playerRef.current;
         const currentTime = player.getCurrentTime();
-        setCurrentTime(currentTime);
         onTimeUpdate?.(currentTime);
       }
     }, 1000);
@@ -50,14 +48,14 @@ const YoutubeVideo = ({ videoId, onTimeUpdate }: { videoId: string; onTimeUpdate
     const player = event.target;
     playerRef.current = player;
 
-    startInterval(); 
+    startInterval();
   };
 
   const handlePlay = () => {
     setIsPlaying(true);
     if (playerRef.current) {
       const player = playerRef.current;
-      player.playVideo(); 
+      player.playVideo();
     }
   };
 

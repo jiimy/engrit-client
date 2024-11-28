@@ -1,9 +1,8 @@
 'use client';
-import { fetchTranscript, fetchVideoInfo, getChannelProfileImage } from '@/api/youtube';
-import TranslateWord from '@/util/TranslateWord';
-import React, { useEffect, useState } from 'react';
+import { fetchVideoInfo, getChannelProfileImage } from '@/api/youtube';
+import { useEffect, useState } from 'react';
 
-const YoutubeData = ({ videoId }: { videoId: string | any}) => {
+const YoutubeData = ({ videoId, children }: { videoId: string | any; children?: React.ReactNode }) => {
   // 유튜브 정보
   const [videoInfo, setVideoInfo] = useState<any>();
   // 유튜브 채널 정보
@@ -25,12 +24,14 @@ const YoutubeData = ({ videoId }: { videoId: string | any}) => {
         <div>
           <img src={profileImage} />
         </div>
-        <div>
-          <p>{videoInfo?.title}</p>
-          <span>{videoInfo?.channelTitle}</span>
-        </div>
-        <div>
-          북마크, 더보기
+        <div className='flex'>
+          <div>
+            <p>{videoInfo?.title}</p>
+            <span>{videoInfo?.channelTitle}</span>
+          </div>
+          <div className='flex flex-col'>
+            {children}
+          </div>
         </div>
       </div>
     </div>

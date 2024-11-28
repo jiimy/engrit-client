@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import s from './detail.module.scss';
 import YoutubeData from '@/components/youtubeVideo/YoutubeData';
 import YoutubeScript from '@/components/youtubeVideo/YoutubeScript';
+import PageAction from '@/components/pageAction/PageAction';
 
 // NOTE: isViewing: number 가 필요할수도있음.
 const DetailPage = () => {
@@ -34,8 +35,10 @@ const DetailPage = () => {
   return (
     <div className={s.detail_page}>
       <YoutubeVideo videoId={videoData[videoIndex]?.videoId} onTimeUpdate={handleTimeUpdate} />
-      <YoutubeData videoId={videoData[videoIndex]} />
-      <YoutubeScript videoTime={videoTime} videoId={videoData[videoIndex]?.videoId}/>
+      <div>
+        <YoutubeData videoId={videoData[videoIndex]?.videoId} />
+      </div>
+      <YoutubeScript videoTime={videoTime} videoId={videoData[videoIndex]?.videoId} />
     </div>
   );
 };

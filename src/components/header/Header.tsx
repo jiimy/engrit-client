@@ -7,6 +7,7 @@ import { BookmarkLine, Close, Delete, LeftArrow20, More } from '@/components/ima
 import { usePathname } from 'next/navigation';
 import { useOutOfClick } from '@/hooks/useOutOfClick';
 import ShareModal from '../portalModal/shareModal/ShareModal';
+import DropDown from '../dropDown/DropDown';
 
 type headerType = {
   isScroll?: boolean;
@@ -20,14 +21,8 @@ const Header = ({ children, isScroll = false, isBack }: headerType) => {
   const targetRef = useRef(null);
   const route = currentPath.split('/')[1];
   const headerRef = useRef<HTMLDivElement | null>(null);
-  const [dropDown, setDropDown] = useState(false);
-  const [shareModal, setShareModal] = useState(false);
 
   const subPage = ['upload', 'edit'];
-
-  useOutOfClick(targetRef, () => {
-    setDropDown(false);
-  });
 
   return (
     <>
@@ -57,17 +52,7 @@ const Header = ({ children, isScroll = false, isBack }: headerType) => {
               <span className='cursor-pointer w-28 h-28'>
                 <BookmarkLine />
               </span>
-              <span className='relative cursor-pointer w-28 h-28' onClick={() => setDropDown(!dropDown)} ref={targetRef}>
-                <More />
-                {
-                  dropDown &&
-                  <ul className={s.dropdown}>
-                    <li>수정</li>
-                    <li>삭제</li>
-                    <li onClick={() => setShareModal(true)}>공유</li>
-                  </ul>
-                }
-              </span>
+              <DropDown />
             </span>
           </>
         }
@@ -82,9 +67,7 @@ const Header = ({ children, isScroll = false, isBack }: headerType) => {
           </>
         }
       </header>
-      {
-        shareModal && <ShareModal setOnModal={() => setShareModal(false)} />
-      }
+
     </>
   );
 };

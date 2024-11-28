@@ -23,7 +23,6 @@ export async function fetchVideoInfo(id: string) {
   try {
     const response = await axios.get(url);
     if (response.data.items.length > 0) {
-      console.log("유튜브 정보", response.data.items[0]);
       return response.data.items[0];
     } else {
       console.log("No video found");
