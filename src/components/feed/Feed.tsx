@@ -10,12 +10,12 @@ type feedType = {
   data?: any;
   // text?: string;
   isView: any;
-  index: number;
+  id: number;
 };
 
 const Feed = forwardRef(({
   data,
-  index
+  id
 }: feedType, ref: Ref<HTMLDivElement>) => {
 
   const [videoTime, setVideoTime] = useState(0);
@@ -27,7 +27,7 @@ const Feed = forwardRef(({
   return (
     <div ref={ref}>
       <YoutubeVideo videoId={data?.videoId} onTimeUpdate={handleTimeUpdate} />
-      <Link href={`/detail/${index}`} className='block pt-16 pr-20 pb-20 pl-20'>
+      <Link href={`/detail/${id}`} className='block pt-16 pr-20 pb-20 pl-20'>
         <YoutubeData videoId={data?.videoId}>
           <PageAction />
         </YoutubeData>

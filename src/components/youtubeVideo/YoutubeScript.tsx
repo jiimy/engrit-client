@@ -49,7 +49,7 @@ const YoutubeScript = ({ videoId, videoTime, viewLength = 0 }: { videoId: string
               [s.is_viewing]: isViewing || index === 0
             })}
             style={{
-              display: viewLength !== 0 && isViewing ? 'block' : 'none', // 조건에 맞는 항목만 표시
+              display: (viewLength !== 0 && isViewing) || index === 0 ? 'block' : 'none', // 조건에 맞는 항목만 표시
             }}
           >
             <p>{cleanText(item.text)}</p>

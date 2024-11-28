@@ -94,7 +94,7 @@ const FeedList = ({ setIsScroll }: FeedListType) => {
           <>
             <Feed
               key={index}
-              index={index}
+              id={index}
               ref={(el: any) => {
                 if (el) {
                   boxRefs.current[index] = el;
