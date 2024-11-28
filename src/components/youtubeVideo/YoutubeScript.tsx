@@ -27,9 +27,9 @@ const YoutubeScript = ({ videoId, videoTime, viewLength = 0 }: { videoId: string
 
   const processScriptData = () => {
     // 종료 시간 계산
-    const result = script.map((item: any, index: any, arr: any) => {
+    const result = script?.map((item: any, index: any, arr: any) => {
       const start = item.offset;
-      const end = index < arr.length - 1 ? arr[index + 1].offset : start + item.duration; // 다음 아이템의 offset 또는 종료 시간
+      const end = index < arr.length - 1 ? arr[index + 1].offset : start + item.duration;
       return { ...item, start, end };
     });
     return result;
