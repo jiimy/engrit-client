@@ -15,18 +15,20 @@
 .script_wrap {
   overflow: auto;
   height: 100%;
-  @include scroll-hide;
+  // @include scroll-hide;
 }
 .script {
   margin-bottom: 12px;
   padding: 16px;
   border-radius: 8px;
   background: #FAFAFA;
-
   // display: none;
 }
-.is_viewing, .is_viewing2 {
+.main {
+  display: none;
+}
+.is_viewing {
   background: #F0F0F0;
 
-  // display: block;
+  display: block;
 }
