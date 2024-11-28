@@ -40,16 +40,16 @@ const YoutubeScript = ({ videoId, videoTime, viewLength = 0 }: { videoId: string
   return (
     <div className={s.script_wrap}>
       {processedData?.map((item: any, index: number) => {
-        const isViewing = item.start <= videoTime && videoTime < item.end;
+        const isViewing = item.start <= videoTime && videoTime < item.end || videoTime === 0 && index === 0;
         return (
           <div
             key={index}
             ref={isViewing ? activeRef : null}
             className={classNames([s.script], {
-              [s.is_viewing]: isViewing || index === 0
+              [s.is_viewing]: isViewing
             })}
             style={{
-              display: (viewLength !== 0 && isViewing) || index === 0 ? 'block' : 'none', // 조건에 맞는 항목만 표시
+              display: (viewLength !== 0 && isViewing) ? 'block' : 'none', // 조건에 맞는 항목만 표시
             }}
           >
             <p>{cleanText(item.text)}</p>
