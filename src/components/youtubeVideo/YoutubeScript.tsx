@@ -46,7 +46,7 @@ const YoutubeScript = ({ videoId, videoTime, viewLength = 0 }: { videoId: string
             key={index}
             ref={isViewing ? activeRef : null}
             className={classNames([s.script], {
-              [s.is_viewing]: isViewing
+              [s.is_viewing]: isViewing || index === 0
             })}
             style={{
               display: viewLength !== 0 && isViewing ? 'block' : 'none', // 조건에 맞는 항목만 표시

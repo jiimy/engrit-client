@@ -20,14 +20,14 @@ const YoutubeData = ({ videoId, children }: { videoId: string | any; children?: 
 
   return (
     <div>
-      <div>
-        <div>
+      <div className='flex'>
+        <div className='max-w-32 max-h-32 w-full h-full rounded-full overflow-hidden mr-12'>
           <img src={profileImage} />
         </div>
-        <div className='flex'>
+        <div className='flex justify-between'>
           <div>
-            <p>{videoInfo?.title}</p>
-            <span>{videoInfo?.channelTitle}</span>
+            <p className='text-[#262626'>{videoInfo?.title}</p>
+            <span className='text-[#8C8C8C]'>{videoInfo?.channelTitle}</span>
           </div>
           <div className='flex flex-col'>
             {children}

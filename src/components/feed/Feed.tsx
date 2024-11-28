@@ -27,7 +27,7 @@ const Feed = forwardRef(({
   return (
     <div ref={ref}>
       <YoutubeVideo videoId={data?.videoId} onTimeUpdate={handleTimeUpdate} />
-      <Link href={`/detail/${index}`}>
+      <Link href={`/detail/${index}`} className='block pt-16 pr-20 pb-20 pl-20'>
         <YoutubeData videoId={data?.videoId}>
           <PageAction />
         </YoutubeData>
