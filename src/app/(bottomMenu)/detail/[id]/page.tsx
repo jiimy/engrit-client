@@ -35,7 +35,7 @@ const DetailPage = () => {
   return (
     <div className={s.detail_page}>
       <YoutubeVideo videoId={videoData[videoIndex]?.videoId} onTimeUpdate={handleTimeUpdate} />
-      <div className='pt-16 pr-20 pb-20 pl-20'>
+      <div className='flex flex-col overflow-hidden'>
         <YoutubeData videoId={videoData[videoIndex]?.videoId} />
         <YoutubeScript videoTime={videoTime} videoId={videoData[videoIndex]?.videoId} />
       </div>
