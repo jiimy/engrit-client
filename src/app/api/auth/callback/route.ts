@@ -1,6 +1,7 @@
-import { createClient } from "@/util/supabase/server";
+// import { createClient } from "@/util/supabase/server";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { createClient } from "@/util/supabase/server";
 // The client you created from the Server-Side Auth instructions
 
 export async function GET(request: Request) {
@@ -10,7 +11,7 @@ export async function GET(request: Request) {
   const next = searchParams.get("next") ?? "/";
 
   if (code) {
-    const supabase = await createClient(cookies());
+    const supabase = await createClient();
     const { error } = await supabase.auth.exchangeCodeForSession(code);
     if (!error) {
       const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer

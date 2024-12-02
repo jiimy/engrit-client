@@ -8,8 +8,6 @@ import PageAction from '../pageAction/PageAction';
 
 type feedType = {
   data?: any;
-  // text?: string;
-  isView: any;
   id: number;
 };
 
@@ -26,12 +24,12 @@ const Feed = forwardRef(({
 
   return (
     <div ref={ref}>
-      <YoutubeVideo videoId={data?.videoId} onTimeUpdate={handleTimeUpdate} />
+      <YoutubeVideo videoId={data?.youtube_link} onTimeUpdate={handleTimeUpdate} />
       <Link href={`/detail/${id}`} className='block pt-16 pr-20 pb-20 pl-20'>
-        <YoutubeData videoId={data?.videoId}>
+        <YoutubeData videoId={data?.youtube_link}>
           <PageAction />
         </YoutubeData>
-        <YoutubeScript videoTime={videoTime} videoId={data.videoId} viewLength={1} />
+        <YoutubeScript videoTime={videoTime} videoId={data.youtube_link} viewLength={1} />
       </Link>
     </div>
   );
