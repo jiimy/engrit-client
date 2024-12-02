@@ -8,4 +8,7 @@ export const videoData = [
   {
     videoId: "arj7oStGLkU",
   },
+  {
+    videoId: "7xs2zFpv5-k"
+  }
 ];

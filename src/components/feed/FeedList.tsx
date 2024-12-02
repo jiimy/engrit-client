@@ -5,6 +5,7 @@ import s from './feed.module.scss';
 import { useHeaderVisible } from '@/hooks/useHeaderVisible';
 import Link from 'next/link';
 import { videoData } from '@/data/sampleVideoData';
+import Loading from '../loading/Loading';
 // import { isMobile } from 'react-device-detect';
 
 type FeedListType = {
@@ -88,6 +89,7 @@ const FeedList = ({ setIsScroll }: FeedListType) => {
 
   return (
     <div ref={scrollRef} className={s.feedList}>
+      {/* <Loading /> */}
       <div style={{ height: `${totalHeight}px` }}>
 
         {videoData.map((item, index) => (

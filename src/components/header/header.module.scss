@@ -8,6 +8,8 @@
   font-size: 20px;
   padding: 0 16px;
   transition: all 0.3s;
+  background: white;
+  z-index: 10;
   &.is_home {
     justify-content: space-between;
     padding: 0 16px;
