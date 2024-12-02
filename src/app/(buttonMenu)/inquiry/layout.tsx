@@ -11,7 +11,7 @@ export default function RootLayout({
 
   return (
     <>
-      <Header isBack>업로드</Header>
+      <Header isBack>문의하기</Header>
       <div className="content">
         {children}
       </div>
