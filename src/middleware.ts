@@ -1,12 +1,13 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { updateSession } from "./util/supabase/middleware";
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  if (pathname.startsWith("/mypage") && !request.cookies.get("session-id")) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
+  // if (pathname.startsWith("/mypage") && !request.cookies.get("session-id")) {
+  //   return NextResponse.redirect(new URL("/login", request.url));
+  // }
 
   const res = NextResponse.next();
 
@@ -24,7 +25,7 @@ export function middleware(request: NextRequest) {
     );
   }
 
-  return res;
+  return await updateSession(request);
 }
 
 export const config = {

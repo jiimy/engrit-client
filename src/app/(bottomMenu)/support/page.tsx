@@ -1,5 +1,6 @@
 import Button from "@/components/button/Button";
 import SupportList from "@/components/support/SupportList";
+import Link from "next/link";
 
 const Index = () => {
   const data = [
@@ -14,10 +15,12 @@ const Index = () => {
         <></> :
         <>
           <Button full className="bg-black">
-            문의하기
+            <Link href="/inquiry" className="block w-full h-full">
+              문의하기
+            </Link>
           </Button>
-          또는 
-          
+          또는
+
           <SupportList />
         </>
       }
