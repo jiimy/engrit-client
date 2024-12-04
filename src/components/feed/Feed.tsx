@@ -27,7 +27,7 @@ const Feed = forwardRef(({
       <YoutubeVideo videoId={data?.youtube_link} onTimeUpdate={handleTimeUpdate} />
       <Link href={`/detail/${id}`} className='block pt-16 pr-20 pb-20 pl-20'>
         <YoutubeData videoId={data?.youtube_link}>
-          <PageAction />
+          <PageAction onClick={(e: any) => { e.stopPropagation(); e.preventDefault() }} data={data} />
         </YoutubeData>
         <YoutubeScript videoTime={videoTime} videoId={data.youtube_link} viewLength={1} />
       </Link>

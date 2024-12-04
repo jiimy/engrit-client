@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 
     const { youtube_link } = await request.json();
     if (!youtube_link) {
-      throw new Error("name and content are required");
+      throw new Error("youtube_link is required");
     }
 
     const { data, error } = await supabase

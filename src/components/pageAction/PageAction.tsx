@@ -5,7 +5,10 @@ import DropDown from '../dropDown/DropDown';
 import ShareModal from '../portalModal/shareModal/ShareModal';
 import { useOutOfClick } from '@/hooks/useOutOfClick';
 
-const PageAction = () => {
+const PageAction = ({ onClick, data }: {
+  onClick: (e: React.MouseEvent) => void;
+  data: any;
+}) => {
   const targetRef = useRef(null);
   const [dropDown, setDropDown] = useState(false);
   const [shareModal, setShareModal] = useState(false);
@@ -15,15 +18,15 @@ const PageAction = () => {
   });
 
   return (
-    <>
+    <div onClick={onClick}>
       <div className='cursor-pointer w-20 h-20'>
         <BookmarkLine />
       </div>
-      <DropDown />
+      <DropDown data={data} />
       {
         shareModal && <ShareModal setOnModal={() => setShareModal(false)} />
       }
-    </>
+    </div>
   );
 };
 

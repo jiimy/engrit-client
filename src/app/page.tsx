@@ -5,16 +5,20 @@ import Header from "@/components/header/Header";
 import { useEffect, useState } from "react";
 import { useUser } from "@supabase/auth-helpers-react";
 import { createClient } from "@/util/supabase/client";
+import { useStore } from "zustand";
+import { UserStore } from "@/store/user";
 
 export default function Home() {
   const [isScroll, setIsScroll] = useState<boolean>(false);
   const supabase = createClient(); // supabase 객체 불러오기.
+  const setUserEmail = UserStore((state) => state.setEmail);
 
   useEffect(() => {
     const user = async () => {
       const session = await supabase.auth.getSession();
       console.log('aa', session);
-      console.log('dd', session.data.session?.user?.user_metadata?.name);
+      console.log('dd', session.data.session?.user?.user_metadata?.email);
+      setUserEmail(session.data.session?.user?.user_metadata?.email);
     }
     user();
   }, [])

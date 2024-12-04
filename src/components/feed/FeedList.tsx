@@ -24,7 +24,7 @@ const FeedList = ({ setIsScroll }: FeedListType) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/api/peed/getList");
+        const response = await axios.get("/api/feed/getList");
         setData(response?.data.data);
         console.log('test: ', response?.data.data)
       } catch (err: any) {
