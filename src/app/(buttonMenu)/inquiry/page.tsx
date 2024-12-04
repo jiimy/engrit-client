@@ -8,7 +8,7 @@ const InquiryPage = () => {
   const { setMenuState } = useMenuContext();
 
   useEffect(() => {
-    setMenuState('여기');
+    // setMenuState('여기');
   }, [])
 
 
