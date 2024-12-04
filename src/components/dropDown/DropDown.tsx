@@ -6,7 +6,7 @@ import { useOutOfClick } from '@/hooks/useOutOfClick';
 import { UserStore } from '@/store/user';
 import { deletePeedApi } from '@/api/board';
 
-const DropDown = ({ data }: { data: any; }) => {
+const DropDown = ({ data }: { data?: any; }) => {
   const [dropDown, setDropDown] = useState(false);
   const [shareModal, setShareModal] = useState(false);
   const targetRef = useRef(null);
