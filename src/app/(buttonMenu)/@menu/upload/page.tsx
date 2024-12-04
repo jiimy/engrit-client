@@ -1,20 +1,21 @@
 'use client';
+import { postPeed } from '@/api/board';
 import BottomMenu from '@/components/bottomMenu/BottomMenu';
 import { useMenuContext } from '@/context/MenuContext';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Bottom = () => {
-  const { menuState } = useMenuContext();
+  const { menuState, youtubeId } = useMenuContext();
 
   const handleClick = () => {
-    console.log('cc', menuState)
     // menuState 라는 데이터 가져와서 업로드 하는 api hook 넣기
+    postPeed(youtubeId)
   };
 
   return (
     <>
       <BottomMenu>
-        <button onClick={handleClick}>업로드</button>
+        <button onClick={handleClick} disabled={menuState}>업로드</button>
       </BottomMenu>
     </>
   );

@@ -1,20 +1,51 @@
 'use client';
-import BottomMenu from '@/components/bottomMenu/BottomMenu';
-import Header from '@/components/header/Header';
 import { useMenuContext } from '@/context/MenuContext';
-import React, { Suspense, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import s from './upload.module.scss';
+import YoutubeVideo from '@/components/youtubeVideo/YoutubeVideo';
+import YoutubeData from '@/components/youtubeVideo/YoutubeData';
+import YoutubeScript from '@/components/youtubeVideo/YoutubeScript';
 
 const UploadPage = () => {
-  const { setMenuState } = useMenuContext();
+  const { setMenuState, setYoutubeId } = useMenuContext();
+  const [text, setText] = useState<string>("");
+  const [videoId, setViedoId] = useState<string>("");
+  const [videoTime, setVideoTime] = useState(0);
 
   useEffect(() => {
-    setMenuState('여기');
-  }, [])
+    if (videoId != '') {
+      setMenuState(false);
+      setYoutubeId(videoId);
+    }
+  }, [videoId])
 
+  const onChange = (e: any) => {
+    setText(e.target.value);
+  }
+  const preView = () => {
+    const link = text.split('?v=')[1]
+    setViedoId(link);
+  }
+
+  const handleTimeUpdate = (time: number) => {
+    setVideoTime(time);
+  };
 
   return (
     <>
-      업로드페이지
+      <div className={s.input}>
+        <input type="text" name="" id="" value={text} onChange={onChange} placeholder='ex) https://www.youtube.com/watch?v=xxxxx' />
+        <button onClick={preView}>확인</button>
+      </div>
+      {
+        // 확인 누르면 유튜브 정보 미리보기 해야됨.
+        videoId &&
+        <>
+          <YoutubeVideo videoId={videoId} onTimeUpdate={handleTimeUpdate} />
+          <YoutubeData videoId={videoId} />
+          <YoutubeScript videoTime={videoTime} videoId={videoId} viewLength={1} />
+        </>
+      }
     </>
   );
 };

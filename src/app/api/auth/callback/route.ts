@@ -1,7 +1,8 @@
 // import { createClient } from "@/util/supabase/server";
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { createClient } from "@/util/supabase/server";
+import { createClient } from "@/util/supabase/client";
+// import { createClient } from "@/util/supabase/server";
 // The client you created from the Server-Side Auth instructions
 
 export async function GET(request: Request) {

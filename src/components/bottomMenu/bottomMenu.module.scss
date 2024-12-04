@@ -12,6 +12,16 @@
   &.is_submit {
     justify-content: end;
   }
+  &:has(button) {
+    justify-content: end;
+    gap: 48px;
+  }
+  button {
+    font-size: 20px;
+    &:disabled {
+      color: #bebebe;
+    }
+  }
   ul {
     display: flex;
     width: 100%;
