@@ -15,8 +15,10 @@ export async function GET(request: Request) {
       const isLocalEnv = process.env.NODE_ENV === "development";
 
       if (isLocalEnv) {
+        console.log('로컬환경');
         return NextResponse.redirect(`${origin}${next}`);
       } else {
+        console.log("배포환경");
         // return NextResponse.redirect(`https://${forwardedHost ?? origin}`);
         return NextResponse.redirect(`https://engrit-client.vercel.app`);
       }
