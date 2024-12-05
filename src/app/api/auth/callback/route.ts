@@ -17,7 +17,8 @@ export async function GET(request: Request) {
       if (isLocalEnv) {
         return NextResponse.redirect(`${origin}${next}`);
       } else {
-        return NextResponse.redirect(`https://${forwardedHost ?? origin}`);
+        // return NextResponse.redirect(`https://${forwardedHost ?? origin}`);
+        return NextResponse.redirect(`https://engrit-client.vercel.app`);
       }
     }
   }
