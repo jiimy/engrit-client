@@ -25,7 +25,8 @@ const Index = () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'kakao',
       // options: { redirectTo: `http://localhost:3000/api/auth/callback` },
-      options: { redirectTo: location.origin + "/api/auth/callback", },
+      // options: { redirectTo: location.origin + "/api/auth/callback", },
+      options: { redirectTo: location.origin + "/auth/callback", },
     })
     if(data) {
       console.log('cc', data);
