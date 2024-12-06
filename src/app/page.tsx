@@ -9,15 +9,14 @@ import { useStore } from "zustand";
 import { UserStore } from "@/store/user";
 
 export default function Home() {
-  const [isScroll, setIsScroll] = useState<boolean>(false);
   const supabase = createClient(); // supabase 객체 불러오기.
   const setUserEmail = UserStore((state) => state.setEmail);
 
   useEffect(() => {
     const user = async () => {
       const session = await supabase.auth.getSession();
-      console.log('aa', session);
-      console.log('dd', session.data.session?.user?.user_metadata?.email);
+      // console.log('aa', session);
+      // console.log('dd', session.data.session?.user?.user_metadata?.email);
       setUserEmail(session.data.session?.user?.user_metadata?.email);
     }
     user();
@@ -26,9 +25,9 @@ export default function Home() {
 
   return (
     <div>
-      <Header isScroll={isScroll}>홈피드</Header>
+      <Header >홈피드</Header>
       <div className='content'>
-        <FeedList setIsScroll={setIsScroll} />
+        <FeedList />
       </div>
       <BottomMenu />
     </div>

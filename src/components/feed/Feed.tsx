@@ -29,7 +29,7 @@ const Feed = forwardRef(({
         <YoutubeData videoId={data?.youtube_link}>
           <PageAction onClick={(e: any) => { e.stopPropagation(); e.preventDefault() }} data={data} />
         </YoutubeData>
-        <YoutubeScript videoTime={videoTime} videoId={data.youtube_link} viewLength={1} />
+        {/* <YoutubeScript videoTime={videoTime} videoId={data.youtube_link} viewLength={1} /> */}
       </Link>
     </div>
   );

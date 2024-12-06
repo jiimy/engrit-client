@@ -5,8 +5,10 @@ import ShareModal from '../portalModal/shareModal/ShareModal';
 import { useOutOfClick } from '@/hooks/useOutOfClick';
 import { UserStore } from '@/store/user';
 import { deletePeedApi } from '@/api/board';
+import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
 
 const DropDown = ({ data }: { data?: any; }) => {
+  const queryClient = useQueryClient();
   const [dropDown, setDropDown] = useState(false);
   const [shareModal, setShareModal] = useState(false);
   const targetRef = useRef(null);
@@ -18,15 +20,23 @@ const DropDown = ({ data }: { data?: any; }) => {
 
   const showDropDown = (e: any) => {
     e.stopPropagation();
+    e.preventDefault()
     setDropDown(!dropDown)
   }
+
+  const deleteFeedMutation = useMutation({
+    mutationFn: (id: number) => deletePeedApi(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['getPeedList'] })
+    }
+  })
 
   const editFeed = (id: number) => {
   }
 
   const deleteFeed = (id: number) => {
     // 삭제
-    deletePeedApi(id);
+    deleteFeedMutation.mutate(id);
   }
 
   return (

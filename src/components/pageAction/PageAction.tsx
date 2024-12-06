@@ -13,12 +13,19 @@ const PageAction = ({ onClick, data }: {
   const [dropDown, setDropDown] = useState(false);
   const [shareModal, setShareModal] = useState(false);
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    onClick(e);
+  };
+
+
   useOutOfClick(targetRef, () => {
     setDropDown(false);
   });
 
   return (
-    <div onClick={onClick}>
+    <div onClick={handleClick}>
       <div className='cursor-pointer w-20 h-20'>
         <BookmarkLine />
       </div>
