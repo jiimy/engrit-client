@@ -9,7 +9,7 @@ const SupportPage = () => {
       <>
         <div className={s.buttons}>
           <Button full className="bg-black">
-            <Link href="/inquiry" className="block w-full h-full">
+            <Link href="/inquiry" className="flex w-full h-full justify-center items-center">
               문의하기
             </Link>
           </Button>

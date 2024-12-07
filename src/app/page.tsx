@@ -7,6 +7,7 @@ import { useUser } from "@supabase/auth-helpers-react";
 import { createClient } from "@/util/supabase/client";
 import { useStore } from "zustand";
 import { UserStore } from "@/store/user";
+import Loading from "@/components/loading/Loading";
 
 export default function Home() {
   const supabase = createClient(); // supabase 객체 불러오기.
