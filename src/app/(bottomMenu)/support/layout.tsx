@@ -15,7 +15,7 @@ export const TitleContext = createContext<HeaderTitleContextType>({
   setTitle: () => { },
 });
 
-export default function Layout({ children }: { children: ReactNode }) {
+export function Layout({ children }: { children: ReactNode }) {
   const [title, setTitle] = useState<string>("고객센터");
 
   return (

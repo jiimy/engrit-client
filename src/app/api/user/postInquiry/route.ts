@@ -15,14 +15,14 @@ export async function POST(request: Request) {
     const session = await supabase.auth.getUser();
     const uploader = session.data?.user?.email;
 
-    const { youtube_link } = await request.json();
-    if (!youtube_link) {
-      throw new Error("youtube_link is required");
+    const { context_text } = await request.json();
+    if (!context_text) {
+      throw new Error("context_text is required");
     }
 
     const { data, error } = await supabase
-      .from("youtube")
-      .insert([{ youtube_link, uploader }]);
+      .from("inquiries")
+      .insert([{ context_text, uploader }]);
 
     // return NextResponse.redirect(`${origin}${next}`);
     revalidatePath("/");
