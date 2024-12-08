@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react';
 
 const Bottom = () => {
   const queryClient = useQueryClient();
-  const { menuState, youtubeId } = useMenuContext();
+  const { menuState, content } = useMenuContext();
 
   const deleteFeedMutation = useMutation({
     mutationFn: (id: string) => postPeed(id),
@@ -18,7 +18,7 @@ const Bottom = () => {
 
   const handleClick = () => {
     // menuState 라는 데이터 가져와서 업로드 하는 api hook 넣기
-    deleteFeedMutation.mutate(youtubeId);
+    deleteFeedMutation.mutate(content);
   };
 
   return (

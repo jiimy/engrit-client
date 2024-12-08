@@ -7,7 +7,7 @@ import YoutubeData from '@/components/youtubeVideo/YoutubeData';
 import YoutubeScript from '@/components/youtubeVideo/YoutubeScript';
 
 const UploadPage = () => {
-  const { setMenuState, setYoutubeId } = useMenuContext();
+  const { setMenuState, setContent } = useMenuContext();
   const [text, setText] = useState<string>("");
   const [videoId, setViedoId] = useState<string>("");
   const [videoTime, setVideoTime] = useState(0);
@@ -15,7 +15,7 @@ const UploadPage = () => {
   useEffect(() => {
     if (videoId != '') {
       setMenuState(false);
-      setYoutubeId(videoId);
+      setContent(videoId);
     }
   }, [videoId])
 

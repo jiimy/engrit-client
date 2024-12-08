@@ -1,20 +1,31 @@
 'use client';
+import { postInquiry } from '@/api/inquiries';
 import BottomMenu from '@/components/bottomMenu/BottomMenu';
 import { useMenuContext } from '@/context/MenuContext';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { redirect } from 'next/navigation';
 import React from 'react';
 
 const Bottom = () => {
-  const { menuState } = useMenuContext();
+  const queryClient = useQueryClient();
+  const { menuState, content } = useMenuContext();
+
+  const inquiryMutation = useMutation({
+    mutationFn: (text: string) => postInquiry(text),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['getInquiriesList'] })
+    }
+  })
 
   const handleClick = () => {
-    console.log('cc', menuState)
-    // menuState 라는 데이터 가져와서 업로드 하는 api hook 넣기
+    inquiryMutation.mutate(content);
+    redirect('/support');
   };
 
   return (
     <>
       <BottomMenu>
-        <button onClick={handleClick}>문의하기</button>
+        <button onClick={handleClick} disabled={menuState}>문의하기</button>
       </BottomMenu>
     </>
   );

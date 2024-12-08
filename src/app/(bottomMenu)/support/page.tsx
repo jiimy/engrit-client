@@ -1,9 +1,15 @@
+'use client';
 import Button from "@/components/button/Button";
 import SupportList from "@/components/support/SupportList";
 import Link from "next/link";
 import s from './support.module.scss';
+import { useContext } from "react";
+import { TitleContext } from "./layout";
 
 const SupportPage = () => {
+  const { setTitle } = useContext(TitleContext);
+  setTitle('고객센터')
+
   return (
     <div className={s.support_page}>
       <>
