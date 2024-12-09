@@ -1,10 +1,9 @@
 'use client';
 import BottomMenu from '@/components/bottomMenu/BottomMenu';
-import { useMenuContext } from '@/context/MenuContext';
-import React from 'react';
+import { useLayoutContext } from '@/context/LayoutContext';
 
 const Bottom = () => {
-  const { menuState } = useMenuContext();
+  const { menuState } = useLayoutContext();
 
   const handleClick = () => {
     console.log('cc', menuState)

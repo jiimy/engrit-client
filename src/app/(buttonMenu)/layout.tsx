@@ -1,6 +1,6 @@
 import BottomMenu from "@/components/bottomMenu/BottomMenu";
 import Header from "@/components/header/Header";
-import { MenuProvider } from "@/context/MenuContext";
+import { LayoutProvider } from "@/context/LayoutContext";
 import { Suspense } from "react";
 
 export default function RootLayout({
@@ -12,11 +12,11 @@ export default function RootLayout({
 }) {
 
   return (
-    <MenuProvider>
+    <LayoutProvider>
       <div>
         {children}
         {menu}
       </div>
-    </MenuProvider>
+    </LayoutProvider>
   )
 }

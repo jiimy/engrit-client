@@ -1,13 +1,11 @@
 'use client';
-import BottomMenu from '@/components/bottomMenu/BottomMenu';
-import Header from '@/components/header/Header';
-import { useMenuContext } from '@/context/MenuContext';
-import React, { Suspense, useEffect, useState } from 'react';
+import { useLayoutContext } from '@/context/LayoutContext';
+import { useEffect, useState } from 'react';
 import s from './inquiry.module.scss';
 
 const InquiryPage = () => {
   const [text, setText] = useState('');
-  const { setMenuState } = useMenuContext();
+  const { setMenuState } = useLayoutContext();
 
   useEffect(() => {
     setMenuState(false);
@@ -15,6 +13,7 @@ const InquiryPage = () => {
 
   const onChange = (e: any) => {
     setText(e.target.value);
+    setMenuState(true);
     // TODO: 텍스트 최대 1000천자까지 가능. 넘어가면 alert 띄우기
   }
 

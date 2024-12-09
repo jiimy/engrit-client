@@ -1,14 +1,13 @@
 'use client';
 import { postInquiry } from '@/api/inquiries';
 import BottomMenu from '@/components/bottomMenu/BottomMenu';
-import { useMenuContext } from '@/context/MenuContext';
+import { useLayoutContext } from '@/context/LayoutContext';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { redirect } from 'next/navigation';
-import React from 'react';
 
 const Bottom = () => {
   const queryClient = useQueryClient();
-  const { menuState, content } = useMenuContext();
+  const { menuState, text } = useLayoutContext();
 
   const inquiryMutation = useMutation({
     mutationFn: (text: string) => postInquiry(text),
@@ -18,7 +17,7 @@ const Bottom = () => {
   })
 
   const handleClick = () => {
-    inquiryMutation.mutate(content);
+    inquiryMutation.mutate(text);
     redirect('/support');
   };
 

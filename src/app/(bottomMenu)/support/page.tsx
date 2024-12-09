@@ -4,11 +4,11 @@ import SupportList from "@/components/support/SupportList";
 import Link from "next/link";
 import s from './support.module.scss';
 import { useContext } from "react";
-import { TitleContext } from "./layout";
+import { useLayoutContext } from "@/context/LayoutContext";
 
 const SupportPage = () => {
-  const { setTitle } = useContext(TitleContext);
-  setTitle('고객센터')
+  const { setText } = useLayoutContext();
+  setText('고객센터')
 
   return (
     <div className={s.support_page}>
