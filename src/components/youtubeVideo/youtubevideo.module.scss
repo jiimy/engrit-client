@@ -1,0 +1,34 @@
+.youtube_wrap {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+}
+
+.youtube_thumbnail {
+  position: relative;
+  cursor: pointer;
+  padding-bottom: 56.25%;
+}
+
+
+.script_wrap {
+  overflow: auto;
+  height: 100%;
+  // @include scroll-hide;
+}
+.script {
+  margin-bottom: 12px;
+  padding: 16px;
+  border-radius: 8px;
+  background: #FAFAFA;
+  // display: none;
+}
+.main {
+  display: none;
+}
+.is_viewing {
+  background: #F0F0F0;
+
+  display: block;
+}

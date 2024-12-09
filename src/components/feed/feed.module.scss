@@ -1,0 +1,11 @@
+
+
+.area {
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.feedList {
+  overflow-y: auto;
+  // @include scroll-hide;
+}
