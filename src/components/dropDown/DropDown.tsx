@@ -49,7 +49,7 @@ const DropDown = ({ data }: { data?: any; }) => {
             data?.uploader === email &&
             <>
               <li onClick={() => editFeed(data?.id)}>수정</li>
-              <li onClick={() => deleteFeed(data?.id)}>삭제</li>
+              <li onClick={() => deleteFeed(data?.id + 1)}>삭제</li>
             </>
           }
           <li onClick={() => setShareModal(true)}>공유</li>

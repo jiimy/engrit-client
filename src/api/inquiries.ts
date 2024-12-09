@@ -43,3 +43,35 @@ export async function postInquiry(text: string) {
     return [];
   }
 }
+
+// 문의 수정
+export async function editInquiry(text: string) {
+  try {
+    const res = await axios.put(`/api/user/editInquiry`, {
+      context_text: text,
+    });
+
+    if (res.status === 200) {
+      return res.data.data;
+    }
+  } catch (error) {
+    console.error("Error fetching feed data:", error);
+    return [];
+  }
+}
+
+// 문의 삭제
+export async function deleteInquiryApi(id: number) {
+  try {
+    const res = await axios.post(`/api/user/deleteInquiry`, {
+      data: { id },
+    });
+
+    if (res.status === 200) {
+      return res.data.data;
+    }
+  } catch (error) {
+    console.error("Error fetching feed data:", error);
+    return [];
+  }
+}
