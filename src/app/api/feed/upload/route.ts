@@ -3,7 +3,6 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-// import { redirect } from "next/navigation";
 
 export async function POST(request: Request) {
   try {
@@ -20,15 +19,25 @@ export async function POST(request: Request) {
       throw new Error("youtube_link is required");
     }
 
+    console.log("upload: ", youtube_link, uploader);
+
     const { data, error } = await supabase
       .from("youtube")
       .insert([{ youtube_link, uploader }]);
 
-    // return NextResponse.redirect(`${origin}${next}`);
-    revalidatePath("/");
-    redirect(`/`);
+    if (error) {
+      console.error("Supabase Error:", error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    // revalidatePath("/");
+    // redirect(`/`);
     return NextResponse.json({ message: "Post created successfully", data });
-  } catch (error) {
-    return NextResponse.json({ error: request }, { status: 500 });
+  } catch (error: any) {
+    console.error("Server Error:", error.message || error);
+    return NextResponse.json(
+      { error: error.message || error },
+      { status: 500 }
+    );
   }
 }

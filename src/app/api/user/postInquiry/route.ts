@@ -26,10 +26,10 @@ export async function POST(request: Request) {
       .from("inquiries")
       .insert([{ content_text, user_name }]);
 
-    if (error) {
-      console.error("Supabase Error:", error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
+    // if (error) {
+    //   console.error("Supabase Error:", error);
+    //   return NextResponse.json({ error: error.message }, { status: 500 });
+    // }
 
     // return NextResponse.redirect(`${origin}${next}`);
     revalidatePath("/support");

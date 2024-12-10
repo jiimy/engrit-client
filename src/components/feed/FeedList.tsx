@@ -13,9 +13,11 @@ import { useQuery } from '@tanstack/react-query';
 
 const FeedList = () => {
   const { data, isLoading } = useQuery({
-    queryKey: ["getPeedList"],
+    queryKey: ["getFeedList"],
     queryFn: () => readPeedApi(),
   });
+
+  console.log('피드 리스트 : ', data);
 
   return (
     <div className={s.feedList}>
