@@ -30,17 +30,12 @@ export async function getInquiriesID(id: number) {
 
 // 문의 하기
 export async function postInquiry(text: string) {
-  try {
-    const res = await axios.post(`/api/user/postInquiry`, {
-      context_text: text,
-    });
+  const res = await axios.post(`/api/user/postInquiry`, {
+    context_text: text,
+  });
 
-    if (res.status === 200) {
-      return res.data.data;
-    }
-  } catch (error) {
-    console.error("Error fetching feed data:", error);
-    return [];
+  if (res.status === 200) {
+    // return res.data.data;
   }
 }
 
@@ -63,7 +58,7 @@ export async function editInquiry(text: string) {
 // 문의 삭제
 export async function deleteInquiryApi(id: number) {
   try {
-    const res = await axios.post(`/api/user/deleteInquiry`, {
+    const res = await axios.delete(`/api/user/deleteInquiry`, {
       data: { id },
     });
 

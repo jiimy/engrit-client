@@ -57,7 +57,7 @@ const Header = ({ children, isScroll = false, isBack }: headerType) => {
           </>
         }
         {
-          currentPath.includes('edit') &&
+          currentPath.includes('edit') && currentPath.includes('feed') && 
           <>
             <span className='absolute right-16'>
               <span className='cursor-pointer w-28 h-28'>

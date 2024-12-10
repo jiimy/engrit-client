@@ -10,9 +10,10 @@ function QueryProviders({ children }: React.PropsWithChildren) {
   const client = new QueryClient({
     defaultOptions: {
       queries: {
-        refetchOnWindowFocus: false,
-        throwOnError: true,
-        staleTime: 5000
+        // refetchOnWindowFocus: false,
+        // throwOnError: true,
+        // refetchOnReconnect: true,
+        // staleTime: 0
       },
       mutations: {
         onError: (error: any) => {

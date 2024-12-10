@@ -24,10 +24,7 @@ const SupportDetail = () => {
     } else {
       setText('문의하기')
     }
-
   }
-  // useEffect(() => {
-  // }, [data])
 
   console.log('dta: ', data);
   // <pre>{JSON.stringify(data, null, 2)}</pre>
@@ -41,11 +38,14 @@ const SupportDetail = () => {
             <p>{data[0]?.content_text}</p>
             <div className={s.date}>{dayformatTime(data[0]?.inquiried_at)}</div>
           </div>
-          <div className={s.response}>
-            <div className={s.title}>답변</div>
-            <p>{data[0]?.response_text}</p>
-            <div className={s.date}>{dayformatTime(data[0]?.responsed_at)}</div>
-          </div>
+          {
+            data[0]?.response_text &&
+            <div className={s.response}>
+              <div className={s.title}>답변</div>
+              <p>{data[0]?.response_text}</p>
+              <div className={s.date}>{dayformatTime(data[0]?.responsed_at)}</div>
+            </div>
+          }
         </>
       }
     </div>

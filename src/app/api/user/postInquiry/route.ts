@@ -13,20 +13,27 @@ export async function POST(request: Request) {
     const supabase = createClient(cookieStore);
 
     const session = await supabase.auth.getUser();
-    const uploader = session.data?.user?.email;
+    const user_name = session.data?.user?.email;
 
-    const { context_text } = await request.json();
-    if (!context_text) {
+    const { content_text } = await request.json();
+    if (!content_text) {
       throw new Error("context_text is required");
     }
 
+    console.log("받은 text: ", content_text, user_name);
+
     const { data, error } = await supabase
       .from("inquiries")
-      .insert([{ context_text, uploader }]);
+      .insert([{ content_text, user_name }]);
+
+    if (error) {
+      console.error("Supabase Error:", error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
 
     // return NextResponse.redirect(`${origin}${next}`);
-    revalidatePath("/");
-    redirect(`/`);
+    revalidatePath("/support");
+    redirect(`/support`);
     return NextResponse.json({ message: "Post created successfully", data });
   } catch (error) {
     return NextResponse.json({ error: request }, { status: 500 });

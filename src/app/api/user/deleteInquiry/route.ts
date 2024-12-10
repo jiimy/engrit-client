@@ -12,9 +12,9 @@ export async function DELETE(request: Request) {
     if (!id) {
       throw new Error("id is required");
     }
-
+    
     const { data, error } = await supabase
-      .from("youtube")
+      .from("inquiries")
       .delete()
       .eq("id", id);
     if (error) {
