@@ -8,12 +8,12 @@ import { getInquiriesID } from '@/api/inquiries';
 
 const InquiryEditPage = () => {
   const [text, setInputText] = useState('');
-  const { setMenuState } = useLayoutContext();
+  const { setMenuState, setText } = useLayoutContext();
   const pathname = usePathname();
 
-  const id = Number(pathname?.split('/')[2]);
+  const id = Number(pathname?.split('/')[3]);
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isSuccess } = useQuery({
     queryKey: ["getInquiriesDetail", id],
     queryFn: () => getInquiriesID(id),
   });
@@ -22,23 +22,44 @@ const InquiryEditPage = () => {
     setMenuState(true);
   }, [])
 
+  useEffect(() => {
+    if (isSuccess && data && data[0]?.content_text) {
+      setInputText(data[0].content_text);
+    }
+  }, [isSuccess, data]);
+
   const onChange = (e: any) => {
-    setInputText(e.target.value);
-    setMenuState(false);
-    // TODO: 텍스트 최대 1000천자까지 가능. 넘어가면 alert 띄우기
+    const newValue = e.target.value;
+    if (newValue.length > 1000) {
+      alert('최대 1000자까지 입력 가능합니다.');
+      return;
+    }
+    setInputText(newValue);
+    if (newValue != data[0].content_text) {
+      setMenuState(false);
+    }
   }
 
-  console.log('data: ', data);
+  const onBluer = () => {
+    setText(text);
+  }
+
+  console.log('data', data && data[0].content_text);
 
   return (
-    <div className={s.inquiryPage}>
-      <div className="title">문의내용</div>
-      <div className='relative'>
-        <textarea name="" id="" placeholder='문의 내용 입력' onChange={onChange} value={text}>
-        </textarea>
-        <div className='absolute bottom-0 w-full bg-[#eee]'></div>
-      </div>
-    </div>
+    <>
+      {
+        isSuccess &&
+        <div className={s.inquiryPage}>
+          <div className="title">문의내용</div>
+          <div className='relative'>
+            <textarea name="" id="" placeholder='문의 내용 입력' onChange={onChange} value={text} onBlur={onBluer}>
+            </textarea>
+            <div className='absolute bottom-0 w-full bg-[#eee]'></div>
+          </div>
+        </div>
+      }
+    </>
   );
 };
 

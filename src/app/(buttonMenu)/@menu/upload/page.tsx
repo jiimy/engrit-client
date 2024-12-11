@@ -15,7 +15,7 @@ const Bottom = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['getFeedList'] })
       // redirect('/');
-      router.push('/');
+      router.back();
     }
   })
 

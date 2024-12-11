@@ -6,7 +6,7 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  const { id } = params; // URL 파라미터에서 id 추출
+  const { id } = params;
   const cookieStore = await cookies();
   const supabase = createClient(cookieStore);
 

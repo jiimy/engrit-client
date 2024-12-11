@@ -7,10 +7,11 @@ import { useEffect, useState } from 'react';
 import s from './upload.module.scss';
 
 const UploadPage = () => {
-  const { setMenuState, setText } = useLayoutContext();
+  const { setMenuState, setText, setTag } = useLayoutContext();
   const [inputText, setInputText] = useState<string>("");
   const [videoId, setViedoId] = useState<string>("");
   const [videoTime, setVideoTime] = useState(0);
+  const [videoTag, setVideoTag] = useState([]);
 
   useEffect(() => {
     if (videoId != '') {
@@ -31,6 +32,14 @@ const UploadPage = () => {
     setVideoTime(time);
   };
 
+  const onChageTextarea = () => {
+    
+  }
+
+  const blur = () => {
+    setTag(videoTag);
+  }
+
   return (
     <>
       <div className={s.input}>
@@ -43,6 +52,11 @@ const UploadPage = () => {
         <>
           <YoutubeVideo videoId={videoId} onTimeUpdate={handleTimeUpdate} />
           <YoutubeData videoId={videoId} />
+          <div >
+            <textarea placeholder='여기에 태그를 입력하세요' onChange={onChageTextarea}>
+
+            </textarea>
+          </div>
           <YoutubeScript videoTime={videoTime} videoId={videoId} viewLength={1} />
         </>
       }

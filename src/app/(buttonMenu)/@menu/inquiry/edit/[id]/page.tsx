@@ -1,24 +1,28 @@
 'use client';
-import { postInquiry } from '@/api/inquiries';
+import { editInquiry } from '@/api/inquiries';
 import BottomMenu from '@/components/bottomMenu/BottomMenu';
 import { useLayoutContext } from '@/context/LayoutContext';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { redirect } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const Bottom = () => {
+  const router = useRouter();
+  const pathname = usePathname();
   const queryClient = useQueryClient();
   const { menuState, text } = useLayoutContext();
 
+  const id = Number(pathname?.split('/')[3]);
+
   const inquiryEditMutation = useMutation({
-    mutationFn: (text: string) => postInquiry(text),
+    mutationFn: (text: string) => editInquiry(text, id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['getInquiriesList'] })
+      router.back();
     }
   })
 
   const handleClick = () => {
     inquiryEditMutation.mutate(text);
-    redirect('/support');
   };
 
   return (
