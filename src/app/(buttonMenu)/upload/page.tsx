@@ -12,6 +12,7 @@ const UploadPage = () => {
   const [videoId, setViedoId] = useState<string>("");
   const [videoTime, setVideoTime] = useState(0);
   const [videoTag, setVideoTag] = useState([]);
+  const [videoTagCount, setVideoTagCount] = useState(0);
 
   useEffect(() => {
     if (videoId != '') {
@@ -32,9 +33,32 @@ const UploadPage = () => {
     setVideoTime(time);
   };
 
-  const onChageTextarea = () => {
-    
-  }
+  const onChageTextarea = (e: any) => {
+    const value = e.target.value;
+    const hashtags = value.split('#').filter((tag: any) => tag.trim() !== '');
+
+    if (hashtags.length > 5) {
+      alert('최대 5개의 해시태그만 입력 가능합니다.');
+      return;
+    }
+
+    if (value.endsWith('#') && hashtags.length > 0 && !value.match(/#[^#]*$/)) {
+      alert('해시태그를 정확히 입력해주세요.');
+      return;
+    }
+
+    setVideoTag(value);
+    setVideoTagCount(hashtags.length);
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    // 이미 해시태그 개수가 5개면 추가 입력 차단
+    if (videoTagCount >= 5 && e.key === '#') {
+      e.preventDefault();
+      alert('최대 5개의 해시태그만 입력 가능합니다.');
+    }
+  };
+
 
   const blur = () => {
     setTag(videoTag);
@@ -52,10 +76,10 @@ const UploadPage = () => {
         <>
           <YoutubeVideo videoId={videoId} onTimeUpdate={handleTimeUpdate} />
           <YoutubeData videoId={videoId} />
-          <div >
-            <textarea placeholder='여기에 태그를 입력하세요' onChange={onChageTextarea}>
-
+          <div className={s.textarea}>
+            <textarea placeholder='여기에 태그를 입력하세요' onChange={onChageTextarea} onBlur={blur} value={videoTag} onKeyDown={onKeyDown}>
             </textarea>
+            <span>#해시태그 {videoTagCount}/5개</span>
           </div>
           <YoutubeScript videoTime={videoTime} videoId={videoId} viewLength={1} />
         </>

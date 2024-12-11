@@ -15,11 +15,12 @@ export async function readPeedApi() {
   }
 }
 // 피드 업로드 하기
-export async function postPeed(youtubeId: string) {
+export async function postPeed(youtubeId: string, tag: string) {
   try {
-    console.log("API 요청 데이터:", { youtube_link: youtubeId });
+    // console.log("API 요청 데이터:", { youtube_link: youtubeId });
     const res = await axios.post("/api/feed/upload", {
       youtube_link: youtubeId,
+      tag: tag
     });
     console.log("API 응답:", res.data);
   } catch (error) {

@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     const session = await supabase.auth.getUser();
     const uploader = session.data?.user?.email;
 
-    const { youtube_link } = await request.json();
+    const { youtube_link, tag } = await request.json();
     if (!youtube_link) {
       throw new Error("youtube_link is required");
     }
@@ -23,7 +23,7 @@ export async function POST(request: Request) {
 
     const { data, error } = await supabase
       .from("youtube")
-      .insert([{ youtube_link, uploader }]);
+      .insert([{ youtube_link, uploader, tag }]);
 
     if (error) {
       console.error("Supabase Error:", error);
