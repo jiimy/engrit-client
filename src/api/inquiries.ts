@@ -42,8 +42,6 @@ export async function postInquiry(text: string) {
 
 // 문의 수정
 export async function editInquiry(text: string, id: number) {
-  console.log("aa1 text: ", text);
-  console.log("aa1 id: ", id);
   try {
     const res = await axios.put(`/api/user/editInquiry/${id}`, {
       content_text: text,

@@ -1,11 +1,11 @@
 'use client';
+import { layoutStore } from '@/store/layoutStore';
+import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import s from './youtubeTag.module.scss';
-import { useLayoutContext } from '@/context/LayoutContext';
-import classNames from 'classnames';
 
 const YoutubeTag = ({ value, autofocus, className }: { value?: string; autofocus?: boolean; className?: any; }) => {
-  const { setTag } = useLayoutContext();
+  const setTag = layoutStore((state) => state.setTag);
   const [videoTag, setVideoTag] = useState([]);
   const [videoTagCount, setVideoTagCount] = useState(0);
 
@@ -51,9 +51,7 @@ const YoutubeTag = ({ value, autofocus, className }: { value?: string; autofocus
   };
 
   const blur = () => {
-    console.log('vv', videoTag);
     setTag(videoTag);
-    // setTag(...videoTag);
   }
 
   return (

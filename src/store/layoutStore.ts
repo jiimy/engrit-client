@@ -1,11 +1,19 @@
 import { create } from "zustand";
 
-interface layout {
-  headerTitle: string;
-  setTitle: (text: string) => void;
+interface LayoutState {
+  menuState: boolean;
+  setMenuState: (newState: boolean) => void;
+  text: string;
+  setText: (newText: string) => void;
+  tag: string[];
+  setTag: (newTags: string[]) => void;
 }
 
-export const layoutStore = create<layout>()((set) => ({
-  headerTitle: "",
-  setTitle: (text: string) => set({ headerTitle: text }),
+export const layoutStore = create<LayoutState>((set) => ({
+  menuState: true,
+  setMenuState: (newState) => set(() => ({ menuState: newState })),
+  text: "",
+  setText: (newText) => set(() => ({ text: newText })),
+  tag: [],
+  setTag: (newTags) => set(() => ({ tag: newTags })),
 }));

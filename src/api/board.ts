@@ -54,3 +54,20 @@ export async function getFeedIDApi(id: number) {
     return [];
   }
 }
+
+// 피드 정보 수정
+export async function editFeedIDApi(tag: object, id: number) {
+  try {
+    const res = await axios.put(`/api/feed/edit/${id}`, {
+      tag: tag,
+      id: id
+    });
+
+    if (res.status === 200) {
+      return res.data.data;
+    }
+  } catch (error) {
+    console.error("Error fetching feed data:", error);
+    return [];
+  }
+}
