@@ -6,8 +6,10 @@ import { useOutOfClick } from '@/hooks/useOutOfClick';
 import { UserStore } from '@/store/user';
 import { deletePeedApi } from '@/api/board';
 import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 
 const DropDown = ({ data }: { data?: any; }) => {
+  const router = useRouter();
   const queryClient = useQueryClient();
   const [dropDown, setDropDown] = useState(false);
   const [shareModal, setShareModal] = useState(false);
@@ -48,7 +50,9 @@ const DropDown = ({ data }: { data?: any; }) => {
           {
             data?.uploader === email &&
             <>
-              <li onClick={() => editFeed(data?.id)}>수정</li>
+              <li onClick={() =>
+                router.push(`/edit/${data?.id}`)
+              }> 수정</li>
               <li onClick={() => deleteFeed(data?.id)}>삭제</li>
             </>
           }
@@ -58,7 +62,7 @@ const DropDown = ({ data }: { data?: any; }) => {
       {
         shareModal && <ShareModal setOnModal={() => setShareModal(false)} />
       }
-    </div>
+    </div >
   );
 };
 

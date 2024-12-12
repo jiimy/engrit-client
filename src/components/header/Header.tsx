@@ -11,7 +11,7 @@ import DropDown from '../dropDown/DropDown';
 
 type headerType = {
   isScroll?: boolean;
-  children?: string;
+  children?: React.ReactNode;
   isBack?: boolean;
 } & React.HtmlHTMLAttributes<HTMLHtmlElement>
 

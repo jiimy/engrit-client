@@ -40,4 +40,17 @@ export async function deletePeedApi(id: number) {
   });
 }
 
-// const response = await axios.delete(apiUrl, {data: dataObj});
+
+// 피드 id 로 정보불러오기
+export async function getFeedIDApi(id: number) {
+  try {
+    const res = await axios.get(`/api/feed/getList/${id}`);
+
+    if (res.status === 200) {
+      return res.data.data;
+    }
+  } catch (error) {
+    console.error("Error fetching feed data:", error);
+    return [];
+  }
+}

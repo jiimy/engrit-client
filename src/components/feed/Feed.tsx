@@ -30,6 +30,7 @@ const Feed = forwardRef(({
           <PageAction onClick={(e: any) => { e.stopPropagation(); e.preventDefault() }} data={data} />
         </YoutubeData>
         {/* <YoutubeScript videoTime={videoTime} videoId={data.youtube_link} viewLength={1} /> */}
+        <div>{data?.tag?.replace(/(?!^)(#)/g, ' $1')}</div>
       </Link>
     </div>
   );
