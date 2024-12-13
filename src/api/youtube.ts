@@ -56,3 +56,18 @@ export async function getChannelProfileImage(videoId: string) {
   }
   return null;
 }
+
+
+// 내가 업로드한 유튜브 정보
+export async function myYoutubeUplaodApi() {
+  try {
+    const res = await axios.get("/api/youtube/user");
+
+    if (res.status === 200) {
+      return res.data.data;
+    }
+  } catch (error) {
+    console.error("Error fetching feed data:", error);
+    return [];
+  }
+}
