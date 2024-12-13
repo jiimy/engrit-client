@@ -8,12 +8,10 @@ import PageAction from '../pageAction/PageAction';
 
 type feedType = {
   data?: any;
-  id: number;
 };
 
 const Feed = forwardRef(({
   data,
-  id
 }: feedType, ref: Ref<HTMLDivElement>) => {
 
   const [videoTime, setVideoTime] = useState(0);
@@ -25,7 +23,7 @@ const Feed = forwardRef(({
   return (
     <div ref={ref}>
       <YoutubeVideo videoId={data?.youtube_link} onTimeUpdate={handleTimeUpdate} />
-      <Link href={`/detail/${id}`} className='block pt-16 pr-20 pb-20 pl-20'>
+      <Link href={`/detail/${data?.id}`} className='block pt-16 pr-20 pb-20 pl-20'>
         <YoutubeData videoId={data?.youtube_link}>
           <PageAction onClick={(e: any) => { e.stopPropagation(); e.preventDefault() }} data={data} />
         </YoutubeData>

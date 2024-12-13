@@ -6,7 +6,11 @@ export async function GET(request: Request) {
   try {
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
-    const { data, error } = await supabase.from("youtube").select("*");
+    const { data, error } = await supabase
+      .from("youtube")
+      .select("*")
+      .order("id", { ascending: true });
+    
     if (error) {
       throw error;
     }

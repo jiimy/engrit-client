@@ -1,10 +1,15 @@
 'use client';
 import { layoutStore } from '@/store/layoutStore';
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, { TextareaHTMLAttributes, useEffect, useState } from 'react';
 import s from './youtubeTag.module.scss';
 
-const YoutubeTag = ({ value, autofocus, className }: { value?: string; autofocus?: boolean; className?: any; }) => {
+interface YoutubeTagProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  value?: string;
+  className?: any;
+}
+
+const YoutubeTag = ({ value, className, ...rest }: YoutubeTagProps) => {
   const setTag = layoutStore((state) => state.setTag);
   const [videoTag, setVideoTag] = useState([]);
   const [videoTagCount, setVideoTagCount] = useState(0);
@@ -36,7 +41,7 @@ const YoutubeTag = ({ value, autofocus, className }: { value?: string; autofocus
       alert('해시태그를 정확히 입력해주세요.');
       return;
     }
-    
+
     setVideoTag(targetValue);
     setVideoTagCount(hashtags.length);
   };
@@ -58,10 +63,12 @@ const YoutubeTag = ({ value, autofocus, className }: { value?: string; autofocus
     <div className={classNames([s.textarea], className)}>
       <textarea placeholder='여기에 태그를 입력하세요' onChange={onChageTextarea} onBlur={blur}
         // value={videoTag} 
-        onKeyDown={onKeyDown} autoFocus={autofocus}>
+        onKeyDown={onKeyDown}  {...rest}>
         {value || videoTag}
       </textarea>
-      <span>#해시태그 {videoTagCount}/5개</span>
+      {!rest.disabled &&
+        <span>#해시태그 {videoTagCount}/5개</span>
+      }
     </div>
   );
 };

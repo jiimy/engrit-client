@@ -45,17 +45,12 @@ const Header = ({ children, isScroll = false, isBack }: headerType) => {
           </div>
         }
         {children}
-        {
+        {/* {
           currentPath.includes('detail') &&
           <>
-            <span className='absolute flex gap-12 right-16'>
-              <span className='cursor-pointer w-28 h-28'>
-                <BookmarkLine />
-              </span>
-              <DropDown />
-            </span>
+            
           </>
-        }
+        } */}
         {
           currentPath.includes('edit') && currentPath.includes('feed') && 
           <>

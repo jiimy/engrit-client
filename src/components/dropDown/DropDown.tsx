@@ -1,24 +1,38 @@
+'use client';
 import React, { useRef, useState } from 'react';
 import { More } from '../images';
 import s from './dropdown.module.scss';
 import ShareModal from '../portalModal/shareModal/ShareModal';
 import { useOutOfClick } from '@/hooks/useOutOfClick';
 import { UserStore } from '@/store/user';
-import { deletePeedApi } from '@/api/board';
-import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
+import { deletePeedApi, getFeedIDApi } from '@/api/board';
+import { QueryClient, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useParams, useRouter } from 'next/navigation';
 
-const DropDown = ({ data }: { data?: any; }) => {
+const DropDown = ({ sendUploader }: { sendUploader?: string; }) => {
   const router = useRouter();
+  const params = useParams<{ id: string }>();
   const queryClient = useQueryClient();
   const [dropDown, setDropDown] = useState(false);
   const [shareModal, setShareModal] = useState(false);
   const targetRef = useRef(null);
   const { email } = UserStore();
 
+  const videoIndex = parseInt(params.id);
+
   useOutOfClick(targetRef, () => {
     setDropDown(false);
   });
+
+  const { data, isSuccess, isLoading } = useQuery({
+    queryKey: ['feedId', videoIndex],
+    queryFn: () => getFeedIDApi(videoIndex),
+  })
+
+  // console.log('upload:', uploader, videoIndex, 'uploa: ', data && data[0]?.uploader, 'email:', email)
+
+  console.log('상세페이지조건 : ', data && data[0].uploader === email);
+  console.log('메인페이지 조건 : ', sendUploader === email)
 
   const showDropDown = (e: any) => {
     e.stopPropagation();
@@ -33,9 +47,6 @@ const DropDown = ({ data }: { data?: any; }) => {
     }
   })
 
-  const editFeed = (id: number) => {
-  }
-
   const deleteFeed = (id: number) => {
     // 삭제
     deleteFeedMutation.mutate(id);
@@ -48,7 +59,8 @@ const DropDown = ({ data }: { data?: any; }) => {
         dropDown &&
         <ul className={s.dropdown}>
           {
-            data?.uploader === email &&
+            ((data && data[0]?.uploader) === email)
+            || (sendUploader === email) &&
             <>
               <li onClick={() =>
                 router.push(`/edit/${data?.id}`)

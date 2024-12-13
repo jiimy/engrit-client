@@ -51,7 +51,7 @@ const Edit = () => {
           <YoutubeVideo videoId={data[0]?.youtube_link} onTimeUpdate={handleTimeUpdate} />
           <div className='flex flex-col overflow-hidden'>
             <YoutubeData videoId={data[0]?.youtube_link} />
-            <YoutubeTag value={data[0]?.tag} autofocus className={s.edit_textarea} />
+            <YoutubeTag value={data[0]?.tag} autoFocus className={s.edit_textarea} />
             <YoutubeScript videoTime={videoTime} videoId={data[0]?.youtube_link} />
           </div>
         </>

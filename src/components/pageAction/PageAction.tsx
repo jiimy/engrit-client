@@ -19,7 +19,6 @@ const PageAction = ({ onClick, data }: {
     onClick(e);
   };
 
-
   useOutOfClick(targetRef, () => {
     setDropDown(false);
   });
@@ -29,7 +28,7 @@ const PageAction = ({ onClick, data }: {
       <div className='cursor-pointer w-20 h-20'>
         <BookmarkLine />
       </div>
-      <DropDown data={data} />
+      <DropDown sendUploader={data?.uploader} />
       {
         shareModal && <ShareModal setOnModal={() => setShareModal(false)} />
       }

@@ -27,7 +27,6 @@ const FeedList = () => {
           {data?.map((item: any, index: any) => (
             <div key={index}>
               <Feed
-                id={index}
                 data={item} />
             </div>
           ))}
