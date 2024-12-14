@@ -5,6 +5,7 @@ import { isLogin } from '@/util/authCookie';
 import { useQuery } from '@tanstack/react-query';
 import { redirect, useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
+import s from './mypage.module.scss';
 
 const MyPage = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const MyPage = () => {
   return (
     <>
       <div>
-        <div className="title">이름</div>
+        <div className={s.title}>이름</div>
         <div className="input_wrap">
           <input type="text" value={''} /><button>usrud</button>
         </div>
