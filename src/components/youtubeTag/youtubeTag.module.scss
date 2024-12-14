@@ -1,0 +1,13 @@
+.textarea {
+  position: relative;
+  textarea {
+    color: #40a9ff;
+    min-block-size: 82px;
+    max-block-size: 82px;
+  }
+  span {
+    position: absolute;
+    bottom: 10px;
+    left: 12px;
+  }
+}

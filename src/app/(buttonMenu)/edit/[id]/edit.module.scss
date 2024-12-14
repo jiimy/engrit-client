@@ -1,0 +1,17 @@
+.edit_page {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  &:before {
+    position: absolute;
+    background: #d9d9d9;
+    opacity: 0.35;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    content: "";
+  }
+  .edit_textarea {
+    z-index: 10;
+  }
+}
