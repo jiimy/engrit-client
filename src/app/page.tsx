@@ -10,7 +10,7 @@ import { UserStore } from "@/store/user";
 import Loading from "@/components/loading/Loading";
 
 export default function Home() {
-  const supabase = createClient(); // supabase 객체 불러오기.
+  const supabase = createClient();
   const setUserEmail = UserStore((state) => state.setEmail);
 
   useEffect(() => {

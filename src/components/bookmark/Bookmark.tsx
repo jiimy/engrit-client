@@ -25,6 +25,7 @@ const Bookmark = () => {
     }
   })
   const onClick = () => {
+    // 북마크 안되어있다면 추가
     bookmarkAddMutation.mutate(data?.id)
   }
 
