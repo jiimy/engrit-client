@@ -1,7 +1,6 @@
 import { createClient } from "@/util/supabase/server";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-// import { redirect } from "next/navigation";
 
 export async function POST(request: Request) {
   try {
@@ -11,18 +10,16 @@ export async function POST(request: Request) {
     const supabase = createClient(cookieStore);
 
     const session = await supabase.auth.getUser();
-    const user_name = session.data?.user?.email;
+    const user_email = session.data?.user?.email;
 
-    const { content_text } = await request.json();
-    if (!content_text) {
-      throw new Error("context_text is required");
+    const { t_youtube_id } = await request.json();
+    if (!t_youtube_id) {
+      throw new Error("id is required");
     }
 
-    console.log("받은 text: ", content_text, user_name);
-
     const { data, error } = await supabase
-      .from("inquiries")
-      .insert([{ content_text, user_name }]);
+      .from("bookmarks")
+      .insert([{ t_youtube_id, user_email }]);
 
     // if (error) {
     //   console.error("Supabase Error:", error);

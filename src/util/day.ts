@@ -13,5 +13,10 @@ export const dayformatTime = (dateString: string) => {
   return dayjs(dateString).format("YY.MM.DD HH:mm");
 };
 
-
-
+// n일전 표기
+export const getRelativeTime = (dateString: string) => {
+  const now = dayjs();
+  const date = dayjs(dateString).add(9, "hour");
+  const diffInDays = Math.max(now.diff(date, "day"), 0);
+  return diffInDays;
+};

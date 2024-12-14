@@ -20,7 +20,7 @@ export async function postPeed(youtubeId: string, tag: string) {
     // console.log("API 요청 데이터:", { youtube_link: youtubeId });
     const res = await axios.post("/api/feed/upload", {
       youtube_link: youtubeId,
-      tag: tag
+      tag: tag,
     });
     console.log("API 응답:", res.data);
   } catch (error) {
@@ -39,7 +39,6 @@ export async function deletePeedApi(id: number) {
     data: { id },
   });
 }
-
 
 // 피드 id 로 정보불러오기
 export async function getFeedIDApi(id: number) {
@@ -60,7 +59,23 @@ export async function editFeedIDApi(tag: object, id: number) {
   try {
     const res = await axios.put(`/api/feed/edit/${id}`, {
       tag: tag,
-      id: id
+      id: id,
+    });
+
+    if (res.status === 200) {
+      return res.data.data;
+    }
+  } catch (error) {
+    console.error("Error fetching feed data:", error);
+    return [];
+  }
+}
+
+// 피드 북마크 저장
+export async function bookmarkFeedIDApi(id: number) {
+  try {
+    const res = await axios.post(`/api/user/bookmark`, {
+      t_youtube_id: id,
     });
 
     if (res.status === 200) {
