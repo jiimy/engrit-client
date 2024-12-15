@@ -93,7 +93,7 @@ export async function getBookmarkFeedApi() {
     const res = await axios.get(`/api/user/bookmark`);
 
     if (res.status === 200) {
-      return res.data;
+      return res.data.data;
     }
   } catch (error) {
     console.error("Error fetching feed data:", error);
