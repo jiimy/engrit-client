@@ -26,16 +26,12 @@ const FeedList = () => {
   console.log('피드 리스트 : ', data);
   console.log('북마크', bookmarkData);
 
-  // const postsWithFavoriteStatus = posts.map(post => ({
-  //   ...post,
-  //   isFavorite: favorites.some(fav => fav.postId === post.id)
-  // }));
   function filterMatchingIds(feed: [], bookmark: []) {
-    // b 배열의 t_youtube_id 값을 추출
     const bIds = bookmark?.map((item: any) => item.t_youtube_id);
 
-    // a 배열에서 b 배열의 t_youtube_id와 일치하는 id만 필터링
-    return feed?.filter((item: any) => bIds?.includes(item.id));
+    const result = feed?.filter((item: any) => bIds?.includes(item.id))
+    const resultArray = result?.map((item: any) => item.id)
+    return resultArray;
   }
 
   const result = filterMatchingIds(data, bookmarkData);
@@ -51,7 +47,10 @@ const FeedList = () => {
           {data?.map((item: any, index: any) => (
             <div key={index}>
               <Feed
-                data={item} />
+                data={item}
+                // a.includes(b.id)
+                isBookmark={result.includes(item.id)}
+              />
             </div>
           ))}
         </div>

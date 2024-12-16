@@ -1,8 +1,8 @@
 import { createClient } from "@/util/supabase/server";
 import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function DELETE(request: Request) {
+export async function DELETE(request: NextRequest) {
   try {
     // const { searchParams, origin } = new URL(request.url);
     const cookieStore = await cookies();
@@ -12,7 +12,7 @@ export async function DELETE(request: Request) {
     if (!id) {
       throw new Error("id is required");
     }
-    
+
     const { data, error } = await supabase
       .from("inquiries")
       .delete()

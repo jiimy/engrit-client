@@ -31,8 +31,9 @@ export async function getInquiriesID(id: number) {
 
 // 문의 하기
 export async function postInquiry(text: string) {
+  console.log('atpi text ', text);
   const res = await axios.post(`/api/user/postInquiry`, {
-    context_text: text,
+    content_text: text,
   });
 
   if (res.status === 200) {

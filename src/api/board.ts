@@ -72,10 +72,27 @@ export async function editFeedIDApi(tag: object, id: number) {
 }
 
 // 피드 북마크 저장
-export async function bookmarkFeedIDApi(id: number) {
+export async function bookmarkAddApi(id: number) {
   try {
     const res = await axios.post(`/api/user/bookmark/add`, {
       t_youtube_id: id,
+    });
+
+    if (res.status === 200) {
+      return res.data.data;
+    }
+  } catch (error) {
+    console.error("Error fetching feed data:", error);
+    return [];
+  }
+}
+
+// 피드 북마크 삭제
+export async function bookmarkRemoveApi(id: number) {
+  console.log('api1 : ', id);
+  try {
+    const res = await axios.delete(`/api/user/bookmark/remove`, {
+      data: { t_youtube_id: id },
     });
 
     if (res.status === 200) {
