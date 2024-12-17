@@ -1,21 +1,21 @@
 'use client';
-import React from 'react';
-import s from './bookmark.module.scss';
-import { getBookmarkFeedApi } from '@/api/board';
-import { useQuery } from '@tanstack/react-query';
+import Feed from '@/components/feed/Feed';
+import { useMyBookMarked } from '@/hooks/useMyBookMarked';
 
 const Index = () => {
-
-  const { data: bookmark, isSuccess: bookmarkSucess } = useQuery({
-    queryFn: () => getBookmarkFeedApi(),
-    queryKey: ['bookmark'],
-  })
-
-  console.log('북마크 리스트: ', bookmark);
+  const { bookmarked, bookmarkedArray } = useMyBookMarked();
 
   return (
     <div>
-      bookmark <br /> 한글
+      {bookmarked.length === 0 ? <>북마크된 피드가 없습니다.</> :
+        bookmarked?.map((item: any, index: any) => (
+          <div key={index}>
+            <Feed
+              data={item.youtube}
+              isBookmark={bookmarkedArray?.includes(item.youtube.id)}
+            />
+          </div>
+        ))}
     </div>
   );
 };

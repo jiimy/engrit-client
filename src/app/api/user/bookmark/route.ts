@@ -21,7 +21,7 @@ export async function GET(request: Request) {
       .select(
         `
         t_youtube_id,
-        youtube (youtube_link, uploader, created_at, tag)
+        youtube (id, youtube_link, uploader, created_at, tag)
       `
       )
       .eq("user_email", userEmail);

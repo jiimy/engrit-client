@@ -1,15 +1,10 @@
 'use client'
-import React, { useEffect, useRef, useState } from 'react';
+import { getBookmarkFeedApi, readPeedApi } from '@/api/board';
+import { useQuery } from '@tanstack/react-query';
+import Loading from '../loading/Loading';
 import Feed from './Feed';
 import s from './feed.module.scss';
-import { useHeaderVisible } from '@/hooks/useHeaderVisible';
-import Link from 'next/link';
-import { videoData } from '@/data/sampleVideoData';
-import Loading from '../loading/Loading';
-import axios from 'axios';
-import { getBookmarkFeedApi, readPeedApi } from '@/api/board';
-import { useQueries, useQuery } from '@tanstack/react-query';
-import { myYoutubeUplaodApi } from '@/api/youtube';
+import { useMyBookMarked } from '@/hooks/useMyBookMarked';
 // import { isMobile } from 'react-device-detect';
 
 const FeedList = () => {
@@ -18,27 +13,11 @@ const FeedList = () => {
     queryFn: () => readPeedApi(),
   });
 
-  const { data: bookmarkData, isSuccess: bookmarkSucess } = useQuery({
-    queryFn: () => getBookmarkFeedApi(),
-    queryKey: ['bookmark'],
-  })
+  const { bookmarkedArray } = useMyBookMarked();
 
-  console.log('피드 리스트 : ', data);
-  console.log('북마크', bookmarkData);
+  // console.log('bookmarked', bookmarkedArray);
 
-  function filterMatchingIds(feed: [], bookmark: []) {
-    const bIds = bookmark?.map((item: any) => item.t_youtube_id);
-
-    const result = feed?.filter((item: any) => bIds?.includes(item.id))
-    const resultArray = result?.map((item: any) => item.id)
-    return resultArray;
-  }
-
-  const result = filterMatchingIds(data, bookmarkData);
-
-  console.log(result);
-
-
+  console.log('data: ', data, 'bookmarked', bookmarkedArray)
   return (
     <div className={s.feedList}>
       {isLoading && <Loading />}
@@ -48,8 +27,7 @@ const FeedList = () => {
             <div key={index}>
               <Feed
                 data={item}
-                // a.includes(b.id)
-                isBookmark={result.includes(item.id)}
+                isBookmark={bookmarkedArray?.includes(item.id)}
               />
             </div>
           ))}

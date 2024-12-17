@@ -27,11 +27,11 @@ const Feed = forwardRef(({
       <YoutubeVideo videoId={data?.youtube_link} onTimeUpdate={handleTimeUpdate} />
       <Link href={`/detail/${data?.id}`} className='block pt-16 pb-20 pl-20 pr-20'>
         <YoutubeData videoId={data?.youtube_link}>
-          <PageAction onClick={(e: any) => { e.stopPropagation(); e.preventDefault() }} data={data} 
+          <PageAction onClick={(e: any) => { e.stopPropagation(); e.preventDefault() }} data={data}
             isBookmark={isBookmark}
-            />
+          />
         </YoutubeData>
-        {/* <YoutubeScript videoTime={videoTime} videoId={data.youtube_link} viewLength={1} /> */}
+        <YoutubeScript videoTime={videoTime} videoId={data.youtube_link} viewLength={1} />
         <div>{data?.tag?.replace(/(?!^)(#)/g, ' $1')}</div>
       </Link>
     </div>
