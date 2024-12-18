@@ -1,17 +1,14 @@
 'use client';
 import { editFeedIDApi } from '@/api/board';
 import BottomMenu from '@/components/bottomMenu/BottomMenu';
-import { useLayoutContext } from '@/context/LayoutContext';
 import { layoutStore } from '@/store/layoutStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams, useRouter } from 'next/navigation';
-import { useEffect } from 'react';
 
 const Bottom = () => {
   const params = useParams<{ id: string }>();
   const router = useRouter();
   const queryClient = useQueryClient();
-  const { menuState } = useLayoutContext();
   const tag = layoutStore((state) => state.tag);
   const id = Number(params?.id);
 

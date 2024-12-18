@@ -6,9 +6,14 @@ import { useLayoutContext } from '@/context/LayoutContext';
 import { useEffect, useState } from 'react';
 import s from './upload.module.scss';
 import YoutubeTag from '@/components/youtubeTag/YoutubeTag';
+import { layoutStore } from '@/store/layoutStore';
 
 const UploadPage = () => {
-  const { setMenuState, setText, setTag } = useLayoutContext();
+  const { setMenuState, setText, setTag } = layoutStore((state) => ({
+    setMenuState: state.setMenuState,
+    setText: state.setText,
+    setTag: state.setTag
+  }));
   const [inputText, setInputText] = useState<string>("");
   const [videoId, setViedoId] = useState<string>("");
   const [videoTime, setVideoTime] = useState(0);

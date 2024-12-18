@@ -1,14 +1,14 @@
 'use client';
 
 import { getInquiriesID } from '@/api/inquiries';
-import { useLayoutContext } from '@/context/LayoutContext';
+import { layoutStore } from '@/store/layoutStore';
 import { dayformatTime } from '@/util/day';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import s from '../support.module.scss';
 
 const SupportDetail = () => {
-  const { setText } = useLayoutContext();
+  const setText = layoutStore((state) => state.setText);
   const params = useParams<{ id: string }>();
   const inquiryId = Number(params?.id);
 
