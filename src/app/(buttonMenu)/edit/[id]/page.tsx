@@ -1,16 +1,16 @@
 'use client';
-import { useParams } from 'next/navigation';
-import s from './edit.module.scss';
-import { useEffect, useState } from 'react';
-import { fetchTranscript, youtubeTest } from '@/api/youtube';
-import YoutubeVideo from '@/components/youtubeVideo/YoutubeVideo';
+import { getFeedIDApi } from '@/api/board';
+import { fetchTranscript } from '@/api/youtube';
+import Loading from '@/components/loading/Loading';
+import YoutubeTag from '@/components/youtubeTag/YoutubeTag';
 import YoutubeData from '@/components/youtubeVideo/YoutubeData';
 import YoutubeScript from '@/components/youtubeVideo/YoutubeScript';
-import { useQuery } from '@tanstack/react-query';
-import { getFeedIDApi } from '@/api/board';
-import YoutubeTag from '@/components/youtubeTag/YoutubeTag';
-import Loading from '@/components/loading/Loading';
+import YoutubeVideo from '@/components/youtubeVideo/YoutubeVideo';
 import { useLayoutContext } from '@/context/LayoutContext';
+import { useQuery } from '@tanstack/react-query';
+import { useParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import s from './edit.module.scss';
 
 const Edit = () => {
   const params = useParams<{ id: string }>();
@@ -25,12 +25,6 @@ const Edit = () => {
   const { data, isSuccess } = useQuery({
     queryKey: ['feedId', videoIndex],
     queryFn: () => getFeedIDApi(videoIndex),
-  })
-
-  const { data: youtubeInfo, isLoading } = useQuery({
-    queryFn: () => youtubeTest(data[0]?.youtube_link),
-    queryKey: ['youtubeLink', data[0]?.youtube_link],
-    // enabled: data?.youtube_link
   })
 
   useEffect(() => {
@@ -54,13 +48,12 @@ const Edit = () => {
         <>
           <YoutubeVideo videoId={data[0]?.youtube_link} onTimeUpdate={handleTimeUpdate} />
           <div className='flex flex-col overflow-hidden'>
-            <YoutubeData title={youtubeInfo?.snippet?.title} channelTitle={youtubeInfo?.snippet?.channelTitle} thumbnails={youtubeInfo?.snippet?.thumbnails?.default?.url} />
+            <YoutubeData videoId={data[0]?.youtube_link} />
             <YoutubeTag value={data[0]?.tag} autoFocus className={s.edit_textarea} />
             <YoutubeScript videoTime={videoTime} videoId={data[0]?.youtube_link} />
           </div>
         </>
       }
-      {isLoading && <Loading />}
     </div>
   );
 };

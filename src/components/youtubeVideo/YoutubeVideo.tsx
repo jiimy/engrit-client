@@ -4,11 +4,13 @@ import React, { useState, useRef, useEffect } from 'react';
 import YouTube from 'react-youtube';
 import Image from 'next/image';
 import s from './youtubevideo.module.scss';
+import { useGetYoutubeInfoLink } from '@/hooks/useGetYoutubeInfo';
 
-const YoutubeVideo = ({ videoId, onTimeUpdate, playTime }: { videoId: string; onTimeUpdate?: (time: number) => void; playTime?: any; }) => {
+const YoutubeVideo = ({ videoId, onTimeUpdate }: { videoId: string; onTimeUpdate?: (time: number) => void; }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const playerRef = useRef<any>(null);
+  const { playTime } = useGetYoutubeInfoLink(videoId);
 
   const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
   const videoOptions = {

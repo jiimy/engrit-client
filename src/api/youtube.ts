@@ -15,8 +15,8 @@ export async function fetchTranscript(id: string) {
   }
 }
 
-// 유튜브 test
-export async function youtubeTest(id: string) {
+// 유튜브 info
+export async function youtubeInfoApi(id: string) {
   const url = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet,statistics&id=${id}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}`;
 
   try {
@@ -47,7 +47,7 @@ export async function fetchVideoInfo(id: string) {
   }
 }
 
-// // 유튜브 채널 정보 추출
+// 유튜브 채널 정보 추출
 // export async function fetchChannelInfo(id: string) {
 //   try {
 //     const response = await axios.get(
@@ -59,7 +59,7 @@ export async function fetchVideoInfo(id: string) {
 //   }
 // }
 
-// // 비디오의 채널 프로필 이미지 가져오기
+// 비디오의 채널 프로필 이미지 가져오기
 // export async function getChannelProfileImage(videoId: string) {
 //   const videoInfo = await fetchVideoInfo(videoId);
 //   if (videoInfo) {

@@ -1,12 +1,12 @@
 'use client';
+import { youtubeInfoApi } from '@/api/youtube';
+import { useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 import { forwardRef, Ref, useState } from 'react';
-import YoutubeVideo from '../youtubeVideo/YoutubeVideo';
+import PageAction from '../pageAction/PageAction';
 import YoutubeData from '../youtubeVideo/YoutubeData';
 import YoutubeScript from '../youtubeVideo/YoutubeScript';
-import Link from 'next/link';
-import PageAction from '../pageAction/PageAction';
-import { useQuery } from '@tanstack/react-query';
-import { youtubeTest } from '@/api/youtube';
+import YoutubeVideo from '../youtubeVideo/YoutubeVideo';
 
 type feedType = {
   data?: any;
@@ -24,17 +24,11 @@ const Feed = forwardRef(({
     setVideoTime(time);
   };
 
-  const { data: youtubeInfo, isLoading } = useQuery({
-    queryFn: () => youtubeTest(data?.youtube_link),
-    queryKey: ['youtubeLink', data?.youtube_link],
-    // enabled: data?.youtube_link
-  })
-
   return (
     <div ref={ref}>
-      <YoutubeVideo videoId={data?.youtube_link} onTimeUpdate={handleTimeUpdate} playTime={youtubeInfo?.contentDetails?.duration} />
+      <YoutubeVideo videoId={data?.youtube_link} onTimeUpdate={handleTimeUpdate} />
       <Link href={`/detail/${data?.id}`} className='block pt-16 pb-20 pl-20 pr-20'>
-        <YoutubeData title={youtubeInfo?.snippet?.title} channelTitle={youtubeInfo?.snippet?.channelTitle} thumbnails={youtubeInfo?.snippet?.thumbnails?.default?.url}>
+        <YoutubeData videoId={data?.youtube_link}>
           <PageAction onClick={(e: any) => { e.stopPropagation(); e.preventDefault() }} data={data}
             isBookmark={isBookmark}
           />
