@@ -22,7 +22,6 @@ export async function postPeed(youtubeId: string, tag: string) {
       youtube_link: youtubeId,
       tag: tag,
     });
-    console.log("API 응답:", res.data);
   } catch (error) {
     if (axios.isAxiosError(error)) {
       console.error("Axios Error:", error.response?.data || error.message);

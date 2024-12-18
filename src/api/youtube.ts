@@ -16,6 +16,22 @@ export async function fetchTranscript(id: string) {
   }
 }
 
+// 유튜브 test
+export async function youtubeTest(id: string) {
+  const url = `https://www.googleapis.com/youtube/v3/videos?part=contentDetails,snippet,statistics&id=${id}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}`;
+
+  try {
+    const response = await axios.get(url);
+    if (response.data.items.length > 0) {
+      return response.data.items[0];
+    } else {
+      console.log("No video found");
+    }
+  } catch (err) {
+    console.log("테스트 실패", err);
+  }
+}
+
 // 유튜브 정보 추출
 export async function fetchVideoInfo(id: string) {
   const url = `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}&part=snippet`;
@@ -56,7 +72,6 @@ export async function getChannelProfileImage(videoId: string) {
   }
   return null;
 }
-
 
 // 내가 업로드한 유튜브 정보
 export async function myYoutubeUplaodApi() {
