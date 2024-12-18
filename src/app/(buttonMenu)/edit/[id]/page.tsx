@@ -2,7 +2,7 @@
 import { useParams } from 'next/navigation';
 import s from './edit.module.scss';
 import { useEffect, useState } from 'react';
-import { fetchTranscript } from '@/api/youtube';
+import { fetchTranscript, youtubeTest } from '@/api/youtube';
 import YoutubeVideo from '@/components/youtubeVideo/YoutubeVideo';
 import YoutubeData from '@/components/youtubeVideo/YoutubeData';
 import YoutubeScript from '@/components/youtubeVideo/YoutubeScript';
@@ -22,12 +22,16 @@ const Edit = () => {
 
   const videoIndex = parseInt(params.id);
 
-  const { data, isSuccess, isLoading } = useQuery({
+  const { data, isSuccess } = useQuery({
     queryKey: ['feedId', videoIndex],
     queryFn: () => getFeedIDApi(videoIndex),
   })
 
-  console.log('data', data);
+  const { data: youtubeInfo, isLoading } = useQuery({
+    queryFn: () => youtubeTest(data[0]?.youtube_link),
+    queryKey: ['youtubeLink', data[0]?.youtube_link],
+    // enabled: data?.youtube_link
+  })
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,7 +54,7 @@ const Edit = () => {
         <>
           <YoutubeVideo videoId={data[0]?.youtube_link} onTimeUpdate={handleTimeUpdate} />
           <div className='flex flex-col overflow-hidden'>
-            <YoutubeData videoId={data[0]?.youtube_link} />
+            <YoutubeData title={youtubeInfo?.snippet?.title} channelTitle={youtubeInfo?.snippet?.channelTitle} thumbnails={youtubeInfo?.snippet?.thumbnails?.default?.url} />
             <YoutubeTag value={data[0]?.tag} autoFocus className={s.edit_textarea} />
             <YoutubeScript videoTime={videoTime} videoId={data[0]?.youtube_link} />
           </div>

@@ -15,9 +15,6 @@ const FeedList = () => {
 
   const { bookmarkedArray } = useMyBookMarked();
 
-  // console.log('bookmarked', bookmarkedArray);
-
-  console.log('data: ', data, 'bookmarked', bookmarkedArray)
   return (
     <div className={s.feedList}>
       {isLoading && <Loading />}

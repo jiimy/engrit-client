@@ -17,7 +17,6 @@ export async function readPeedApi() {
 // 피드 업로드 하기
 export async function postPeed(youtubeId: string, tag: string) {
   try {
-    // console.log("API 요청 데이터:", { youtube_link: youtubeId });
     const res = await axios.post("/api/feed/upload", {
       youtube_link: youtubeId,
       tag: tag,
@@ -88,7 +87,6 @@ export async function bookmarkAddApi(id: number) {
 
 // 피드 북마크 삭제
 export async function bookmarkRemoveApi(id: number) {
-  console.log('api1 : ', id);
   try {
     const res = await axios.delete(`/api/user/bookmark/remove`, {
       data: { t_youtube_id: id },

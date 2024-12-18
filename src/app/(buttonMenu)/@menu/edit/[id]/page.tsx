@@ -24,8 +24,6 @@ const Bottom = () => {
   })
 
   const comClick = () => {
-    console.log('tag: ', tag)
-    // menuState 라는 데이터 가져와서 업로드 하는 api hook 넣기
     inquiryEditMutation.mutate(tag)
   };
 

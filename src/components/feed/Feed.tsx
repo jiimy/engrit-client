@@ -30,8 +30,6 @@ const Feed = forwardRef(({
     // enabled: data?.youtube_link
   })
 
-  console.log('aa1', youtubeInfo)
-
   return (
     <div ref={ref}>
       <YoutubeVideo videoId={data?.youtube_link} onTimeUpdate={handleTimeUpdate} playTime={youtubeInfo?.contentDetails?.duration} />

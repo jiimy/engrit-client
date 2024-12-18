@@ -44,8 +44,6 @@ const InquiryEditPage = () => {
     setText(text);
   }
 
-  console.log('data', data && data[0].content_text);
-
   return (
     <>
       {

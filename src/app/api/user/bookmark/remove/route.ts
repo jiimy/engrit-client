@@ -16,8 +16,6 @@ export async function DELETE(request: NextRequest) {
       throw new Error("id is required");
     }
 
-    console.log("api 데이터 : ", user_email, t_youtube_id);
-
     const { data, error } = await supabase
       // await supabase
       .from("bookmarks")

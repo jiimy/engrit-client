@@ -18,8 +18,6 @@ export async function POST(request: Request) {
     //   throw new Error("context_text is required");
     // }
 
-    console.log("받은 text: ", content_text, user_name);
-
     const { data, error } = await supabase
       .from("inquiries")
       .insert([{ content_text, user_name }]);

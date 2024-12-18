@@ -5,7 +5,7 @@ import YouTube from 'react-youtube';
 import Image from 'next/image';
 import s from './youtubevideo.module.scss';
 
-const YoutubeVideo = ({ videoId, onTimeUpdate, playTime }: { videoId: string; onTimeUpdate?: (time: number) => void; playTime: any; }) => {
+const YoutubeVideo = ({ videoId, onTimeUpdate, playTime }: { videoId: string; onTimeUpdate?: (time: number) => void; playTime?: any; }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const playerRef = useRef<any>(null);
@@ -46,7 +46,6 @@ const YoutubeVideo = ({ videoId, onTimeUpdate, playTime }: { videoId: string; on
 
   const onReady = (event: any) => {
     const player = event.target;
-    console.log('Duration:', player.getDuration());
     playerRef.current = player;
 
     startInterval();

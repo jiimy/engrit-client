@@ -1,7 +1,5 @@
 'use client';
-import { fetchVideoInfo, getChannelProfileImage, youtubeTest } from '@/api/youtube';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 
 const YoutubeData = ({ thumbnails, title, channelTitle, children }:
   { thumbnails: string; title: string; channelTitle: string; children?: React.ReactNode }) => {

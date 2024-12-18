@@ -26,9 +26,6 @@ const SupportDetail = () => {
     }
   }
 
-  console.log('dta: ', data);
-  // <pre>{JSON.stringify(data, null, 2)}</pre>
-
   return (
     <div>
       {isSuccess &&
