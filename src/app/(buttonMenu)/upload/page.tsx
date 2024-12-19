@@ -1,12 +1,11 @@
 'use client';
+import YoutubeTag from '@/components/youtubeTag/YoutubeTag';
 import YoutubeData from '@/components/youtubeVideo/YoutubeData';
 import YoutubeScript from '@/components/youtubeVideo/YoutubeScript';
 import YoutubeVideo from '@/components/youtubeVideo/YoutubeVideo';
-import { useLayoutContext } from '@/context/LayoutContext';
+import { layoutStore } from '@/store/layoutStore';
 import { useEffect, useState } from 'react';
 import s from './upload.module.scss';
-import YoutubeTag from '@/components/youtubeTag/YoutubeTag';
-import { layoutStore } from '@/store/layoutStore';
 
 const UploadPage = () => {
   const { setMenuState, setText, setTag } = layoutStore((state) => ({

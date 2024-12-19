@@ -12,5 +12,5 @@ export function useMyBookMarked() {
 
   // }
   const bookmarkedArray = bookmarked?.map((item: any) => item.t_youtube_id);
-  return { bookmarked, bookmarkedArray };
+  return { bookmarked, bookmarkedArray, isSuccess };
 }

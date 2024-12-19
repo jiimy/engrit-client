@@ -6,11 +6,12 @@ import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { BookmarkFill, BookmarkLine } from '../images';
 
-const Bookmark = ({ isBookmark, sendId }: { isBookmark: boolean; sendId: number }) => {
+const Bookmark = ({ isBookmark, sendId }: { isBookmark?: boolean; sendId?: number }) => {
   const params = useParams<{ id: string }>();
   const queryClient = useQueryClient();
 
-  const currentId = parseInt(params.id) || sendId;
+  // const currentId = parseInt(params.id) || sendId;
+  const currentId = sendId ? sendId : parseInt(params.id);
 
   const { data: bookmarkData, isSuccess } = useQuery({
     queryKey: ['bookmarkId', currentId],

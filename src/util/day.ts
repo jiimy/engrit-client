@@ -22,7 +22,7 @@ export const getRelativeTimeDay = (dateString: string) => {
 };
 
 // n일전 표기 - 0일 미만이면 시간으로 표기
-// export const getRelativeTime = (dateString: string) => {
-//   const date = dayjs(dateString).add(9, "hour");
-//   return date.fromNow();
-// };
+export const getRelativeTime = (dateString: string) => {
+  const date = dayjs(dateString).add(9, "hour");
+  return date.fromNow();
+};
