@@ -4,7 +4,14 @@ import TranslateWord, { cleanText } from '@/util/TranslateWord';
 import s from './youtubevideo.module.scss';
 import classNames from 'classnames';
 
-const YoutubeScript = ({ videoId, videoTime, viewLength = 0 }: { videoId: string | any; videoTime: any; viewLength?: number }) => {
+type Props = {
+  videoId: string | any;
+  videoTime: any;
+  viewLength?: number;
+  className?: string;
+} & React.HTMLAttributes<HTMLDivElement>
+
+const YoutubeScript = ({ videoId, videoTime, viewLength = 0, className }: Props) => {
   const [script, setScript] = useState<any>();
   const activeRef = useRef<HTMLDivElement | null>(null);
 
@@ -38,7 +45,7 @@ const YoutubeScript = ({ videoId, videoTime, viewLength = 0 }: { videoId: string
   const processedData = processScriptData();
 
   return (
-    <div className={s.script_wrap}>
+    <div className={classNames(s.script_wrap, className)}>
       {processedData?.map((item: any, index: number) => {
         const isViewing = item.start <= videoTime && videoTime < item.end || videoTime === 0 && index === 0;
         return (
@@ -53,7 +60,7 @@ const YoutubeScript = ({ videoId, videoTime, viewLength = 0 }: { videoId: string
             }}
           >
             <p>{cleanText(item.text)}</p>
-            <p>
+            <p className={s.ko}>
               <TranslateWord source={item.text} id={videoId} />
             </p>
             <span>

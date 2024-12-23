@@ -2,20 +2,23 @@
 import { youtubeInfoApi } from '@/api/youtube';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import { forwardRef, Ref, useState } from 'react';
+import { forwardRef, Ref, Suspense, useState } from 'react';
 import PageAction from '../pageAction/PageAction';
 import YoutubeData from '../youtubeVideo/YoutubeData';
 import YoutubeScript from '../youtubeVideo/YoutubeScript';
 import YoutubeVideo from '../youtubeVideo/YoutubeVideo';
+import Loading from '../loading/Loading';
 
 type feedType = {
   data?: any;
   isBookmark: boolean;
+  className?: string;
 };
 
 const Feed = forwardRef(({
   data,
-  isBookmark
+  isBookmark,
+  className
 }: feedType, ref: Ref<HTMLDivElement>) => {
 
   const [videoTime, setVideoTime] = useState(0);
@@ -33,8 +36,10 @@ const Feed = forwardRef(({
             isBookmark={isBookmark}
           />
         </YoutubeData>
-        <YoutubeScript videoTime={videoTime} videoId={data.youtube_link} viewLength={1} />
-        <div>{data?.tag?.replace(/(?!^)(#)/g, ' $1')}</div>
+        <Suspense fallback={<Loading />}>
+          <YoutubeScript videoTime={videoTime} videoId={data.youtube_link} viewLength={1} className={className} />
+          <div>{data?.tag?.replace(/(?!^)(#)/g, ' $1')}</div>
+        </Suspense>
       </Link>
     </div>
   );

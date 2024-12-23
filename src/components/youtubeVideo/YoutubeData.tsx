@@ -11,7 +11,9 @@ const YoutubeData = ({ videoId, children }:
     <div>
       <div className='flex'>
         <div className='w-full h-full mr-12 overflow-hidden rounded-full max-w-32 max-h-32 min-w-32 min-h-32'>
-          <Image src={thumbNail} width={32} height={32} alt={title} />
+          {thumbNail &&
+            <Image src={thumbNail} width={32} height={32} alt={title} />
+          }
         </div>
         <div className='flex justify-between'>
           <div>

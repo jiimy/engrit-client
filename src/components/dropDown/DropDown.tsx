@@ -59,7 +59,7 @@ const DropDown = ({ sendUploader }: { sendUploader?: string; }) => {
   }, [])
 
   return (
-    <div className='relative cursor-pointer w-28 h-28' onClick={showDropDown} ref={targetRef}>
+    <div className='relative cursor-pointer w-28 h-28 mt-18' onClick={showDropDown} ref={targetRef}>
       <More />
       {
         dropDown &&
