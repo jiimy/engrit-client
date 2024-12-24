@@ -19,10 +19,10 @@ const YoutubeScript = ({ videoId, videoTime, viewLength = 0, className }: Props)
 
   useEffect(() => {
     const fetchData = async () => {
-      setIsLoading(true);
+      // setIsLoading(true);
       const trans = await fetchTranscript(videoId);
       setScript(trans);
-      setIsLoading(false);
+      // setIsLoading(false);
     };
     fetchData();
   }, [videoId]);
@@ -51,7 +51,7 @@ const YoutubeScript = ({ videoId, videoTime, viewLength = 0, className }: Props)
   return (
     <div className={classNames(s.script_wrap, className)}>
       {/* <div className='relative '><Loading /></div> */}
-      {isLoading ? <div className='relative h-115'><Loading /></div> :
+      {
         (processedData?.map((item: any, index: number) => {
           const isViewing = item.start <= videoTime && videoTime < item.end || videoTime === 0 && index === 0;
           return (

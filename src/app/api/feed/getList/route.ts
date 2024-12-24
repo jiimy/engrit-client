@@ -7,24 +7,27 @@ export async function GET(request: Request) {
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
 
-    const url = new URL(request.url);
-    const page = parseInt(url.searchParams.get("page") || "1", 10);
-    const pageSize = 10;
+    const { searchParams } = new URL(request.url);
+    const page = Number(searchParams.get("page") || 1);
+    const pageSize = Number(searchParams.get("size") || 10);
 
     const startIndex = (page - 1) * pageSize;
-    const endIndex = page * pageSize - 1;
+    const endIndex = startIndex + pageSize - 1;
+
+    // console.log("dd", page, pageSize, startIndex, endIndex);
 
     const { data, error } = await supabase
       .from("youtube")
       .select("*", { count: "exact" })
       .order("id", { ascending: true })
       .range(startIndex, endIndex);
+    // .range(0, 10);
 
     if (error) {
       throw error;
     }
-    // res.status(200).json(data);
     return NextResponse.json({ data }, { status: 200 });
+    // return NextResponse.json({ message: "Post created successfully" });
   } catch (error) {
     // res.status(500).json({ error: error });
     return NextResponse.json({ error }, { status: 500 });

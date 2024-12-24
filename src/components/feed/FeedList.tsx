@@ -13,7 +13,7 @@ import React from 'react';
 
 const FeedList = () => {
   const [ref, isView] = useInView();
-  const size = 3; // 한 페이지당 아이템 수
+  const size = 5; // 한 페이지당 아이템 수
   const [searchValue, setSearchValue] = useState("");
   // const { data, isLoading } = useQuery({
   //   queryKey: ["getFeedList"],
@@ -32,7 +32,7 @@ const FeedList = () => {
     isLoading
   } = useInfiniteQuery({
     queryKey: ["getFeedList"],
-    queryFn: async ({ pageParam = 0 }) => {
+    queryFn: async ({ pageParam = 1 }) => {
       const response = await readPeedApi(searchValue, pageParam, size);
       return response;
     },
