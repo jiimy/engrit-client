@@ -2,16 +2,37 @@ import axios from "axios";
 import { redirect } from "next/navigation";
 
 // 피드 목록 불러오기
-export async function readPeedApi() {
-  try {
-    const res = await axios.get("/api/feed/getList");
+export async function readPeedApi(
+  serachValue: string,
+  pageParam: number,
+  size: number
+) {
+  if (serachValue) {
+    try {
+      const res = await axios.get(
+        `/api/feed/getList?search=${serachValue}&page=${pageParam}&size=${size}`
+      );
 
-    if (res.status === 200) {
-      return res.data.data;
+      if (res.status === 200) {
+        return res.data.data;
+      }
+    } catch (error) {
+      console.error("Error fetching feed data:", error);
+      return [];
     }
-  } catch (error) {
-    console.error("Error fetching feed data:", error);
-    return [];
+  } else {
+    try {
+      const res = await axios.get(
+        `/api/feed/getList?page=${pageParam}&size=${size}`
+      );
+
+      if (res.status === 200) {
+        return res.data.data;
+      }
+    } catch (error) {
+      console.error("Error fetching feed data:", error);
+      return [];
+    }
   }
 }
 // 피드 업로드 하기

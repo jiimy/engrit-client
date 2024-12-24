@@ -3,6 +3,7 @@ import { fetchTranscript } from '@/api/youtube';
 import TranslateWord, { cleanText } from '@/util/TranslateWord';
 import s from './youtubevideo.module.scss';
 import classNames from 'classnames';
+import Loading from '../loading/Loading';
 
 type Props = {
   videoId: string | any;
@@ -13,12 +14,15 @@ type Props = {
 
 const YoutubeScript = ({ videoId, videoTime, viewLength = 0, className }: Props) => {
   const [script, setScript] = useState<any>();
+  const [isLoading, setIsLoading] = useState(true);
   const activeRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
       const trans = await fetchTranscript(videoId);
       setScript(trans);
+      setIsLoading(false);
     };
     fetchData();
   }, [videoId]);
@@ -46,29 +50,31 @@ const YoutubeScript = ({ videoId, videoTime, viewLength = 0, className }: Props)
 
   return (
     <div className={classNames(s.script_wrap, className)}>
-      {processedData?.map((item: any, index: number) => {
-        const isViewing = item.start <= videoTime && videoTime < item.end || videoTime === 0 && index === 0;
-        return (
-          <div
-            key={index}
-            ref={isViewing ? activeRef : null}
-            className={classNames([s.script], [viewLength !== 0 && s.main], {
-              [s.is_viewing]: isViewing
-            })}
-            style={{
-              // display: (viewLength !== 0 && isViewing) ? 'block' : 'none', // 조건에 맞는 항목만 표시
-            }}
-          >
-            <p>{cleanText(item.text)}</p>
-            <p className={s.ko}>
-              <TranslateWord source={item.text} id={videoId} />
-            </p>
-            <span>
-              {item.start.toFixed(2)} ~ {item.end.toFixed(2)}
-            </span>
-          </div>
-        );
-      })}
+      {/* <div className='relative '><Loading /></div> */}
+      {isLoading ? <div className='relative h-115'><Loading /></div> :
+        (processedData?.map((item: any, index: number) => {
+          const isViewing = item.start <= videoTime && videoTime < item.end || videoTime === 0 && index === 0;
+          return (
+            <div
+              key={index}
+              ref={isViewing ? activeRef : null}
+              className={classNames([s.script], [viewLength !== 0 && s.main], {
+                [s.is_viewing]: isViewing
+              })}
+              style={{
+                // display: (viewLength !== 0 && isViewing) ? 'block' : 'none', // 조건에 맞는 항목만 표시
+              }}
+            >
+              <p>{cleanText(item.text)}</p>
+              <p className={s.ko}>
+                <TranslateWord source={item.text} id={videoId} />
+              </p>
+              <span>
+                {item.start.toFixed(2)} ~ {item.end.toFixed(2)}
+              </span>
+            </div>
+          )
+        }))}
     </div>
   );
 };

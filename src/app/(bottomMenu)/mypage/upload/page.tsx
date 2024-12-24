@@ -8,6 +8,7 @@ import s from './upload.module.scss';
 import { useGetYoutubeInfoLink } from '@/hooks/useGetYoutubeInfo';
 import YoutubeTitle from '@/components/youtubeVideo/YoutubeTitle';
 import Loading from '@/components/loading/Loading';
+import Link from 'next/link';
 
 const MyPageUpload = () => {
   const { data, isLoading } = useQuery({
@@ -32,18 +33,20 @@ const MyPageUpload = () => {
           <>
             {sortedData?.map((item: any, index: any) => (
               <li key={index} className={s.item}>
-                <div className={s.video}>
-                  <YoutubeVideo videoId={item.youtube_link} />
-                </div>
-                <div>
-                  <div className={s.title}>
-                    <p>
-                      <YoutubeTitle Link={item.youtube_link} />
-                    </p>
-                    <DropDown sendUploader={item.uploader} />
+                <Link href={`/detail/${item.id}`}>
+                  <div className={s.video}>
+                    <YoutubeVideo videoId={item.youtube_link} />
                   </div>
-                  {getRelativeTime(item.created_at)}
-                </div>
+                  <div>
+                    <div className={s.title}>
+                      <p>
+                        <YoutubeTitle Link={item.youtube_link} />
+                      </p>
+                      <DropDown sendUploader={item.uploader} className='w-20 h-20 mt-0 min-w-20 min-h-20' />
+                    </div>
+                    {getRelativeTime(item.created_at)}
+                  </div>
+                </Link>
               </li>
             ))}
           </>

@@ -2,12 +2,13 @@
 import { youtubeInfoApi } from '@/api/youtube';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import { forwardRef, Ref, Suspense, useState } from 'react';
+import { forwardRef, lazy, Ref, Suspense, useState } from 'react';
 import PageAction from '../pageAction/PageAction';
 import YoutubeData from '../youtubeVideo/YoutubeData';
-import YoutubeScript from '../youtubeVideo/YoutubeScript';
+// import YoutubeScript from '../youtubeVideo/YoutubeScript';
 import YoutubeVideo from '../youtubeVideo/YoutubeVideo';
 import Loading from '../loading/Loading';
+const YoutubeScript = lazy(() => import('../youtubeVideo/YoutubeScript'));
 
 type feedType = {
   data?: any;
@@ -38,7 +39,7 @@ const Feed = forwardRef(({
         </YoutubeData>
         <Suspense fallback={<Loading />}>
           <YoutubeScript videoTime={videoTime} videoId={data.youtube_link} viewLength={1} className={className} />
-          <div>{data?.tag?.replace(/(?!^)(#)/g, ' $1')}</div>
+          <div className="text-[#40A9FF]">{data?.tag?.replace(/(?!^)(#)/g, ' $1')}</div>
         </Suspense>
       </Link>
     </div>

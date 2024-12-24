@@ -6,57 +6,65 @@ import Feed from './Feed';
 import s from './feed.module.scss';
 import { useMyBookMarked } from '@/hooks/useMyBookMarked';
 import FeedSkeleton from '../loading/skeleton/FeedSkeleton';
+import { useEffect, useState } from 'react';
+import { useInView } from "react-intersection-observer";
+import React from 'react';
 // import { isMobile } from 'react-device-detect';
 
 const FeedList = () => {
-  const { data, isLoading } = useQuery({
-    queryKey: ["getFeedList"],
-    queryFn: () => readPeedApi(),
-  });
+  const [ref, isView] = useInView();
+  const size = 3; // 한 페이지당 아이템 수
+  const [searchValue, setSearchValue] = useState("");
+  // const { data, isLoading } = useQuery({
+  //   queryKey: ["getFeedList"],
+  //   queryFn: () => readPeedApi('', ),
+  // });
 
   const { bookmarkedArray } = useMyBookMarked();
 
-  // const {
-  //   data: jupjupList,
-  //   fetchNextPage: jupjupListFetchNextPage,
-  //   hasNextPage: jupjupListHasNextPage,
-  //   status: jupjupListStatus,
-  //   error: jupjupListError,
-  //   refetch,
-  // } = useInfiniteQuery({
-  //   queryKey: ["jupjupList"],
-  //   queryFn: async ({ pageParam = 0 }) => {
-  //     const response = await readPeedApi(searchValue, pageParam, size);
-  //     return response;
-  //   },
-  //   getNextPageParam: (lastPage, allPages) => {
-  //     return lastPage.length === size ? allPages.length : undefined;
-  //   },
-  //   initialPageParam: 0,
-  // });
+  const {
+    data: FeedList,
+    fetchNextPage: FeedListFetchNextPage,
+    hasNextPage: FeedListHasNextPage,
+    status: FeedListStatus,
+    error: FeedListError,
+    refetch,
+    isLoading
+  } = useInfiniteQuery({
+    queryKey: ["getFeedList"],
+    queryFn: async ({ pageParam = 0 }) => {
+      const response = await readPeedApi(searchValue, pageParam, size);
+      return response;
+    },
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage.length === size ? allPages.length : undefined;
+    },
+    initialPageParam: 0,
+  });
 
-  // useEffect(() => {
-  //   if (isView && jupjupListHasNextPage) {
-  //     jupjupListFetchNextPage();
-  //   }
-  // }, [isView, jupjupListHasNextPage, jupjupListFetchNextPage, jupjupList]);
+  useEffect(() => {
+    if (isView && FeedListHasNextPage) {
+      FeedListFetchNextPage();
+    }
+  }, [isView, FeedListHasNextPage, FeedListFetchNextPage, FeedList]);
+
+  console.log('data', FeedList?.pages);
 
   return (
     <div className={s.feedList}>
       {isLoading && <FeedSkeleton />}
-      {data &&
+      {FeedList &&
         <div>
-          {data?.map((item: any, index: any) => (
-            <div key={index}>
-              <Feed
-                data={item}
-                isBookmark={bookmarkedArray?.includes(item.id)}
-                className={'isMain'}
-              />
-            </div>
+          {FeedList?.pages?.map((item: any, index: any) => (
+            <React.Fragment key={index}>
+              {item.map((feed: any, idx: any) => (
+                <Feed key={idx} data={feed} isBookmark={bookmarkedArray?.includes(feed.id)} />
+              ))}
+            </React.Fragment>
           ))}
         </div>
       }
+      <div ref={ref} style={{ height: '20px' }}></div>
     </div>
   );
 };
