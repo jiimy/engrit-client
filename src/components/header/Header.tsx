@@ -1,17 +1,12 @@
 'use client';
-import React, { useRef, useState } from 'react';
-import className from 'classnames';
-import s from './header.module.scss';
-import classNames from 'classnames';
-import { BookmarkLine, Close, Delete, LeftArrow20, More } from '@/components/images';
+import { Close, Delete, LeftArrow20 } from '@/components/images';
 import { usePathname } from 'next/navigation';
-import { useOutOfClick } from '@/hooks/useOutOfClick';
-import ShareModal from '../portalModal/shareModal/ShareModal';
-import DropDown from '../dropDown/DropDown';
+import React, { useRef } from 'react';
+import s from './header.module.scss';
 
 type headerType = {
   isScroll?: boolean;
-  children?: string;
+  children?: React.ReactNode;
   isBack?: boolean;
 } & React.HtmlHTMLAttributes<HTMLHtmlElement>
 
@@ -45,19 +40,14 @@ const Header = ({ children, isScroll = false, isBack }: headerType) => {
           </div>
         }
         {children}
-        {
+        {/* {
           currentPath.includes('detail') &&
           <>
-            <span className='absolute flex gap-12 right-16'>
-              <span className='cursor-pointer w-28 h-28'>
-                <BookmarkLine />
-              </span>
-              <DropDown />
-            </span>
+            
           </>
-        }
+        } */}
         {
-          currentPath.includes('edit') &&
+          currentPath.includes('edit') && currentPath.includes('feed') && 
           <>
             <span className='absolute right-16'>
               <span className='cursor-pointer w-28 h-28'>

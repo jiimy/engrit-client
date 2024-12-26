@@ -1,9 +1,6 @@
 import { createClient } from "@/util/supabase/server";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
-// import { redirect } from "next/navigation";
 
 export async function POST(request: Request) {
   try {
@@ -15,20 +12,26 @@ export async function POST(request: Request) {
     const session = await supabase.auth.getUser();
     const uploader = session.data?.user?.email;
 
-    const { youtube_link } = await request.json();
+    const { youtube_link, tag } = await request.json();
     if (!youtube_link) {
       throw new Error("youtube_link is required");
     }
-
+    
     const { data, error } = await supabase
       .from("youtube")
-      .insert([{ youtube_link, uploader }]);
+      .insert([{ youtube_link, uploader, tag }]);
 
-    // return NextResponse.redirect(`${origin}${next}`);
-    revalidatePath("/");
-    redirect(`/`);
+    if (error) {
+      console.error("Supabase Error:", error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
     return NextResponse.json({ message: "Post created successfully", data });
-  } catch (error) {
-    return NextResponse.json({ error: request }, { status: 500 });
+  } catch (error: any) {
+    console.error("Server Error:", error.message || error);
+    return NextResponse.json(
+      { error: error.message || error },
+      { status: 500 }
+    );
   }
 }

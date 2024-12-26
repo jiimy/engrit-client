@@ -9,6 +9,10 @@ import s from './detail.module.scss';
 import YoutubeData from '@/components/youtubeVideo/YoutubeData';
 import YoutubeScript from '@/components/youtubeVideo/YoutubeScript';
 import PageAction from '@/components/pageAction/PageAction';
+import { useQuery } from '@tanstack/react-query';
+import { getFeedIDApi } from '@/api/board';
+import YoutubeTag from '@/components/youtubeTag/YoutubeTag';
+import Loading from '@/components/loading/Loading';
 
 // NOTE: isViewing: number 가 필요할수도있음.
 const DetailPage = () => {
@@ -20,9 +24,14 @@ const DetailPage = () => {
 
   const videoIndex = parseInt(params.id);
 
+  const { data, isSuccess, isLoading } = useQuery({
+    queryKey: ['feedId', videoIndex],
+    queryFn: () => getFeedIDApi(videoIndex),
+  })
+
   useEffect(() => {
     const fetchData = async () => {
-      const trans = await fetchTranscript(videoData[videoIndex]?.videoId);
+      const trans = await fetchTranscript(data[0]?.youtube_link);
       setScript(trans);
     };
     fetchData();
@@ -34,11 +43,17 @@ const DetailPage = () => {
 
   return (
     <div className={s.detail_page}>
-      <YoutubeVideo videoId={videoData[videoIndex]?.videoId} onTimeUpdate={handleTimeUpdate} />
-      <div className='flex flex-col overflow-hidden'>
-        <YoutubeData videoId={videoData[videoIndex]?.videoId} />
-        <YoutubeScript videoTime={videoTime} videoId={videoData[videoIndex]?.videoId} />
-      </div>
+      {isSuccess &&
+        <>
+          <YoutubeVideo videoId={data[0]?.youtube_link} onTimeUpdate={handleTimeUpdate} />
+          <div className='flex flex-col overflow-hidden'>
+            <YoutubeData videoId={data[0]?.youtube_link} />
+            <YoutubeTag value={data[0]?.tag} disabled className={s.edit_textarea} />
+            <YoutubeScript videoTime={videoTime} videoId={data[0]?.youtube_link} />
+          </div>
+        </>
+      }
+      {isLoading && <Loading />}
     </div>
   );
 };

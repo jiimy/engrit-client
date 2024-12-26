@@ -1,16 +1,23 @@
 'use client';
+import YoutubeTag from '@/components/youtubeTag/YoutubeTag';
 import YoutubeData from '@/components/youtubeVideo/YoutubeData';
 import YoutubeScript from '@/components/youtubeVideo/YoutubeScript';
 import YoutubeVideo from '@/components/youtubeVideo/YoutubeVideo';
-import { useLayoutContext } from '@/context/LayoutContext';
+import { layoutStore } from '@/store/layoutStore';
 import { useEffect, useState } from 'react';
 import s from './upload.module.scss';
 
 const UploadPage = () => {
-  const { setMenuState, setText } = useLayoutContext();
+  const { setMenuState, setText, setTag } = layoutStore((state) => ({
+    setMenuState: state.setMenuState,
+    setText: state.setText,
+    setTag: state.setTag
+  }));
   const [inputText, setInputText] = useState<string>("");
   const [videoId, setViedoId] = useState<string>("");
   const [videoTime, setVideoTime] = useState(0);
+  const [videoTag, setVideoTag] = useState([]);
+  const [videoTagCount, setVideoTagCount] = useState(0);
 
   useEffect(() => {
     if (videoId != '') {
@@ -43,6 +50,7 @@ const UploadPage = () => {
         <>
           <YoutubeVideo videoId={videoId} onTimeUpdate={handleTimeUpdate} />
           <YoutubeData videoId={videoId} />
+          <YoutubeTag />
           <YoutubeScript videoTime={videoTime} videoId={videoId} viewLength={1} />
         </>
       }

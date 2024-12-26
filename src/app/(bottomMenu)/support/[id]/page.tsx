@@ -1,14 +1,14 @@
 'use client';
 
 import { getInquiriesID } from '@/api/inquiries';
-import { useLayoutContext } from '@/context/LayoutContext';
+import { layoutStore } from '@/store/layoutStore';
 import { dayformatTime } from '@/util/day';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import s from '../support.module.scss';
 
 const SupportDetail = () => {
-  const { setText } = useLayoutContext();
+  const setText = layoutStore((state) => state.setText);
   const params = useParams<{ id: string }>();
   const inquiryId = Number(params?.id);
 
@@ -24,13 +24,7 @@ const SupportDetail = () => {
     } else {
       setText('문의하기')
     }
-
   }
-  // useEffect(() => {
-  // }, [data])
-
-  console.log('dta: ', data);
-  // <pre>{JSON.stringify(data, null, 2)}</pre>
 
   return (
     <div>
@@ -41,11 +35,14 @@ const SupportDetail = () => {
             <p>{data[0]?.content_text}</p>
             <div className={s.date}>{dayformatTime(data[0]?.inquiried_at)}</div>
           </div>
-          <div className={s.response}>
-            <div className={s.title}>답변</div>
-            <p>{data[0]?.response_text}</p>
-            <div className={s.date}>{dayformatTime(data[0]?.responsed_at)}</div>
-          </div>
+          {
+            data[0]?.response_text &&
+            <div className={s.response}>
+              <div className={s.title}>답변</div>
+              <p>{data[0]?.response_text}</p>
+              <div className={s.date}>{dayformatTime(data[0]?.responsed_at)}</div>
+            </div>
+          }
         </>
       }
     </div>

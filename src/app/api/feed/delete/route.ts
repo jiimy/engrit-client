@@ -12,8 +12,6 @@ export async function DELETE(request: Request) {
     if (!id) {
       throw new Error("id is required");
     }
-    console.log('supabse 에서 받은 id', id);
-
     const { data, error } = await supabase
       .from("youtube")
       .delete()

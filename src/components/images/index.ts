@@ -6,6 +6,7 @@ import User from "./User";
 import Close from "./Close";
 import More from "./More";
 import Delete from "./Delete";
+import Eidt from "./Edit";
 
 export {
   BookmarkFill,
@@ -16,4 +17,5 @@ export {
   Close,
   More,
   Delete,
+  Eidt,
 };

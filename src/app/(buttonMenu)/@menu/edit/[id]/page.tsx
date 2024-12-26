@@ -1,20 +1,38 @@
 'use client';
+import { editFeedIDApi } from '@/api/board';
 import BottomMenu from '@/components/bottomMenu/BottomMenu';
-import { useLayoutContext } from '@/context/LayoutContext';
+import { layoutStore } from '@/store/layoutStore';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useParams, useRouter } from 'next/navigation';
 
 const Bottom = () => {
-  const { menuState } = useLayoutContext();
+  const params = useParams<{ id: string }>();
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const tag = layoutStore((state) => state.tag);
+  const id = Number(params?.id);
 
-  const handleClick = () => {
-    console.log('cc', menuState)
-    // menuState 라는 데이터 가져와서 업로드 하는 api hook 넣기
+  const inquiryEditMutation = useMutation({
+    mutationFn: (tag: object) => editFeedIDApi(tag, id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['getInquiriesList'] })
+      router.back();
+    }
+  })
+
+  const comClick = () => {
+    inquiryEditMutation.mutate(tag)
   };
+
+  const delClick = () => {
+
+  }
 
   return (
     <>
       <BottomMenu>
-        <button onClick={handleClick}>삭제</button>
-        <button onClick={handleClick}>완료</button>
+        <button onClick={delClick}>삭제</button>
+        <button onClick={comClick}>완료</button>
       </BottomMenu>
     </>
   );

@@ -1,3 +1,4 @@
+'use client';
 import Header from "@/components/header/Header";
 
 export default function RootLayout({
@@ -8,7 +9,7 @@ export default function RootLayout({
 
   return (
     <>
-      <Header isBack>콘텐츠 수정하기</Header>
+      <Header isBack>콘텐츠 수정하기<span>삭제</span></Header>
       <div className="content">
         {children}
       </div>

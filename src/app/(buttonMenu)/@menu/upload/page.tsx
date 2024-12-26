@@ -1,23 +1,30 @@
 'use client';
 import { postPeed } from '@/api/board';
 import BottomMenu from '@/components/bottomMenu/BottomMenu';
-import { useLayoutContext } from '@/context/LayoutContext';
+import { layoutStore } from '@/store/layoutStore';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 
 const Bottom = () => {
   const queryClient = useQueryClient();
-  const { menuState, text } = useLayoutContext();
+  const router = useRouter();
+  const { menuState, text, tag } = layoutStore((state) => ({
+    menuState: state.menuState,
+    text: state.text,
+    tag: state.tag
+  }));
 
-  const deleteFeedMutation = useMutation({
-    mutationFn: (id: string) => postPeed(id),
+  const uploadeFeedMutation = useMutation({
+    mutationFn: ({ text, tag }: { text: string; tag: any }) => postPeed(text, tag),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['getPeedList'] })
+      queryClient.invalidateQueries({ queryKey: ['getFeedList'] })
+      // redirect('/');
+      router.back();
     }
   })
 
   const handleClick = () => {
-    // menuState 라는 데이터 가져와서 업로드 하는 api hook 넣기
-    deleteFeedMutation.mutate(text);
+    uploadeFeedMutation.mutate({ text, tag });
   };
 
   return (
