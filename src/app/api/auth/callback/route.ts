@@ -19,8 +19,8 @@ export async function GET(request: Request) {
         return NextResponse.redirect(`${origin}${next}`);
       } else {
         // console.log("배포환경");
-        // return NextResponse.redirect(`https://${forwardedHost ?? origin}`);
-        return NextResponse.redirect(`https://engrit-client.vercel.app`);
+        return NextResponse.redirect(`https://${forwardedHost ?? origin}`);
+        // return NextResponse.redirect(`https://engrit-client.vercel.app`);
       }
     }
   }

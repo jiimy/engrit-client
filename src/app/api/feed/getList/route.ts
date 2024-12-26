@@ -11,17 +11,19 @@ export async function GET(request: Request) {
     const page = Number(searchParams.get("page") || 1);
     const pageSize = Number(searchParams.get("size") || 10);
 
-    const startIndex = (page - 1) * pageSize;
+    const startIndex = page == 0 ? 0 : (page - 1) * pageSize;
     const endIndex = startIndex + pageSize - 1;
 
-    // console.log("dd", page, pageSize, startIndex, endIndex);
+    console.log("route: ", page, pageSize, startIndex, endIndex);
 
     const { data, error } = await supabase
       .from("youtube")
       .select("*", { count: "exact" })
       .order("id", { ascending: true })
-      .range(startIndex, endIndex);
-    // .range(0, 10);
+      // .range(startIndex, endIndex);
+      .range(0, 10);
+
+    console.log("route data: ", data);
 
     if (error) {
       throw error;

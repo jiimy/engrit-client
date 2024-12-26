@@ -15,9 +15,10 @@ const FeedList = () => {
   const [ref, isView] = useInView();
   const size = 5; // 한 페이지당 아이템 수
   const [searchValue, setSearchValue] = useState("");
-  // const { data, isLoading } = useQuery({
+
+  // const { data: FeedList, isLoading } = useQuery({
   //   queryKey: ["getFeedList"],
-  //   queryFn: () => readPeedApi('', ),
+  //   queryFn: () => readPeedApi('', 0, size),
   // });
 
   const { bookmarkedArray } = useMyBookMarked();
@@ -32,12 +33,13 @@ const FeedList = () => {
     isLoading
   } = useInfiniteQuery({
     queryKey: ["getFeedList"],
-    queryFn: async ({ pageParam = 1 }) => {
+    queryFn: async ({ pageParam = 0 }) => {
       const response = await readPeedApi(searchValue, pageParam, size);
       return response;
     },
     getNextPageParam: (lastPage, allPages) => {
-      return lastPage.length === size ? allPages.length : undefined;
+      // console.log('aa', allPages);
+      return lastPage?.length === size ? allPages.length : undefined;
     },
     initialPageParam: 0,
   });
@@ -48,7 +50,7 @@ const FeedList = () => {
     }
   }, [isView, FeedListHasNextPage, FeedListFetchNextPage, FeedList]);
 
-  console.log('data', FeedList?.pages);
+  console.log('data', FeedList, FeedList?.pages);
 
   return (
     <div className={s.feedList}>
@@ -57,7 +59,7 @@ const FeedList = () => {
         <div>
           {FeedList?.pages?.map((item: any, index: any) => (
             <React.Fragment key={index}>
-              {item.map((feed: any, idx: any) => (
+              {item?.map((feed: any, idx: any) => (
                 <Feed key={idx} data={feed} isBookmark={bookmarkedArray?.includes(feed.id)} />
               ))}
             </React.Fragment>
