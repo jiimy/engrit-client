@@ -46,7 +46,7 @@ const DetailPage = () => {
       {isSuccess &&
         <>
           <YoutubeVideo videoId={data[0]?.youtube_link} onTimeUpdate={handleTimeUpdate} />
-          <div className='flex flex-col overflow-hidden'>
+          <div className='flex flex-col pt-16 pb-20 pl-20 pr-20 overflow-hidden'>
             <YoutubeData videoId={data[0]?.youtube_link} />
             <YoutubeTag value={data[0]?.tag} disabled className={s.edit_textarea} />
             <YoutubeScript videoTime={videoTime} videoId={data[0]?.youtube_link} />

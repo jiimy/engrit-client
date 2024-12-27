@@ -66,8 +66,24 @@ const YoutubeVideo = ({ videoId, onTimeUpdate }: { videoId: string; onTimeUpdate
   }, []);
 
   const playTimeConvert = (time: any) => {
-    const result = time?.replace('PT', '').replace('M', ':').replace('S', '');
-    return result;
+    // Match ISO 8601 duration format (PT#H#M#S)
+    const match = time.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+
+    if (!match) return "Invalid format";
+
+    const hours = parseInt(match[1] || "0", 10);
+    const minutes = parseInt(match[2] || "0", 10);
+    const seconds = parseInt(match[3] || "0", 10);
+
+    const timeString = [
+      hours > 0 ? hours : null,
+      hours > 0 || minutes > 0 ? String(minutes).padStart(2, "0") : "0",
+      String(seconds).padStart(2, "0")
+    ]
+      .filter((part) => part !== null)
+      .join(":");
+
+    return timeString;
   }
 
   return (

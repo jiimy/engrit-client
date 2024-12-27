@@ -12,6 +12,7 @@ import { Delete } from '../images';
 import { Modal } from '../portalModal/Modal';
 import ConfirmModal from '../portalModal/confirmModal/ConfirmModal';
 import { redirect, useRouter } from 'next/navigation';
+import classNames from 'classnames';
 
 const SupportList = () => {
   const router = useRouter()
@@ -38,7 +39,9 @@ const SupportList = () => {
       {isLoading && <Loading />}
       {data?.map((item: any, index: any) => (
         <Link key={index} href={`/support/${item.id}`}>
-          <span className={s.res}>{item.response_text ? '답변완료' : '답변준비중'}</span>
+          <span className={classNames([s.res], {
+            [s.is_answered]: item.response_text,
+          })}>{item.response_text ? '답변완료' : '답변준비중'}</span>
           {
             !item.response_text &&
             <div className={s.icon}>

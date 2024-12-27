@@ -18,7 +18,9 @@ const SupportPage = () => {
               문의하기
             </Link>
           </Button>
-          또는
+          <span>
+            또는
+          </span>
           <div className={s.input}>
             <input type="text" placeholder="질문을 입력해주세요" />
             <button>아이콘</button>

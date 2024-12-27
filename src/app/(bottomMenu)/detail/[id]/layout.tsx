@@ -14,9 +14,9 @@ export default function RootLayout({
   return (
     <>
       <Header isBack>
-        <span className='absolute flex gap-12 right-16'>
+        <span className='absolute flex items-center gap-12 right-16'>
           <Bookmark />
-          <DropDown />
+          <DropDown className="mt-0"/>
         </span>
       </Header>
       <div className="content">

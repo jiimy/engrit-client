@@ -13,7 +13,7 @@ import React from 'react';
 
 const FeedList = () => {
   const [ref, isView] = useInView();
-  const size = 5; // 한 페이지당 아이템 수
+  const size = 2; // 한 페이지당 아이템 수
   const [searchValue, setSearchValue] = useState("");
 
   // const { data: FeedList, isLoading } = useQuery({
@@ -30,42 +30,55 @@ const FeedList = () => {
     status: FeedListStatus,
     error: FeedListError,
     refetch,
-    isLoading
+    isLoading,
+    isFetchingNextPage
   } = useInfiniteQuery({
     queryKey: ["getFeedList"],
     queryFn: async ({ pageParam = 0 }) => {
-      const response = await readPeedApi(searchValue, pageParam, size);
-      return response;
+      // const response = await readPeedApi(searchValue, pageParam, size);
+      // return response;
+      const response = await readPeedApi("", pageParam, size);
+      return response.map((item: any) => ({
+        tag: item.tag,
+        youtube_link: item.youtube_link,
+        id: item.id
+      }));
     },
+  
+    staleTime: 1000 * 60 * 1,
     getNextPageParam: (lastPage, allPages) => {
       // console.log('aa', allPages);
       return lastPage?.length === size ? allPages.length : undefined;
     },
     initialPageParam: 0,
+
   });
 
   useEffect(() => {
-    if (isView && FeedListHasNextPage) {
+    if (isView && FeedListHasNextPage && !isFetchingNextPage) {
       FeedListFetchNextPage();
     }
-  }, [isView, FeedListHasNextPage, FeedListFetchNextPage, FeedList]);
+  }, [isView, FeedListHasNextPage, FeedListFetchNextPage, isFetchingNextPage]);
 
-  console.log('data', FeedList, FeedList?.pages);
+  // console.log('data', FeedList, FeedList?.pages);
+  const flattenedData = FeedList?.pages.flat() || [];
+
+  console.log('flattenedData', flattenedData && flattenedData);
 
   return (
     <div className={s.feedList}>
-      {isLoading && <FeedSkeleton />}
-      {FeedList &&
+      {(isLoading || isFetchingNextPage) && <FeedSkeleton />}
+      {flattenedData.length > 0 && (
         <div>
-          {FeedList?.pages?.map((item: any, index: any) => (
-            <React.Fragment key={index}>
-              {item?.map((feed: any, idx: any) => (
-                <Feed key={idx} data={feed} isBookmark={bookmarkedArray?.includes(feed.id)} />
-              ))}
-            </React.Fragment>
+          {flattenedData.map((feed: any, idx: any) => (
+            <Feed
+              key={idx}
+              data={feed}
+              isBookmark={bookmarkedArray?.includes(feed.id)}
+            />
           ))}
         </div>
-      }
+      )}
       <div ref={ref} style={{ height: '20px' }}></div>
     </div>
   );

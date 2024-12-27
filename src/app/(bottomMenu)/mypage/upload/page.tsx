@@ -32,8 +32,8 @@ const MyPageUpload = () => {
         {isLoading ? <Loading /> :
           <>
             {sortedData?.map((item: any, index: any) => (
-              <li key={index} className={s.item}>
-                <Link href={`/detail/${item.id}`}>
+              <li key={index}>
+                <Link href={`/detail/${item.id}`} className={s.item}>
                   <div className={s.video}>
                     <YoutubeVideo videoId={item.youtube_link} />
                   </div>
