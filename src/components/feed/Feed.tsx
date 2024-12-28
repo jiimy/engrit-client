@@ -5,10 +5,10 @@ import Link from 'next/link';
 import { forwardRef, lazy, Ref, Suspense, useState } from 'react';
 import PageAction from '../pageAction/PageAction';
 import YoutubeData from '../youtubeVideo/YoutubeData';
-import YoutubeScript from '../youtubeVideo/YoutubeScript';
 import YoutubeVideo from '../youtubeVideo/YoutubeVideo';
 import Loading from '../loading/Loading';
-// const YoutubeScript = lazy(() => import('../youtubeVideo/YoutubeScript'));
+// import YoutubeScript from '../youtubeVideo/YoutubeScript';
+const YoutubeScript = lazy(() => import('../youtubeVideo/YoutubeScript'));
 
 type feedType = {
   data?: any;
@@ -37,7 +37,9 @@ const Feed = forwardRef(({
             isBookmark={isBookmark}
           />
         </YoutubeData>
-        <YoutubeScript videoTime={videoTime} videoId={data.youtube_link} viewLength={1} className={className} />
+        <Suspense fallback={<div>로딩 중...</div>}>
+          <YoutubeScript videoTime={videoTime} videoId={data.youtube_link} viewLength={1} className={className} />
+        </Suspense>
         <div className="text-[#40A9FF]">{data?.tag?.replace(/(?!^)(#)/g, ' $1')}</div>
       </Link>
     </div>

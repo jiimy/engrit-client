@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useTransition } from 'react';
 import { fetchTranscript } from '@/api/youtube';
 import TranslateWord, { cleanText } from '@/util/TranslateWord';
 import s from './youtubevideo.module.scss';
@@ -16,16 +16,26 @@ const YoutubeScript = ({ videoId, videoTime, viewLength = 0, className }: Props)
   const [script, setScript] = useState<any>();
   const [isLoading, setIsLoading] = useState(true);
   const activeRef = useRef<HTMLDivElement | null>(null);
+  const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    const fetchData = async () => {
-      // setIsLoading(true);
+    startTransition(async () => {
       const trans = await fetchTranscript(videoId);
-      setScript(trans);
-      // setIsLoading(false);
-    };
-    fetchData();
-  }, [videoId]);
+      startTransition(() => {
+        setScript(trans);
+      })
+    });
+  }, [videoId])
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setIsLoading(true);
+  //     const trans = await fetchTranscript(videoId);
+  //     setScript(trans);
+  //     setIsLoading(false);
+  //   };
+  //   fetchData();
+  // }, [videoId]);
 
   useEffect(() => {
     if (activeRef.current && viewLength === 0) {
@@ -50,7 +60,7 @@ const YoutubeScript = ({ videoId, videoTime, viewLength = 0, className }: Props)
 
   return (
     <div className={classNames(s.script_wrap, className)}>
-      {/* <div className='relative '><Loading /></div> */}
+      {isPending && <div className='relative '><Loading /></div>}
       {
         (processedData?.map((item: any, index: number) => {
           const isViewing = item.start <= videoTime && videoTime < item.end || videoTime === 0 && index === 0;
