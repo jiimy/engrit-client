@@ -67,7 +67,7 @@ const YoutubeVideo = ({ videoId, onTimeUpdate }: { videoId: string; onTimeUpdate
 
   const playTimeConvert = (time: any) => {
     // Match ISO 8601 duration format (PT#H#M#S)
-    const match = time.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+    const match = time?.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
 
     if (!match) return "Invalid format";
 
