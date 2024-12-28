@@ -1,5 +1,6 @@
 import { getBookmarkFeedApi, readPeedApi } from "@/api/board";
 import { useQuery } from "@tanstack/react-query";
+import { redirect } from "next/navigation";
 
 export function useMyBookMarked() {
   const { data: bookmarked, isSuccess } = useQuery({

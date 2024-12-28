@@ -25,8 +25,8 @@ const Index = () => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'kakao',
       // options: { redirectTo: `http://localhost:3000/api/auth/callback` },
-      // options: { redirectTo: location.origin + "/api/auth/callback", },
-      options: { redirectTo: location.origin + "/auth/callback", },
+      options: { redirectTo: location.origin + "/api/auth/callback", },
+      // options: { redirectTo: location.origin + "/auth/callback", },
     })
   };
 
@@ -34,6 +34,9 @@ const Index = () => {
   return (
     <>
       <div className={s.login_page}>
+        <div className={s.logo}>
+          <Image src="/image/logo.svg" alt="logo" width={100} height={32} />
+        </div>
         <Button
           onClick={signInWithKakao}
           className={`${s.login_btn} h-38`}
@@ -41,9 +44,6 @@ const Index = () => {
         >
           카카오 로그인
         </Button>
-        <div className={s.logo}>
-          <Image src="/image/logo.svg" alt="logo" width={100} height={32} />
-        </div>
       </div>
     </>
   );

@@ -131,8 +131,14 @@ export async function getBookmarkFeedApi() {
     if (res.status === 200) {
       return res.data.data;
     }
+    if(res.status === 401) {
+      console.log('401');
+    }
   } catch (error) {
     console.error("Error fetching feed data:", error);
+    if (axios.isAxiosError(error) && error.response?.status === 401) {
+      redirect('/login');
+    }
     return [];
   }
 }

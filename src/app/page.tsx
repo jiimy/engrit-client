@@ -19,7 +19,7 @@ export default function Home() {
   useEffect(() => {
     const user = async () => {
       const session = await supabase.auth.getSession();
-      // console.log('session', session);
+      console.log('session', session);
       setUserEmail(session.data.session?.user?.user_metadata?.email);
     }
     user();

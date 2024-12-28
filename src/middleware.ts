@@ -24,7 +24,7 @@ export async function middleware(request: NextRequest) {
       "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
     );
   }
-  
+
   try {
     // Create an unmodified response
     let response = NextResponse.next({
@@ -63,13 +63,22 @@ export async function middleware(request: NextRequest) {
     // console.log("request", request.nextUrl.pathname);
     // console.log("user", user);
     // protected routes
-    if (request.nextUrl.pathname.startsWith("/mypage") && user?.data.user === null) {
+    if (
+      request.nextUrl.pathname.startsWith("/mypage") &&
+      user?.data?.user === null
+    ) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
-    if (request.nextUrl.pathname.startsWith("/bookmark") && user?.data.user === null) {
+    if (
+      request.nextUrl.pathname.startsWith("/bookmark") &&
+      user?.data?.user === null
+    ) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
-    if (request.nextUrl.pathname.startsWith("/upload") && user?.data.user === null) {
+    if (
+      request.nextUrl.pathname.startsWith("/upload") &&
+      user?.data?.user === null
+    ) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
 
@@ -87,5 +96,10 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/api/:path*", "/mypage/:path*"],
+  matcher: [
+    "/api/:path*",
+    "/mypage/:path*",
+    "/bookmark/:path*",
+    "/upload/:path*",
+  ],
 };

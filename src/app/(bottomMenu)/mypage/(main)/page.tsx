@@ -6,14 +6,21 @@ import { useQuery } from '@tanstack/react-query';
 import { redirect, useRouter } from 'next/navigation';
 import React, { useEffect } from 'react';
 import s from './mypage.module.scss';
+import { createClient } from '@/util/supabase/client';
 
 const MyPage = () => {
   const router = useRouter();
+  const supabase = createClient();
 
   const { data } = useQuery({
     queryFn: () => myYoutubeUplaodApi(),
     queryKey: ['myYoutubeUpload']
   });
+
+  const logout = async () => {
+    const { error } = await supabase.auth.signOut();
+    alert('로그아웃 되었습니다');
+  };
 
   return (
     <>
@@ -23,7 +30,7 @@ const MyPage = () => {
           <input type="text" value={''} /><button>usrud</button>
         </div>
         <div className="input_wrap">
-          <input type="text" /><button>usrud</button>
+          <input type="text" /><button onClick={logout}>로그아웃</button>
         </div>
       </div>
       <div>

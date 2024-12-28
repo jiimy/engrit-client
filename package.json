@@ -45,6 +45,7 @@
     "zustand": "^5.0.0-rc.2"
   },
   "devDependencies": {
+    "@babel/preset-react": "^7.26.3",
     "@types/lodash": "^4.17.10",
     "@types/node": "^20",
     "@types/react": "^18",
