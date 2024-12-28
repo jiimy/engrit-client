@@ -5,13 +5,15 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { BookmarkFill, BookmarkLine } from '../images';
+import { UserStore } from '@/store/user';
 
 const Bookmark = ({ isBookmark, sendId }: { isBookmark?: boolean; sendId?: number }) => {
   const params = useParams<{ id: string }>();
   const queryClient = useQueryClient();
-
+  const { email } = UserStore();
   // const currentId = parseInt(params.id) || sendId;
   const currentId = sendId ? sendId : parseInt(params.id);
+  console.log('bookmark eamil', email);
 
   const { data: bookmarkData, isSuccess } = useQuery({
     queryKey: ['bookmarkId', currentId],
