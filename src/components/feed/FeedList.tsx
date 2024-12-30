@@ -35,8 +35,6 @@ const FeedList = () => {
   } = useInfiniteQuery({
     queryKey: ["getFeedList"],
     queryFn: async ({ pageParam = 0 }) => {
-      // const response = await readPeedApi(searchValue, pageParam, size);
-      // return response;
       const response = await readPeedApi("", pageParam, size);
       return response.map((item: any) => ({
         tag: item.tag,
@@ -44,14 +42,12 @@ const FeedList = () => {
         id: item.id
       }));
     },
-  
     staleTime: 1000 * 60 * 1,
+    initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) => {
       // console.log('aa', allPages);
       return lastPage?.length === size ? allPages.length : undefined;
     },
-    initialPageParam: 0,
-
   });
 
   useEffect(() => {
@@ -60,7 +56,7 @@ const FeedList = () => {
     }
   }, [isView, FeedListHasNextPage, FeedListFetchNextPage, isFetchingNextPage]);
 
-  // console.log('data', FeedList, FeedList?.pages);
+  console.log('data', FeedList, FeedList?.pages);
   const flattenedData = FeedList?.pages.flat() || [];
 
   console.log('flattenedData', flattenedData && flattenedData);
