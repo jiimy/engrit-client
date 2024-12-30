@@ -1,4 +1,3 @@
-import { getBookmarkFeedApi, readPeedApi } from "@/api/board";
 import { youtubeInfoApi } from "@/api/youtube";
 import { useQuery } from "@tanstack/react-query";
 

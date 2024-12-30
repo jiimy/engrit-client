@@ -1,11 +1,11 @@
-import { getBookmarkFeedApi, readPeedApi } from "@/api/board";
+import { getBookmarkFeedApi } from "@/api/board";
 import { useQuery } from "@tanstack/react-query";
-import { redirect } from "next/navigation";
 
-export function useMyBookMarked() {
+export function useMyBookMarked(email: string) {
   const { data: bookmarked, isSuccess } = useQuery({
     queryFn: () => getBookmarkFeedApi(),
     queryKey: ["bookmark"],
+    enabled: Boolean(email),
   });
 
   // NOTE: 보완필요

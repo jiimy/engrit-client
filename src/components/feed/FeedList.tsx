@@ -1,17 +1,17 @@
 'use client'
-import { getBookmarkFeedApi, readPeedApi } from '@/api/board';
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
-import Loading from '../loading/Loading';
-import Feed from './Feed';
-import s from './feed.module.scss';
+import { readPeedApi } from '@/api/board';
 import { useMyBookMarked } from '@/hooks/useMyBookMarked';
-import FeedSkeleton from '../loading/skeleton/FeedSkeleton';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useInView } from "react-intersection-observer";
-import React from 'react';
+import FeedSkeleton from '../loading/skeleton/FeedSkeleton';
+import Feed from './Feed';
+import s from './feed.module.scss';
+import { UserStore } from '@/store/user';
 // import { isMobile } from 'react-device-detect';
 
 const FeedList = () => {
+  const { email } = UserStore();
   const [ref, isView] = useInView();
   const size = 2; // 한 페이지당 아이템 수
   const [searchValue, setSearchValue] = useState("");
@@ -21,7 +21,7 @@ const FeedList = () => {
   //   queryFn: () => readPeedApi('', 0, size),
   // });
 
-  const { bookmarkedArray } = useMyBookMarked();
+  const { bookmarkedArray } = useMyBookMarked(email);
 
   const {
     data: FeedList,

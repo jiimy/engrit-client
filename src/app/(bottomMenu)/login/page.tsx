@@ -4,31 +4,30 @@ import Button from "@/components/button/Button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import s from './loginPage.module.scss';
-import { useEffect, useState } from "react";
 import { createClient } from "@/util/supabase/client";
 
 const Index = () => {
   const router = useRouter();
 
-  const click = () => {
-    router.push(
-      `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=90dfb6439cebafe3e61ec13e051adbe6&redirect_uri=http://localhost:3000/oauth/kakao`
-    );
-  };
-
   const signInWithKakao = async () => {
     const supabase = createClient();
-    // await supabase.auth.signInWithOAuth({
-    //   provider: 'kakao',
-    //   // options: { redirectTo: `http://localhost:3000/api/auth/callback` },
-    // });
+    const redirectUrl = `${window.location.origin}/auth/callback`;
+
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider: 'kakao',
-      // options: { redirectTo: `http://localhost:3000/api/auth/callback` },
-      options: { redirectTo: location.origin + "/auth/callback", },
-    })
-  };
+      options: {
+        redirectTo: process.env.NEXT_PUBLIC_VERCEL_URL
+          ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}/auth/callback`
+          : 'http://localhost:3000/auth/callback'
+      },
+    });
 
+    if (error) {
+      console.error("OAuth 로그인 에러:", error);
+    } else {
+      console.log("로그인 성공:", data);
+    }
+  };
 
   return (
     <>

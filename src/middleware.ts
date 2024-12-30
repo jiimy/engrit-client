@@ -81,6 +81,12 @@ export async function middleware(request: NextRequest) {
     ) {
       return NextResponse.redirect(new URL("/login", request.url));
     }
+    if (
+      request.nextUrl.pathname.startsWith("/support") &&
+      user?.data?.user === null
+    ) {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
 
     return response;
   } catch (e) {
@@ -101,5 +107,6 @@ export const config = {
     "/mypage/:path*",
     "/bookmark/:path*",
     "/upload/:path*",
+    "/support/:path*",
   ],
 };
