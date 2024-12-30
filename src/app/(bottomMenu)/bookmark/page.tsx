@@ -1,9 +1,11 @@
 'use client';
 import Feed from '@/components/feed/Feed';
 import { useMyBookMarked } from '@/hooks/useMyBookMarked';
+import { UserStore } from '@/store/user';
 
 const Index = () => {
-  const { bookmarked, bookmarkedArray, isSuccess } = useMyBookMarked();
+  const { email } = UserStore();
+  const { bookmarked, bookmarkedArray, isSuccess } = useMyBookMarked(email);
 
   console.log('bookmarked', bookmarked);
 
