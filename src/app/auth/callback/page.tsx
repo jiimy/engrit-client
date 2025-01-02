@@ -12,12 +12,12 @@ export default function AuthCallback() {
     const checkSession = async () => {
       const { data, error } = await supabase.auth.getSession();
       console.log('data', data);
-      // if (error || !data.session) {
-      //   console.error("Authentication failed:", error);
-      //   router.push("/login");
-      // } else {
-      //   router.push("/"); // 로그인 후 이동할 페이지
-      // }
+      if (error || !data.session) {
+        console.error("Authentication failed:", error);
+        router.push("/login");
+      } else {
+        router.push("/"); // 로그인 후 이동할 페이지
+      }
     };
 
     checkSession();

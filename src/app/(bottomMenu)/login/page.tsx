@@ -23,12 +23,6 @@ const Index = () => {
         // redirectTo: location.origin + "/auth/callback",
         redirectTo: 'http://localhost:3000/auth/callback'
       },
-      // options: {
-      //   queryParams: {
-      //     access_type: 'offline',
-      //     prompt: 'consent',
-      //   },
-      // },
     });
 
     if (error) {
