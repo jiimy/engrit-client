@@ -6,6 +6,7 @@ import Link from "next/link";
 import s from './support.module.scss';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Search } from "@/components/images";
 
 const SupportPage = () => {
   const router = useRouter();
@@ -19,7 +20,7 @@ const SupportPage = () => {
     }
   }
 
-  const Search = (e: any) => {
+  const handleSearchKeyDown = (e: any) => {
     if (e.key === 'Enter') {
       onEnter();
     }
@@ -34,14 +35,14 @@ const SupportPage = () => {
               문의하기
             </Link>
           </Button>
-          <span>
+          <span className="flex conten-center my-10">
             또는
           </span>
           <div className={s.input}>
             <input type="text" placeholder="질문을 입력해주세요"
-              onKeyDown={Search} value={text || ''} onChange={(e: any) => setText(e.target.value)}
+              onKeyDown={handleSearchKeyDown} value={text || ''} onChange={(e: any) => setText(e.target.value)}
             />
-            <button>아이콘</button>
+            <button><Search /></button>
           </div>
         </div>
         <SupportList />

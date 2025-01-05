@@ -6,7 +6,7 @@ export async function getInquiries(
   pageParam: number,
   size: number
 ) {
-  if (searchValue) {
+  if (searchValue !== '') {
     try {
       const res = await axios.get(
         `/api/user/getInquiriesAll?search=${searchValue}&page=${pageParam}&size=${size}`

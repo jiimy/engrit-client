@@ -18,14 +18,22 @@ export async function GET(request: Request) {
     const session = await supabase.auth.getUser();
     const user_name = session?.data?.user?.email;
 
-    const { data, error } = await supabase
-      .from("inquiries")
-      .select("*", { count: "exact" })
-      .eq("user_name", user_name)
-      .or(`title.ilike.%${keyword}%,content.ilike.%${keyword}%`)
-      .range(startIndex, endIndex);
-
-    return NextResponse.json({ data }, { status: 200 });
+    if (keyword !== "") {
+      const { data, error } = await supabase
+        .from("inquiries")
+        .select("*", { count: "exact" })
+        .eq("user_name", user_name)
+        .or(`title.ilike.%${keyword}%,content.ilike.%${keyword}%`)
+        .range(startIndex, endIndex);
+      return NextResponse.json({ data }, { status: 200 });
+    } else {
+      const { data, error } = await supabase
+        .from("inquiries")
+        .select("*", { count: "exact" })
+        .eq("user_name", user_name)
+        .range(startIndex, endIndex);
+      return NextResponse.json({ data }, { status: 200 });
+    }
   } catch (error) {
     // res.status(500).json({ error: error });
     return NextResponse.json({ error }, { status: 500 });

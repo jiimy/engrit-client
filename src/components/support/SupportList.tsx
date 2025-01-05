@@ -21,7 +21,7 @@ const SupportList = () => {
   
   const { data, isLoading } = useQuery({
     queryKey: ["getInquiriesList"],
-    queryFn: () => getInquiries('', 1, 10),
+    queryFn: () => getInquiries('', 0, 10),
   });
 
   const deleteInquiryMutation = useMutation({
@@ -34,6 +34,8 @@ const SupportList = () => {
   const deleteInquiry = (id: number) => {
     deleteInquiryMutation.mutate(id);
   }
+
+  console.log('getInquiriesList', data);
 
   return (
     <div className={s.support}>

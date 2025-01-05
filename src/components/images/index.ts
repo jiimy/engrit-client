@@ -7,6 +7,7 @@ import Close from "./Close";
 import More from "./More";
 import Delete from "./Delete";
 import Eidt from "./Edit";
+import Search from "./Search";
 
 export {
   BookmarkFill,
@@ -18,4 +19,5 @@ export {
   More,
   Delete,
   Eidt,
+  Search,
 };
