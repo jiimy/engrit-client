@@ -7,13 +7,21 @@ export async function GET(request: Request) {
     const cookieStore = await cookies();
     const supabase = createClient(cookieStore);
 
+    const { searchParams } = new URL(request.url);
+    const page = Number(searchParams.get("page") || 1);
+    const pageSize = Number(searchParams.get("size") || 10);
+
+    const startIndex = page == 0 ? 0 : (page - 1) * pageSize;
+    const endIndex = startIndex + pageSize - 1;
+
     const session = await supabase.auth.getUser();
     const user_name = session?.data?.user?.email;
 
     const { data, error } = await supabase
       .from("inquiries")
-      .select("*")
-      .eq("user_name", user_name);
+      .select("*", {count: "exact"})
+      .eq("user_name", user_name)
+      .range(startIndex, endIndex);
 
     return NextResponse.json({ data }, { status: 200 });
   } catch (error) {

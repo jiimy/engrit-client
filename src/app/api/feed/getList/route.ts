@@ -16,19 +16,19 @@ export async function GET(request: Request) {
 
     console.log("route: ", page, pageSize, startIndex, endIndex);
 
-    const { data, error } = await supabase
+    const { data, count, error } = await supabase
       .from("youtube")
       .select("*", { count: "exact" })
       .order("id", { ascending: true })
-      // .range(startIndex, endIndex);
-      .range(0, 10);
+      .range(startIndex, endIndex);
+      // .range(0, 10);
 
-    console.log("route data: ", data);
+    // console.log("route data: ", data);
 
     if (error) {
       throw error;
     }
-    return NextResponse.json({ data }, { status: 200 });
+    return NextResponse.json({ data, count }, { status: 200 });
     // return NextResponse.json({ message: "Post created successfully" });
   } catch (error) {
     // res.status(500).json({ error: error });

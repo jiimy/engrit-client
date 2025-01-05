@@ -56,11 +56,8 @@ const FeedList = () => {
     }
   }, [isView, FeedListHasNextPage, FeedListFetchNextPage, isFetchingNextPage]);
 
-  console.log('data', FeedList, FeedList?.pages);
   const flattenedData = FeedList?.pages.flat() || [];
-
-  console.log('flattenedData', flattenedData && flattenedData);
-
+  
   return (
     <div className={s.feedList}>
       {(isLoading || isFetchingNextPage) && <FeedSkeleton />}

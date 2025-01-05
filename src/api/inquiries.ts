@@ -1,9 +1,15 @@
 import axios from "axios";
 
 // 문의 글 전체 불러오기
-export async function getInquiries() {
+export async function getInquiries(
+  searchValue: string,
+  pageParam: number,
+  size: number
+) {
   try {
-    const res = await axios.get("/api/user/getInquiriesAll");
+    const res = await axios.get(
+      `/api/user/getInquiriesAll?search=${searchValue}&page=${pageParam}&size=${size}`
+    );
 
     if (res.status === 200) {
       return res.data.data;

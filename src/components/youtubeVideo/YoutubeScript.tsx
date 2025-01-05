@@ -58,34 +58,41 @@ const YoutubeScript = ({ videoId, videoTime, viewLength = 0, className }: Props)
 
   const processedData = processScriptData();
 
+  console.log('ispedn', isPending);
+
   return (
-    <div className={classNames(s.script_wrap, className)}>
-      {isPending && <div className='relative '><Loading /></div>}
-      {
-        (processedData?.map((item: any, index: number) => {
-          const isViewing = item.start <= videoTime && videoTime < item.end || videoTime === 0 && index === 0;
-          return (
-            <div
-              key={index}
-              ref={isViewing ? activeRef : null}
-              className={classNames([s.script], [viewLength !== 0 && s.main], {
-                [s.is_viewing]: isViewing
-              })}
-              style={{
-                // display: (viewLength !== 0 && isViewing) ? 'block' : 'none', // 조건에 맞는 항목만 표시
-              }}
-            >
-              <p>{cleanText(item.text)}</p>
-              <p className={s.ko}>
-                <TranslateWord source={item.text} id={videoId} />
-              </p>
-              <span>
-                {item.start.toFixed(2)} ~ {item.end.toFixed(2)}
-              </span>
-            </div>
-          )
-        }))}
-    </div>
+    <>
+      {isPending ?
+        <div className={classNames(s.script_wrap, className)}>
+          {/* {isPending && <div className='relative '><Loading /></div>} */}
+          {
+            (processedData?.map((item: any, index: number) => {
+              const isViewing = item.start <= videoTime && videoTime < item.end || videoTime === 0 && index === 0;
+              return (
+                <div
+                  key={index}
+                  ref={isViewing ? activeRef : null}
+                  className={classNames([s.script], [viewLength !== 0 && s.main], {
+                    [s.is_viewing]: isViewing
+                  })}
+                  style={{
+                    // display: (viewLength !== 0 && isViewing) ? 'block' : 'none', // 조건에 맞는 항목만 표시
+                  }}
+                >
+                  <p>{cleanText(item.text)}</p>
+                  <p className={s.ko}>
+                    <TranslateWord source={item.text} id={videoId} />
+                  </p>
+                  <span>
+                    {item.start.toFixed(2)} ~ {item.end.toFixed(2)}
+                  </span>
+                </div>
+              )
+            }))}
+        </div> :
+        <label>로딩 중...</label>
+      }
+    </>
   );
 };
 

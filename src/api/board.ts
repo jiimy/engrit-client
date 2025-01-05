@@ -8,7 +8,6 @@ export async function readPeedApi(
   pageParam: number,
   size: number
 ) {
-  console.log('board', serachValue, pageParam, size);
   if (serachValue) {
     try {
       const res = await axios.get(
