@@ -18,9 +18,10 @@ const SupportList = () => {
   const router = useRouter()
   const queryClient = useQueryClient();
   const [modal, setModal] = useState(false);
+  
   const { data, isLoading } = useQuery({
     queryKey: ["getInquiriesList"],
-    queryFn: () => getInquiries(),
+    queryFn: () => getInquiries('', 1, 10),
   });
 
   const deleteInquiryMutation = useMutation({

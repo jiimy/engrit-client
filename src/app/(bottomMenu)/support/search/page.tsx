@@ -6,11 +6,11 @@ import React from 'react';
 
 const Index = () => {
   const searchParams = useSearchParams();
-  const keyword = searchParams.get('content')
+  const keyword = searchParams.get('keyword') || ''
 
   // TODO: 검색
   const { isLoading, error, data } = useQuery({
-    // variables: { keyword: keyword || '' },
+    queryFn: () => getInquiries(keyword, 1, 10),
     queryKey: ['inquiries', keyword],
   });
 
@@ -18,7 +18,7 @@ const Index = () => {
 
   return (
     <div>
-      검색페이지
+      {data === null ? <>검색 결과가 없습니다.</> : <>데이터</>}
     </div>
   );
 };

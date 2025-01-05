@@ -62,7 +62,7 @@ const YoutubeScript = ({ videoId, videoTime, viewLength = 0, className }: Props)
 
   return (
     <>
-      {isPending ?
+      {!isPending ?
         <div className={classNames(s.script_wrap, className)}>
           {/* {isPending && <div className='relative '><Loading /></div>} */}
           {

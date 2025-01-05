@@ -6,17 +6,31 @@ export async function getInquiries(
   pageParam: number,
   size: number
 ) {
-  try {
-    const res = await axios.get(
-      `/api/user/getInquiriesAll?search=${searchValue}&page=${pageParam}&size=${size}`
-    );
+  if (searchValue) {
+    try {
+      const res = await axios.get(
+        `/api/user/getInquiriesAll?search=${searchValue}&page=${pageParam}&size=${size}`
+      );
 
-    if (res.status === 200) {
-      return res.data.data;
+      if (res.status === 200) {
+        return res.data.data;
+      }
+    } catch (error) {
+      console.error("Error fetching feed data:", error);
+      return [];
     }
-  } catch (error) {
-    console.error("Error fetching feed data:", error);
-    return [];
+  } else {
+    try {
+      const res = await axios.get(
+        `/api/user/getInquiriesAll?page=${pageParam}&size=${size}`
+      );
+
+      if (res.status === 200) {
+        return res.data.data;
+      }
+    } catch (error) {
+      console.error("Error fetching feed data:", error);
+    }
   }
 }
 

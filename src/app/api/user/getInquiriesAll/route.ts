@@ -10,6 +10,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const page = Number(searchParams.get("page") || 1);
     const pageSize = Number(searchParams.get("size") || 10);
+    const keyword = searchParams.get("keyword") || "";
 
     const startIndex = page == 0 ? 0 : (page - 1) * pageSize;
     const endIndex = startIndex + pageSize - 1;
@@ -19,8 +20,9 @@ export async function GET(request: Request) {
 
     const { data, error } = await supabase
       .from("inquiries")
-      .select("*", {count: "exact"})
+      .select("*", { count: "exact" })
       .eq("user_name", user_name)
+      .or(`title.ilike.%${keyword}%,content.ilike.%${keyword}%`)
       .range(startIndex, endIndex);
 
     return NextResponse.json({ data }, { status: 200 });
